@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="XBCommentCell" id="c35-iq-ZGz" customClass="XBCommentCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c35-iq-ZGz" id="VPf-O4-lST">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L9T-4M-mKk" userLabel="avator">
+                        <rect key="frame" x="10" y="5" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="6Od-4l-xeH"/>
+                            <constraint firstAttribute="height" constant="40" id="A0B-Jo-T7d"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QrFy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATg-YE-JVY" userLabel="name">
+                        <rect key="frame" x="60" y="10" width="28" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博美友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-Cx-U0S" userLabel="sign">
+                        <rect key="frame" x="60" y="30" width="48" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5z-4V-vWc" userLabel="time">
+                        <rect key="frame" x="278" y="14" width="29" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detail_comment_bg" translatesAutoresizingMaskIntoConstraints="NO" id="blX-eH-i72" userLabel="qipao">
+                        <rect key="frame" x="10" y="50" width="297" height="29"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我记得这个游戏很早就有了，不过那会儿好像是掌机的？&lt;br/&gt;也有PC版本，这游戏很温暖，值得一玩！就是广告太多…" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fib-0U-8hn" userLabel="content">
+                        <rect key="frame" x="25" y="60" width="267" height="9"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="L9T-4M-mKk" firstAttribute="top" secondItem="VPf-O4-lST" secondAttribute="top" constant="5" id="Kwb-wL-Ahb"/>
+                    <constraint firstItem="fib-0U-8hn" firstAttribute="top" secondItem="blX-eH-i72" secondAttribute="top" constant="10" id="NSB-JJ-eh5"/>
+                    <constraint firstItem="L9T-4M-mKk" firstAttribute="leading" secondItem="VPf-O4-lST" secondAttribute="leading" constant="10" id="OI4-oD-N4B"/>
+                    <constraint firstItem="qQ8-Cx-U0S" firstAttribute="leading" secondItem="ATg-YE-JVY" secondAttribute="leading" id="PLC-me-006"/>
+                    <constraint firstItem="L9T-4M-mKk" firstAttribute="centerY" secondItem="i5z-4V-vWc" secondAttribute="bottom" constant="-3" id="RbB-68-ceb"/>
+                    <constraint firstItem="blX-eH-i72" firstAttribute="bottom" secondItem="fib-0U-8hn" secondAttribute="bottom" constant="10" id="SzH-5V-Um6"/>
+                    <constraint firstItem="blX-eH-i72" firstAttribute="trailing" secondItem="fib-0U-8hn" secondAttribute="trailing" constant="15" id="WIt-LA-yAN"/>
+                    <constraint firstItem="blX-eH-i72" firstAttribute="top" secondItem="L9T-4M-mKk" secondAttribute="bottom" constant="5" id="WUj-Tu-EBB"/>
+                    <constraint firstItem="blX-eH-i72" firstAttribute="trailing" secondItem="i5z-4V-vWc" secondAttribute="trailing" id="Y7e-Ww-VYZ"/>
+                    <constraint firstItem="blX-eH-i72" firstAttribute="leading" secondItem="L9T-4M-mKk" secondAttribute="leading" id="ZC6-kW-PsL"/>
+                    <constraint firstItem="ATg-YE-JVY" firstAttribute="leading" secondItem="L9T-4M-mKk" secondAttribute="trailing" constant="10" id="anp-xU-PHb"/>
+                    <constraint firstAttribute="bottom" secondItem="blX-eH-i72" secondAttribute="bottom" id="dvs-i5-R7y"/>
+                    <constraint firstAttribute="trailing" secondItem="i5z-4V-vWc" secondAttribute="trailing" constant="13" id="fOG-aC-aM6"/>
+                    <constraint firstItem="fib-0U-8hn" firstAttribute="leading" secondItem="blX-eH-i72" secondAttribute="leading" constant="15" id="te2-J6-UgP"/>
+                    <constraint firstItem="qQ8-Cx-U0S" firstAttribute="bottom" secondItem="L9T-4M-mKk" secondAttribute="bottom" id="z1F-Nr-VpZ"/>
+                    <constraint firstItem="L9T-4M-mKk" firstAttribute="centerY" secondItem="ATg-YE-JVY" secondAttribute="bottom" id="zgy-8X-GWo"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatorImageView" destination="L9T-4M-mKk" id="CFi-RY-hDF"/>
+                <outlet property="bubbleImageView" destination="blX-eH-i72" id="kJn-4D-hPa"/>
+                <outlet property="contentLabel" destination="fib-0U-8hn" id="uAL-vH-k7W"/>
+                <outlet property="nameLabel" destination="ATg-YE-JVY" id="QYA-Iv-eWJ"/>
+                <outlet property="signLabel" destination="qQ8-Cx-U0S" id="SE8-ez-LZb"/>
+                <outlet property="timeLabel" destination="i5z-4V-vWc" id="06v-CY-qXE"/>
+            </connections>
+            <point key="canvasLocation" x="318" y="222"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="detail_comment_bg" width="30" height="26"/>
+    </resources>
+</document>

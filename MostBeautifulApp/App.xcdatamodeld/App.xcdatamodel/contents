@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+    <entity name="App" syncable="YES">
+        <attribute name="authorAvatarUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorBgcolor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorCareer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorGender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="authorUsername" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentArticle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentAuthorAvatarUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentAuthorBgcolor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentAuthorCareer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentAuthorGender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentAuthorId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentAuthorName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentCreatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentIsOnCover" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverCommentUpdatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="digest" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="downloadUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iconImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="minSdkVersion" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="otherDownloadUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="packageName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="priceFormat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publishDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="qrcodeImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recommandedBackgroundColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recommandedDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recommendLevel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thankTo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoIsPortrait" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="videoShareUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comments" syncable="YES"/>
+        <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Info" syncable="YES"/>
+        <relationship name="sameApps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SameApp" syncable="YES"/>
+        <relationship name="upUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SameApp" syncable="YES"/>
+    </entity>
+    <entity name="AppFavorite" parentEntity="App" syncable="YES">
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
+    <entity name="Author" syncable="YES">
+        <attribute name="avatarUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bgColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="career" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="enname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flowers" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Comment" syncable="YES">
+        <attribute name="article" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="authorAvatarUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorBgcolor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorCareer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorGender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="authorName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isOnCover" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comments" inverseName="data" inverseEntity="Comments" syncable="YES"/>
+    </entity>
+    <entity name="Comments" syncable="YES">
+        <attribute name="hasNext" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="data" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="comments" inverseEntity="Comment" syncable="YES"/>
+    </entity>
+    <entity name="Info" syncable="YES">
+        <attribute name="av" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="down" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="downUsers" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="fav" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favUsers" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="up" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="upUsers" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
+    </entity>
+    <entity name="SameApp" syncable="YES">
+        <attribute name="digest" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="upTimes" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="App" positionX="-63" positionY="-18" width="128" height="780"/>
+        <element name="SameApp" positionX="-54" positionY="144" width="128" height="120"/>
+        <element name="Author" positionX="-36" positionY="153" width="128" height="180"/>
+        <element name="Info" positionX="-18" positionY="162" width="128" height="165"/>
+        <element name="Comments" positionX="0" positionY="171" width="128" height="90"/>
+        <element name="Comment" positionX="18" positionY="180" width="128" height="240"/>
+        <element name="AppFavorite" positionX="36" positionY="189" width="128" height="60"/>
+    </elements>
+</model>

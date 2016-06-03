@@ -1,0 +1,32 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+
+#ifndef __IPHONE_7_0
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+#define MAS_SHORTHAND
+#import "UIColor+Util.h"
+#import "Constants.h"
+#import "Application.h"
+#import "XBHttpClient.h"
+#import "NSIntegerFormatter.h"
+#import "UIViewController+HUD.h"
+#import <DDLog.h>
+#import <Masonry/Masonry.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#endif
+
+#ifdef DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_WARN;
+#endif
