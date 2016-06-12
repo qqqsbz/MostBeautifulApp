@@ -8,18 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@class XBMenuView;
-@protocol XBMenuViewDelegate <NSObject>
-
-@optional
-- (void)menuView:(XBMenuView *)menuView didSelectedAtIndex:(NSInteger)index;
-
-@end
-
 typedef NS_ENUM(NSInteger,XBMenuViewType){
     XBMenuViewTypeView = 0,
     XBMenuViewTypeNavBar
 };
+
+typedef NS_ENUM(NSInteger,XBMenuViewDidSelectedType) {
+    XBMenuViewDidSelectedTypeFavorite = 0,
+    XBMenuViewDidSelectedTypeShare,
+    XBMenuViewDidSelectedTypeDownload
+};
+
+@class XBMenuView;
+@protocol XBMenuViewDelegate <NSObject>
+
+@optional
+- (void)menuView:(XBMenuView *)menuView didSelectedWithType:(XBMenuViewDidSelectedType)type atIndex:(NSInteger)index;
+
+@end
+
 typedef void(^complete)(BOOL finished);
 
 @interface XBMenuView : UIView

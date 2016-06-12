@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol XBShareWeChatViewDelegate <NSObject>
 
+@optional
+- (void)shareWeChatViewDidSelected;
+
+@end
 @interface XBShareWeChatView : UIView
 
-- (instancetype)initWithDidSelectedBlock:(dispatch_block_t)block;
-
-- (instancetype)initWithFrame:(CGRect)frame didSelectedBlock:(dispatch_block_t)block;
+@property (weak, nonatomic) id<XBShareWeChatViewDelegate> delegate;
 
 @end

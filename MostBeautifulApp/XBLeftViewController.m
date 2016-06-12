@@ -10,9 +10,22 @@
 #import "LeftSlideViewController.h"
 #import "XBLeftViewController.h"
 #import "XBLeftCell.h"
+#import "User.h"
+#import "UserDefaultsUtil.h"
 #import "XBLeftFooterView.h"
+#import "XBLeftHeaderView.h"
+#import "XBHomeViewController.h"
+#import "XBFavoriteViewController.h"
+#import "XBRecruitViewController.h"
+#import "XBLoginViewController.h"
+#import "XBSettingViewController.h"
+#import "XBSearchViewController.h"
+#import "XBLiabilityViewController.h"
+#import "XBArticleViewController.h"
+#import "XBDiscoverViewController.h"
+#import "AppDelegate.h"
 @interface XBLeftViewController () <UITableViewDelegate,UITableViewDataSource,LeftFooterViewDelegate>
-@property (strong, nonatomic) UIView  *headerView;
+@property (strong, nonatomic) XBLeftHeaderView  *headerView;
 @property (strong, nonatomic) XBLeftFooterView  *footerView;
 @end
 static NSString *reuseIdentifier = @"XBLeftCell";
@@ -25,7 +38,17 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     
     [self buildFooterView];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBackGroundColor:) name:kChangeBackgroundColor object:nil];
+    [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBackGroundColor:) name:kChangeBackgroundColorNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginOutSuccessNotification object:nil];
+    
+    //显示用户信息
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginOutSuccessNotification object:nil];
+    
+    //设置默认颜色
+    UIColor *color = [UIColor colorWithHexString:@"#40A0D0"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kChangeBackgroundColorNotification object:color];
 }
 
 - (void)buildTableView
@@ -86,16 +109,44 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 {
     XBLeftCell *cell = (XBLeftCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.dotImageView.hidden = NO;
+    
+    
+    if (indexPath.row == 0) {
+        
+        [self pushToViewController:[[XBHomeViewController alloc] init]];
+        
+    } else if (indexPath.row == 1) {
+        
+        [self pushToViewController:[[XBLiabilityViewController alloc] init]];
+        
+    } else if (indexPath.row == 2) {
+        
+        [self pushToViewController:[[XBDiscoverViewController alloc] init]];
+        
+    } else if (indexPath.row == 3) {
+        
+        [self pushToViewController:[[XBArticleViewController alloc] init]];
+        
+    } else if (indexPath.row == 4) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/zui-mei-ying-yong/id739652274?mt=8"]];
+        
+    } else if (indexPath.row == 5) {
+        
+        User *user = [UserDefaultsUtil userInfo];
+        
+        [self pushToViewController:[[XBFavoriteViewController alloc] init]];
+        if (!user) {
+            [self presentToLogViewController];
+        }
+        
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XBLeftCell *cell = (XBLeftCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.dotImageView.hidden = YES;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
     
 }
 
@@ -121,26 +172,13 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 }
 
 #pragma mark -- lazy load
-- (UIView *)headerView
+- (XBLeftHeaderView *)headerView
 {
     if (!_headerView) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableview.bounds.size.width, 110)];
+        _headerView = [[XBLeftHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableview.bounds.size.width, 110) loginBlock:^{
+            [self presentToLogViewController];
+        }];
         _headerView.backgroundColor = [UIColor clearColor];
-        
-        UIImageView *avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.f, 0, 46.f, 46.f)];
-        avatarImageView.image = [UIImage imageNamed:@"detail_portrait_default"];
-        avatarImageView.layer.masksToBounds = YES;
-        avatarImageView.layer.cornerRadius  = CGRectGetWidth(avatarImageView.frame) / 2.f;
-        avatarImageView.center = CGPointMake(avatarImageView.center.x, _headerView.center.y + 10.f);
-        [_headerView addSubview:avatarImageView];
-        
-        UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        loginBtn.frame = CGRectMake(0, 0, 80.f, 30.);
-        loginBtn.center = CGPointMake(CGRectGetMaxX(avatarImageView.frame) + 30.f, avatarImageView.center.y);
-        [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-        [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [loginBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.f]];
-        [_headerView addSubview:loginBtn];
     }
     return _headerView;
 }
@@ -156,16 +194,65 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 #pragma mark -- LeftViewDelegate
 - (void)didSelectedLeftButton:(UIButton *)sender
 {
-    
+    XBSearchViewController *searchVC = [[XBSearchViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)didSelectedTitleButton:(UIButton *)sender
 {
-
+    XBRecruitViewController *recruitVC = [[XBRecruitViewController alloc] init];
+    [self presentViewController:recruitVC animated:YES completion:^{
+        
+    }];
 }
 
 - (void)didSelectedRightButton:(UIButton *)sender
 {
-
+    XBSettingViewController *settingVC = [[XBSettingViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingVC];
+    [self presentViewController:navigationController animated:YES completion:^{
+        
+    }];
 }
+
+
+#pragma mark -- public method
+- (void)pushToViewController:(UIViewController *)vc
+{
+    BOOL isAlread = NO;
+    AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSArray *childViewControllers = tempAppDelegate.mainNavigationController.childViewControllers;
+    for (UIViewController *viewVC in childViewControllers) {
+        if ([viewVC isKindOfClass:[vc class]]) {
+            vc = viewVC;
+            isAlread = YES;
+        }
+    }
+    
+    [tempAppDelegate.leftSlideVC closeLeftView];
+    if (!isAlread) {
+        [tempAppDelegate.mainNavigationController pushViewController:vc animated:NO];
+    } else {
+        //如果控制器存在 则把控制器移到最前
+        NSInteger index = [childViewControllers indexOfObject:vc];
+        NSMutableArray *array = [NSMutableArray arrayWithArray:childViewControllers];
+        [array exchangeObjectAtIndex:index withObjectAtIndex:array.count - 1];
+        [tempAppDelegate.mainNavigationController setViewControllers:array animated:NO];
+    }
+}
+
+- (void)presentToLogViewController
+{
+    XBLoginViewController *loginViewController = [[XBLoginViewController alloc] init];
+    [self presentViewController:loginViewController animated:YES completion:nil];
+}
+
+- (void)loginSuccess:(NSNotification *)notification
+{
+    User *user = [UserDefaultsUtil userInfo];
+    self.headerView.user = user;
+    
+}
+
 @end

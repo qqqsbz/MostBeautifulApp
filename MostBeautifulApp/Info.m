@@ -10,14 +10,6 @@
 
 @implementation Info
 
-- (instancetype)init
-{
-    if (self = [super init]) {
-        
-    }
-    return self;
-}
-
 + (NSString *)managedObjectEntityName
 {
     return NSStringFromClass(self);

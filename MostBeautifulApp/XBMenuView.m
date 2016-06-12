@@ -189,6 +189,24 @@
             make.right.equalTo(firstLabel.left).offset(-kTextSpace);
         }];
         
+    } else if (count == 1) {
+        
+        UILabel *label = [self.titleLabels firstObject];
+        UIImageView *imageView = [self.imageViews firstObject];
+        imageView.tag = XBMenuViewDidSelectedTypeShare;
+        
+        [label makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self);
+            make.right.equalTo(self.centerX).offset(-kTextSpace);
+        }];
+        
+        [imageView makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(kImageViewWH);
+            make.height.mas_equalTo(kImageViewWH);
+            make.centerY.equalTo(self);
+            make.right.equalTo(label.left).offset(-kTextSpace);
+        }];
+        
     }
     
 }
@@ -216,7 +234,7 @@
                 make.height.equalTo(lastImageView.height);
             }];
         }
-    } else {
+    } else if (count == 2) {
         UIImageView *firstImageView = [self.imageViews firstObject];
         UIImageView *lastImageView  = [self.imageViews lastObject];
         
@@ -232,6 +250,17 @@
             make.right.equalTo(lastImageView.left).offset(-kNaviBarSpace);
             make.width.equalTo(lastImageView);
             make.height.equalTo(lastImageView);
+        }];
+    } else if (count == 1) {
+        
+        UIImageView *imageView = [self.imageViews firstObject];
+        imageView.tag = XBMenuViewDidSelectedTypeShare;
+        
+        [imageView makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(kImageViewWH);
+            make.height.mas_equalTo(kImageViewWH);
+            make.centerY.equalTo(self);
+            make.left.equalTo(self).offset(kNaviBarSpace);
         }];
     }
 }
@@ -258,7 +287,7 @@
             complete(finished);
         }];
         
-    } else {
+    } else if (count == 2) {
         [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
             CGRect firstFrame = firstImaegView.frame;
@@ -268,6 +297,17 @@
             CGRect lastFrame = lastImageView.frame;
             lastFrame.origin.x -= kAnimationSpace * 3;
             lastImageView.frame = lastFrame;
+            
+        } completion:^(BOOL finished) {
+            complete(finished);
+        }];
+    } else if (count == 1) {
+        
+        [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            
+            CGRect firstFrame = firstImaegView.frame;
+            firstFrame.origin.x -= kAnimationSpace * 2;
+            firstImaegView.frame = firstFrame;
             
         } completion:^(BOOL finished) {
             complete(finished);
@@ -283,6 +323,7 @@
     UIImageView *lastImageView = [self.imageViews lastObject];
     
     if (count == 3) {
+        
         [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
             CGRect firstFrame = firstImaegView.frame;
@@ -297,7 +338,8 @@
             complete(finished);
         }];
         
-    } else {
+    } else if (count == 2) {
+        
         [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
             CGRect firstFrame = firstImaegView.frame;
@@ -311,6 +353,19 @@
         } completion:^(BOOL finished) {
             complete(finished);
         }];
+        
+    } else if (count == 1) {
+        
+        [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            
+            CGRect firstFrame = firstImaegView.frame;
+            firstFrame.origin.x += kAnimationSpace * 2;
+            firstImaegView.frame = firstFrame;
+            
+        } completion:^(BOOL finished) {
+            complete(finished);
+        }];
+        
     }
 
 }
@@ -318,8 +373,9 @@
 - (void)tapAction:(UITapGestureRecognizer *)tapGesture
 {
     UIView *view = [tapGesture view];
-    if ([self.delegate respondsToSelector:@selector(menuView:didSelectedAtIndex:)]) {
-        [self.delegate menuView:self didSelectedAtIndex:view.tag];
+    XBMenuViewDidSelectedType type = view.tag;
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectedWithType:atIndex:)]) {
+        [self.delegate menuView:self didSelectedWithType:type atIndex:view.tag];
     }
 }
 

@@ -41,18 +41,19 @@
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thankTo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoIsPortrait" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="videoShareUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="comments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comments" syncable="YES"/>
         <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Info" syncable="YES"/>
         <relationship name="sameApps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SameApp" syncable="YES"/>
         <relationship name="upUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SameApp" syncable="YES"/>
     </entity>
     <entity name="AppFavorite" parentEntity="App" syncable="YES">
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="updateAt" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="Author" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -86,13 +87,13 @@
         <relationship name="data" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="comments" inverseEntity="Comment" syncable="YES"/>
     </entity>
     <entity name="Info" syncable="YES">
-        <attribute name="av" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="down" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="av" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="down" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="downUsers" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="fav" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="favUsers" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="up" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="up" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="upUsers" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
     </entity>
     <entity name="SameApp" syncable="YES">
@@ -102,13 +103,15 @@
         <attribute name="upTimes" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" syncable="YES"/>
     </entity>
+    <entity name="SearchHistory" parentEntity="App" syncable="YES"/>
     <elements>
         <element name="App" positionX="-63" positionY="-18" width="128" height="780"/>
-        <element name="SameApp" positionX="-54" positionY="144" width="128" height="120"/>
+        <element name="AppFavorite" positionX="36" positionY="189" width="128" height="75"/>
         <element name="Author" positionX="-36" positionY="153" width="128" height="180"/>
-        <element name="Info" positionX="-18" positionY="162" width="128" height="165"/>
-        <element name="Comments" positionX="0" positionY="171" width="128" height="90"/>
         <element name="Comment" positionX="18" positionY="180" width="128" height="240"/>
-        <element name="AppFavorite" positionX="36" positionY="189" width="128" height="60"/>
+        <element name="Comments" positionX="0" positionY="171" width="128" height="90"/>
+        <element name="Info" positionX="-18" positionY="162" width="128" height="165"/>
+        <element name="SameApp" positionX="-54" positionY="144" width="128" height="120"/>
+        <element name="SearchHistory" positionX="-9" positionY="135" width="128" height="45"/>
     </elements>
 </model>

@@ -8,5 +8,8 @@
 
 #import "Constants.h"
 
-NSString *const kChangeBackgroundColor = @"CHANGE_BACKGROUND_COLOR";
+NSString *const kChangeBackgroundColorNotification = @"CHANGE_BACKGROUND_COLOR_NOTIFICATION";
 
+NSString *const kLoginOutSuccessNotification = @"LOGIN_SUCCESS_NOTIFICATION";
+
+NSString *const kApiInvite = @"http://zuimeia.com/article/100/?utm_medium=community_android&utm_source=niceapp";

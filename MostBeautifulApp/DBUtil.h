@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <Mantle/Mantle.h>
+
+typedef void(^Complete)(NSArray *datas);
+typedef void(^OneComplete)(id result);
 @interface DBUtil : NSObject
 
 + (instancetype)shareDBUtil;
@@ -18,7 +21,7 @@
 
 - (void)remove:(NSManagedObject *)model;
 
-- (NSArray *)queryListWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors;
+- (void)queryListWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors complete:(Complete)complete;
 
-- (id)queryOneWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors;
+- (void)queryOneWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors complete:(OneComplete)complete;
 @end

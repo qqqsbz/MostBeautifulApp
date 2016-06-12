@@ -21,24 +21,20 @@
 @property (strong, nonatomic) UIView            *separatorView;
 @property (strong, nonatomic) UIImageView       *iconImageView;
 @property (strong, nonatomic) UILabel           *descLabel;
-@property (copy,   nonatomic) dispatch_block_t  block;
 @end
 @implementation XBShareWeChatView
 
-- (instancetype)initWithDidSelectedBlock:(dispatch_block_t)block;
-
+- (instancetype)init
 {
     if (self = [super init]) {
-        _block = block;
         [self initialization];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame didSelectedBlock:(dispatch_block_t)block
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        _block = block;
         [self initialization];
     }
     return self;
@@ -163,8 +159,8 @@
 
 - (void)tapAction
 {
-    if (self.block) {
-        self.block();
+    if ([self.delegate respondsToSelector:@selector(shareWeChatViewDidSelected)]) {
+        [self.delegate shareWeChatViewDidSelected];
     }
 }
 

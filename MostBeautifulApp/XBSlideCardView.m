@@ -5,14 +5,16 @@
 //  Created by coder on 16/5/26.
 //  Copyright © 2016年 coder. All rights reserved.
 //
-#define kMenuHeight 55.f  // 菜单栏的长度
-#define kMenuLeft 7.f     // 左边距
-#define kSpace 2.f        // 按钮之间的边距
-#define kShowSpace 4.f    // 当前显示按钮距离顶部的边距
-#define kItemWidth 44.f   // 按钮的宽度
-#define kLastNumber 3     // 最后3个按钮向左缩进
-#define kItemHeight kMenuHeight + 20.f    // 按钮的长度 默认比菜单栏的长度多20 以便遮住按钮底部的圆角
-#define kYSpace kMenuHeight - kSpace * 3  // 不选中按钮的顶部边距
+#define kMenuHeight 55.f                    // 菜单栏的长度
+#define kMenuLeft 7.f                       // 左边距
+#define kSpace 2.f                          // 按钮之间的边距
+#define kShowSpace 4.f                      // 当前显示按钮距离顶部的边距
+#define kItemWidth 44.f                     // 按钮的宽度
+#define kLastNumber 3                       // 最后3个按钮向左缩进
+#define kItemHeight kMenuHeight + 20.f      // 按钮的长度 默认比菜单栏的长度多20 以便遮住按钮底部的圆角
+#define kYSpace kMenuHeight - kSpace * 3    // 不选中按钮的顶部边距
+#define kMaxItemInCenter 6                  // 大于 个在滚动都最后三个的时候自动居中
+
 #import "XBSlideCardView.h"
 #import "XBSlideItem.h"
 @interface XBSlideCardView() <UICollectionViewDelegate,UICollectionViewDataSource>
@@ -163,7 +165,7 @@
         moveX = self.isForwardSwip ? tabsOffsetX + moveX : tabsOffsetX - moveX;
         
         BOOL lastThree = page + kLastNumber >= self.btns.count;
-        if (lastThree) {
+        if (lastThree && self.itemCount > kMaxItemInCenter) {
             moveX = self.menuView.contentOffset.x + (self.isForwardSwip ? kItemWidth + kSpace : - ( kItemWidth + kSpace));
         }
         

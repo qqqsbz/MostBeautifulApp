@@ -10,9 +10,13 @@
 
 @interface AppFavorite : App
 
-@property (assign, nonatomic) BOOL  isFavorite;
+@property (assign, nonatomic) BOOL    isFavorite;
+
+@property (strong, nonatomic) NSDate  *updateAt;
 
 + (instancetype)favoriteAppFromApp:(App *)app;
+
+//+ (App *)appFromFavoriteApp:(AppFavorite *)appFavorite;
 
 - (BOOL)toggleFavoriteWithOutError:(NSError **)error;
 

@@ -12,8 +12,8 @@
 @property (strong, nonatomic) NSArray   *upUsers;
 @property (strong, nonatomic) NSArray   *favUsers;
 @property (strong, nonatomic) NSString  *fav;
-@property (strong, nonatomic) NSString  *up;
-@property (strong, nonatomic) NSString  *down;
-@property (strong, nonatomic) NSString  *av;
+@property (assign, nonatomic) NSInteger up;
+@property (assign, nonatomic) NSInteger down;
+@property (assign, nonatomic) NSInteger av;
 @property (strong, nonatomic) NSArray   *downUsers;
 @end

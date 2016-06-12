@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="XBSettingCell" id="VQN-Sy-nCb" customClass="XBSettingCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VQN-Sy-nCb" id="50Z-Ff-Uio">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_icon_aboutus_normal" translatesAutoresizingMaskIntoConstraints="NO" id="d7q-aO-TAo" userLabel="cover">
+                        <rect key="frame" x="10" y="14" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="CGd-pA-SgK"/>
+                            <constraint firstAttribute="height" constant="30" id="IMZ-AF-eid"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关于我们" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvl-0t-UH6" userLabel="title">
+                        <rect key="frame" x="55" y="20" width="60" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqa-LX-RPH" userLabel="separator">
+                        <rect key="frame" x="10" y="56" width="295" height="1"/>
+                        <color key="backgroundColor" red="0.9137254901960784" green="0.90980392156862744" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="P5k-CS-boy"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seach_icon_arrow_pressed" translatesAutoresizingMaskIntoConstraints="NO" id="kBq-SX-yBl">
+                        <rect key="frame" x="297" y="22" width="8" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="Gm7-EJ-huh"/>
+                            <constraint firstAttribute="height" constant="14" id="hrp-jx-b42"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Wqa-LX-RPH" firstAttribute="leading" secondItem="50Z-Ff-Uio" secondAttribute="leading" constant="10" id="Kha-w3-S3N"/>
+                    <constraint firstItem="nvl-0t-UH6" firstAttribute="leading" secondItem="d7q-aO-TAo" secondAttribute="trailing" constant="15" id="Ncy-Qf-U5W"/>
+                    <constraint firstAttribute="trailing" secondItem="kBq-SX-yBl" secondAttribute="trailing" constant="15" id="Sfw-EE-Ogc"/>
+                    <constraint firstAttribute="bottom" secondItem="Wqa-LX-RPH" secondAttribute="bottom" id="TdD-cY-Bm2"/>
+                    <constraint firstItem="kBq-SX-yBl" firstAttribute="centerY" secondItem="50Z-Ff-Uio" secondAttribute="centerY" id="Yln-8I-RE9"/>
+                    <constraint firstItem="nvl-0t-UH6" firstAttribute="centerY" secondItem="50Z-Ff-Uio" secondAttribute="centerY" id="ZGM-Dl-zej"/>
+                    <constraint firstItem="d7q-aO-TAo" firstAttribute="leading" secondItem="50Z-Ff-Uio" secondAttribute="leading" constant="10" id="ic1-Ml-jyB"/>
+                    <constraint firstAttribute="trailing" secondItem="Wqa-LX-RPH" secondAttribute="trailing" constant="15" id="nct-9P-Qaf"/>
+                    <constraint firstItem="d7q-aO-TAo" firstAttribute="centerY" secondItem="50Z-Ff-Uio" secondAttribute="centerY" id="wjC-fU-Psk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="coverImageView" destination="d7q-aO-TAo" id="Uzx-o1-tWX"/>
+                <outlet property="rightImageView" destination="kBq-SX-yBl" id="qpg-KQ-Mjs"/>
+                <outlet property="separatorHeightConstraint" destination="P5k-CS-boy" id="8gI-gi-Bgm"/>
+                <outlet property="separatorView" destination="Wqa-LX-RPH" id="sQB-P3-O0a"/>
+                <outlet property="titleLabel" destination="nvl-0t-UH6" id="B39-m5-BzG"/>
+            </connections>
+            <point key="canvasLocation" x="376" y="326"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="more_icon_aboutus_normal" width="66" height="66"/>
+        <image name="seach_icon_arrow_pressed" width="16" height="28"/>
+    </resources>
+</document>

@@ -32,9 +32,11 @@
     return @{@"data":[Comment class]};
 }
 
+
 + (NSValueTransformer *)dataJSONTransformer
 {
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[Comment class]];
 }
+
 
 @end

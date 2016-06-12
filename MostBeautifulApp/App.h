@@ -10,6 +10,12 @@
 #import "Model.h"
 @class Info;
 @class Comments;
+
+typedef NS_ENUM(NSInteger,XBAppType) {
+    XBAppTypeApp = 0,
+    XBAppTypeFavorite
+};
+
 @interface App : Model <MTLManagedObjectSerializing>
 @property (strong, nonatomic) NSString  *thankTo;
 @property (strong, nonatomic) NSString  *coverCommentAuthorAvatarUrl;
@@ -20,7 +26,7 @@
 @property (strong, nonatomic) NSString  *authorGender;
 @property (strong, nonatomic) NSString  *qrcodeImage;
 @property (strong, nonatomic) NSString  *createTime;
-@property (strong, nonatomic) Comments  *comments;
+//@property (strong, nonatomic) Comments  *comments;
 @property (strong, nonatomic) NSString  *coverCommentArticle;
 @property (strong, nonatomic) NSString  *digest;
 @property (strong, nonatomic) NSString  *size;
@@ -59,6 +65,7 @@
 @property (strong, nonatomic) NSString  *videoShareUrl;
 @property (assign, nonatomic) NSInteger authorId;
 @property (strong, nonatomic) NSString  *packageName;
+@property (assign, nonatomic) XBAppType type;
 
 
 - (id)deriveModelWithTemplateModelClass:(Class)modelClass;

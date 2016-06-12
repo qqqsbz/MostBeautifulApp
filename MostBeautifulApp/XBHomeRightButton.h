@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef NS_ENUM(NSInteger,XBHomeRightType) {
+    XBHomeRightTypeDaily = 0,
+    XBHomeRightTypeLiability,
+    XBHomeRightTypeFavorite,
+    XBHomeRightTypeArticle
+};
 @interface XBHomeRightButton : UIView
+
 @property (strong, nonatomic) NSString  *currentDateString;
-- (instancetype)initWithFrame:(CGRect)frame homeBlock:(dispatch_block_t)block;
+
+- (instancetype)initWithFrame:(CGRect)frame homeBlock:(dispatch_block_t)block type:(XBHomeRightType)type;
+
+//- (void)showFavoriteWithTitle:(NSString *)title;
+
 @end

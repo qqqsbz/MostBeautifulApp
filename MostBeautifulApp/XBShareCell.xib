@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="XBShareCell" id="y6E-Pt-nwg" customClass="XBShareCell">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UMS_alipay_icon" translatesAutoresizingMaskIntoConstraints="NO" id="AAt-FV-ZJE" userLabel="icon">
+                        <rect key="frame" x="21" y="10" width="39" height="39"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EY-OI-SeC" userLabel="title">
+                        <rect key="frame" x="0.0" y="54" width="80" height="26"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="0EY-OI-SeC" firstAttribute="top" secondItem="AAt-FV-ZJE" secondAttribute="bottom" constant="5" id="6oq-1l-Ddt"/>
+                <constraint firstAttribute="bottom" secondItem="0EY-OI-SeC" secondAttribute="bottom" id="B1k-1c-kNv"/>
+                <constraint firstItem="0EY-OI-SeC" firstAttribute="leading" secondItem="y6E-Pt-nwg" secondAttribute="leading" id="FRL-fc-YhI"/>
+                <constraint firstItem="AAt-FV-ZJE" firstAttribute="top" secondItem="y6E-Pt-nwg" secondAttribute="top" constant="10" id="H8g-mP-Iw7"/>
+                <constraint firstAttribute="trailing" secondItem="0EY-OI-SeC" secondAttribute="trailing" id="sGt-4E-qrW"/>
+                <constraint firstItem="AAt-FV-ZJE" firstAttribute="centerX" secondItem="y6E-Pt-nwg" secondAttribute="centerX" id="uzQ-IS-LCT"/>
+            </constraints>
+            <connections>
+                <outlet property="iconImageView" destination="AAt-FV-ZJE" id="xkz-rz-4AJ"/>
+                <outlet property="titleLabel" destination="0EY-OI-SeC" id="xQn-sg-IDv"/>
+            </connections>
+            <point key="canvasLocation" x="408" y="156"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="UMS_alipay_icon" width="39" height="39"/>
+    </resources>
+</document>

@@ -9,5 +9,5 @@
 #import <MJRefresh/MJRefresh.h>
 
 @interface XBRefreshAutoFooter : MJRefreshAutoFooter
-
+@property (assign, nonatomic) MJRefreshState  previousState;
 @end

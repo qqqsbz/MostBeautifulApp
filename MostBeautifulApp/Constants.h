@@ -8,5 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const kChangeBackgroundColor;
+extern NSString *const kChangeBackgroundColorNotification;
 
+extern NSString *const kLoginOutSuccessNotification;
+
+extern NSString *const kApiInvite;//招聘编辑

@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XBHomeCell;
-@interface XBHomeViewController : UIViewController
-@property (assign, nonatomic) BOOL  showMenu;
-
-- (XBHomeCell *)currentHomeCell;
+#import "XBHomeCommonViewController.h"
+@interface XBHomeViewController : XBHomeCommonViewController
 
 @end

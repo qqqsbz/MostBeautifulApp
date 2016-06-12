@@ -10,6 +10,8 @@
 
 @interface UIViewController (HUD)
 
+- (void)showLoadinngInView:(UIView *)view;
+
 - (void)showLoadinng;
 
 - (void)hideLoading;

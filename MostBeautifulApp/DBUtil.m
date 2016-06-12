@@ -55,7 +55,7 @@
     }
 }
 
-- (NSArray *)queryListWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+- (void)queryListWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors complete:(Complete)complete
 {
     NSManagedObjectContext *moc = [Application sharedManagedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:moc];
@@ -72,11 +72,12 @@
     if (error) {
         DDLogCDebug(@"query list from core data error:%@",error);
     }
-    return result;
+    
+    complete(result);
 
 }
 
-- (id)queryOneWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+- (void)queryOneWithEntityName:(NSString *)entityName fetchRequest:(NSFetchRequest *)fetchRequest sortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors complete:(OneComplete)complete
 {
     NSManagedObjectContext *moc = [Application sharedManagedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:moc];
@@ -92,7 +93,8 @@
     id result = [[moc executeFetchRequest:fetchRequest error:&error] lastObject];
     if (error) {
         DDLogCDebug(@"query one from core data error:%@",error);
+    } else {
+        complete(result);
     }
-    return result;
 }
 @end

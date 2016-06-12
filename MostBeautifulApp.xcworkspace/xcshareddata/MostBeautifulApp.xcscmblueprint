@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A31E455A1D03FCFE7EA6B03CFBA4993FB45AF5DF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "e88e7ddf-44c6-44d9-bda3-70cc007375f9++7378" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "e88e7ddf-44c6-44d9-bda3-70cc007375f9++7378" : 0,
+    "A31E455A1D03FCFE7EA6B03CFBA4993FB45AF5DF" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "096FD21C-3B28-4B99-A309-7CCB8F6F2447",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "e88e7ddf-44c6-44d9-bda3-70cc007375f9++7378" : "MostBeautifulApp\/MostBeautifulApp\/SMProgressHUD\/progresshud.bundle\/",
+    "A31E455A1D03FCFE7EA6B03CFBA4993FB45AF5DF" : "MostBeautifulApp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MostBeautifulApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MostBeautifulApp.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:qqqsbz\/MostBeautifulApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A31E455A1D03FCFE7EA6B03CFBA4993FB45AF5DF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/code.taobao.org\/svn\/SMProgressHUD",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "e88e7ddf-44c6-44d9-bda3-70cc007375f9++7378"
+    }
+  ]
+}

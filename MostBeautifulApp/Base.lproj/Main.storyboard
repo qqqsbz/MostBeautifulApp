@@ -5,6 +5,45 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="ZbQ-VI-0p4">
+            <objects>
+                <navigationController id="mJO-Vc-giS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PCg-Js-RDZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="K6Q-YP-erh" kind="relationship" relationship="rootViewController" id="yPJ-bm-Nhw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NKK-Cp-ND6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1017" y="-733"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Sw1-6A-GF7">
+            <objects>
+                <viewController id="K6Q-YP-erh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QDf-C2-Cpr"/>
+                        <viewControllerLayoutGuide type="bottom" id="ePC-ui-z8F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kia-xT-0NV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="G22-dO-k75">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="2wK-Op-kcN">
+                            <color key="tintColor" red="0.22745098039215686" green="0.49803921568627452" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oV4-nw-GYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="-732"/>
+        </scene>
         <!--Table View Controller-->
         <scene sceneID="ycP-Qf-24y">
             <objects>
@@ -13,6 +52,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <navigationBar key="tableFooterView" contentMode="scaleToFill" id="6dn-94-e7y">
+                            <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gC6-RP-rtF">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>

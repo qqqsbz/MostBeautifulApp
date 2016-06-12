@@ -24,10 +24,13 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     objc_setAssociatedObject(self, HttpRequestHUDKey, HUD, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)showLoadinng
+- (void)showLoadinngInView:(UIView *)view
 {
     
-    UIView *view = [[UIApplication sharedApplication].delegate window];
+    if ([self HUD]) {
+        [[self HUD] removeFromSuperview];
+    }
+    
     UIImageView *loadImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40.f, 40.f)];
     loadImageView.animationImages = @[[UIImage imageNamed:@"loading_1"],[UIImage imageNamed:@"loading_2"],[UIImage imageNamed:@"loading_3"],[UIImage imageNamed:@"loading_4"],[UIImage imageNamed:@"loading_5"],[UIImage imageNamed:@"loading_6"],[UIImage imageNamed:@"loading_7"],[UIImage imageNamed:@"loading_8"]];
     loadImageView.center = view.center;
@@ -43,11 +46,19 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.animationType = MBProgressHUDAnimationZoomOut;
     hud.color = [UIColor clearColor];
     [self setHUD:hud];
+
+}
+
+- (void)showLoadinng
+{
+    UIView *view = [[UIApplication sharedApplication].delegate window];
+    [self showLoadinngInView:view];
 }
 
 - (void)hideLoading
 {
     [[self HUD] hide:YES];
+    [[self HUD] removeFromSuperview];
 }
 
 - (void)showFail:(NSString *)hit

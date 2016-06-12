@@ -14,12 +14,17 @@
 @property (strong, nonatomic) UILabel       *monthLabel;
 @property (strong, nonatomic) UILabel       *weekLabel;
 @property (strong, nonatomic) NSDate        *date;
+@property (assign, nonatomic) XBHomeRightType   type;
 @property (copy  , nonatomic) dispatch_block_t  block;
+@property (assign, nonatomic, getter=isShowFavorite) BOOL  showFavorite;
 @end
 @implementation XBHomeRightButton
-- (instancetype)initWithFrame:(CGRect)frame homeBlock:(dispatch_block_t)block
+- (instancetype)initWithFrame:(CGRect)frame homeBlock:(dispatch_block_t)block type:(XBHomeRightType)type
 {
     if (self = [super initWithFrame:frame]) {
+        
+        _type = type;
+        
         self.titleLabel = [UILabel new];
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.f];
@@ -96,24 +101,51 @@
 
 - (void)setCurrentDateString:(NSString *)currentDateString
 {
+    
     _currentDateString = currentDateString;
-    
-    NSString *todayString = [self dateString:[NSDate date]];
-    NSString *yesterDayString = [self dateString:[[NSDate date] dateByAddingTimeInterval:-86400]];
-    
-    if ([currentDateString isEqualToString:todayString]) {
-        [self showToDayYesterDay:YES];
-        self.titleLabel.text = @"今日最美";
-    } else if ([currentDateString isEqualToString:yesterDayString]) {
-        [self showToDayYesterDay:YES];
-        self.titleLabel.text = @"昨日最美";
-    } else {
+    if (self.type == XBHomeRightTypeDaily) {
+        NSString *todayString = [self dateString:[NSDate date]];
+        NSString *yesterDayString = [self dateString:[[NSDate date] dateByAddingTimeInterval:-86400]];
+        
+        if ([currentDateString isEqualToString:todayString]) {
+            [self showToDayYesterDay:YES];
+            self.titleLabel.text = @"今日最美";
+        } else if ([currentDateString isEqualToString:yesterDayString]) {
+            [self showToDayYesterDay:YES];
+            self.titleLabel.text = @"昨日最美";
+        } else {
+            [self showToDayYesterDay:NO];
+            NSDateComponents *components = [self componentDate:[self formatterDate:currentDateString]];
+            self.dayLabel.text = [NSIntegerFormatter formatToNSString:components.day fix:YES];
+            self.monthLabel.text = [NSIntegerFormatter formatToNSString:components.month fix:NO];
+            self.weekLabel.text = [self formatterWeekDay:components.weekday];
+        }
+    } else if (self.type == XBHomeRightTypeLiability) {
+        
         [self showToDayYesterDay:NO];
         NSDateComponents *components = [self componentDate:[self formatterDate:currentDateString]];
         self.dayLabel.text = [NSIntegerFormatter formatToNSString:components.day fix:YES];
         self.monthLabel.text = [NSIntegerFormatter formatToNSString:components.month fix:NO];
         self.weekLabel.text = [self formatterWeekDay:components.weekday];
+        self.homeImageView.hidden = YES;
+        
+    } else if (self.type == XBHomeRightTypeFavorite) {
+        [self setTypeWithTitle:@"我的收藏"];
+    } else if (self.type == XBHomeRightTypeArticle) {
+        [self setTypeWithTitle:@"文章专栏"];
     }
+    
+}
+
+- (void)setTypeWithTitle:(NSString *)title
+{
+    self.showFavorite = YES;
+    self.dayLabel.hidden = YES;
+    self.monthLabel.hidden = YES;
+    self.weekLabel.hidden = YES;
+    self.homeImageView.hidden = YES;
+    self.titleLabel.hidden = NO;
+    self.titleLabel.text = title;
 }
 
 - (NSDate *)formatterDate:(NSString *)dateString

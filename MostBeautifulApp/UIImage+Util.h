@@ -14,4 +14,6 @@
 
 + (UIImage *)resizeImageWithImageName:(NSString *)imageName;
 
++ (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation;
+
 @end

@@ -76,7 +76,12 @@
 - (void)scrollViewPanStateDidChange:(NSDictionary *)change
 {
     [super scrollViewPanStateDidChange:change];
-    
+}
+
+- (void)endRefreshingWithNoMoreData
+{
+    [super endRefreshingWithNoMoreData];
+    self.previousState = MJRefreshStateNoMoreData;
 }
 
 #pragma mark 监听控件的刷新状态

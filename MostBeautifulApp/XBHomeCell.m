@@ -8,6 +8,7 @@
 
 #import "XBHomeCell.h"
 #import "Info.h"
+#import "NSIntegerFormatter.h"
 @implementation XBHomeCell
 - (void)awakeFromNib
 {
@@ -27,7 +28,7 @@
     self.subTitleLabel.hidden = YES;
     self.textView.text = app.digest;
     self.authorLabel.text = app.authorUsername;
-    self.favoriteCountLabel.text = app.info.up;
+    self.favoriteCountLabel.text = [NSIntegerFormatter formatToNSString:app.info.up];
     [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:app.coverImage] placeholderImage:[UIImage imageNamed:@"home_logo_normal"]];
     
     NSRange titleRange = NSMakeRange(0, app.title.length);
