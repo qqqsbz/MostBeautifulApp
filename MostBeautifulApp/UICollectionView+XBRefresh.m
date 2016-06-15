@@ -27,4 +27,24 @@
     }
 }
 
+
+- (XBRefreshFooter *)xb_footer
+{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+
+- (void)setXb_footer:(XBRefreshFooter *)xb_footer
+{
+    // 删除旧的，添加新的
+    if (xb_footer != self.xb_footer) {
+        [self.xb_footer removeFromSuperview];
+        [self insertSubview:xb_footer atIndex:0];
+        objc_setAssociatedObject(self, @selector(xb_footer),
+                                 xb_footer, OBJC_ASSOCIATION_ASSIGN);
+    }
+}
+
+
+
 @end

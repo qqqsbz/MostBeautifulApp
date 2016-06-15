@@ -18,7 +18,6 @@
 #import "XBSlideCardView.h"
 #import "XBSlideItem.h"
 #import "UIImage+Util.h"
-#import "XBRefreshHeader.h"
 #import "UICollectionView+XBRefresh.h"
 @interface XBSlideCardView() <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (strong, nonatomic) UICollectionView  *collectionView;
@@ -29,7 +28,10 @@
 @property (assign, nonatomic) NSInteger         previousIndex;
 @property (assign, nonatomic) NSInteger         currentItemTag;
 @property (assign, nonatomic) BOOL              isForwardSwip;
+
+/** 是否第一次调用 */
 @property (assign, nonatomic) BOOL              isFirstLoad;
+
 @end
 @implementation XBSlideCardView
 
@@ -61,23 +63,6 @@
         [self addSubview:self.collectionView];
         [self addSubview:self.menuView];
         
-        // 设置普通状态的动画图片
-        NSMutableArray *idleImages = [NSMutableArray array];
-        for (NSUInteger i = 1; i<=8; i++) {
-            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_%zd", i]];
-            [idleImages addObject:[UIImage scaleImage:image toScale:0.3]];
-        }
-        
-        self.collectionView.xb_header = [XBRefreshHeader headerWithRefreshingBlock:^{
-            if ([self.delegate respondsToSelector:@selector(slideCardDidRefreshing)]) {
-                [self.delegate slideCardDidRefreshing];
-            }
-            self.isFirstLoad  = YES;
-        }];
-        
-        self.collectionView.xb_header.images = idleImages;
-        
-        
     }
     return self;
 }
@@ -94,16 +79,6 @@
     [self.collectionView reloadData];
     
     [self slideCardScrollToItemAtIndex:0];
-}
-
-- (void)slideCardBeginRefreshing
-{
-    [self.collectionView.xb_header beginRefreshing];
-}
-
-- (void)slideCardEndRefreshing
-{
-    [self.collectionView.xb_header endRefreshing];
 }
 
 - (void)slideCardRegisterSlideCarNib:(UINib *)nib forCellWithReuseIdentifier:(NSString *)reuseIdentifier
@@ -164,6 +139,12 @@
     self.isFirstLoad = NO;
     
     [self visibleSlideItems];
+}
+
+- (void)slideCardScrollToFirst
+{
+    self.isFirstLoad = YES;
+    [self slideCardScrollToItemAtIndex:0];
 }
 
 - (void)autoScrollTopTabBySwipDirctionToPage:(NSInteger)page
@@ -238,14 +219,14 @@
 }
 
 #pragma mark -- UIScrollView delegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     
     if (page != self.previousIndex) {
         [self slideCardScrollToItemAtIndex:page];
-        if ([self.delegate respondsToSelector:@selector(slideCardScrollViewDidEndDecelerating:isScrollToItem:)]) {
-            [self.delegate slideCardScrollViewDidEndDecelerating:scrollView isScrollToItem:YES];
+        if ([self.delegate respondsToSelector:@selector(slideCardScrollViewDidScroll:isScrollToItem:)]) {
+            [self.delegate slideCardScrollViewDidScroll:scrollView isScrollToItem:YES];
         }
     }
 }
@@ -286,8 +267,8 @@
         dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, .1f * self.visibleItems.count * NSEC_PER_SEC);
         dispatch_after(time, dispatch_get_main_queue(), ^{
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentItemTag inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-            if ([self.delegate respondsToSelector:@selector(slideCardScrollViewDidEndDecelerating:isScrollToItem:)]) {
-                [self.delegate slideCardScrollViewDidEndDecelerating:self.collectionView isScrollToItem:NO];
+            if ([self.delegate respondsToSelector:@selector(slideCardScrollViewDidScroll:isScrollToItem:)]) {
+                [self.delegate slideCardScrollViewDidScroll:self.collectionView isScrollToItem:NO];
             }
         });
     }
@@ -322,6 +303,17 @@
     } completion:nil];
 }
 
+- (void)setXb_header:(XBRefreshHeader *)xb_header
+{
+    _xb_header = xb_header;
+    self.collectionView.xb_header = xb_header;
+}
+
+- (void)setXb_footer:(XBRefreshFooter *)xb_footer
+{
+    _xb_footer = xb_footer;
+    self.collectionView.xb_footer = xb_footer;
+}
 
 #pragma mark -- lazy load
 - (NSMutableArray *)visibleItems

@@ -10,3 +10,4 @@
 
 const CGFloat   XBRefreshViewWidth = 64.0;
 NSString *const XBRefreshContentOffset = @"contentOffset";
+NSString *const XBRefreshContentSize   = @"contentSize";

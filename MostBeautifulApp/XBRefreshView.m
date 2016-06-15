@@ -9,7 +9,7 @@
 #import "XBRefreshView.h"
 @implementation XBRefreshView
 
-+ (instancetype)headerWithRefreshingBlock:(XBRefreshComponentRefreshingBlock)refreshingBlock
++ (instancetype)refreshWithRefreshingBlock:(XBRefreshComponentRefreshingBlock)refreshingBlock
 {
     XBRefreshView *refreshHeader = [[self alloc] init];
     refreshHeader.refreshingBlock  = refreshingBlock;

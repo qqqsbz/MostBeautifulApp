@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "XBRefreshHeader.h"
+#import "XBRefreshFooter.h"
 @interface UICollectionView (XBRefresh)
 @property (strong, nonatomic) XBRefreshHeader  *xb_header;
+@property (strong, nonatomic) XBRefreshFooter  *xb_footer;
 @end

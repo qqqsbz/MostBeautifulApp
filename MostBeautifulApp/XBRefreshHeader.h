@@ -11,5 +11,6 @@
 
 @interface XBRefreshHeader : XBRefreshView
 
++ (instancetype)headerWithRefreshingBlock:(XBRefreshComponentRefreshingBlock)refreshingBlock;
 
 @end

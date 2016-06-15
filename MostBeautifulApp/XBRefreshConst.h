@@ -9,3 +9,4 @@
 #import <Foundation/Foundation.h>
 extern CGFloat  const  XBRefreshViewWidth;
 extern NSString *const XBRefreshContentOffset;
+extern NSString *const XBRefreshContentSize;

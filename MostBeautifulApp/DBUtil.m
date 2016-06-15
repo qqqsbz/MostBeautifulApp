@@ -60,10 +60,12 @@
     NSManagedObjectContext *moc = [Application sharedManagedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:moc];
     if (!fetchRequest) {
-        fetchRequest = self.fetchRequest;
+        fetchRequest = [[NSFetchRequest alloc] init];
+        fetchRequest.fetchLimit = 100;
     }
+    
     fetchRequest.entity = entity;
-    fetchRequest.fetchLimit = 100;
+    
     if (sortDescriptors && sortDescriptors.count > 0) {
         fetchRequest.sortDescriptors = sortDescriptors;
     }

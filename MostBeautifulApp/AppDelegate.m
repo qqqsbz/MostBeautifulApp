@@ -85,7 +85,7 @@
 //    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
 //    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
     [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"1770138639"
-                                              secret:@"Secret：c928ea51c2235bf20ffceec63e8a4866"
+                                              secret:@"c928ea51c2235bf20ffceec63e8a4866"
                                          RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 }
 
@@ -93,8 +93,8 @@
 - (void)didOpenLeftView:(UIViewController *)mainVC
 {
     UIViewController *viewController = [mainVC.childViewControllers lastObject];
-    if ([viewController isKindOfClass:[XBHomeViewController class]]) {
-        XBHomeViewController *homeVC = (XBHomeViewController *)viewController;
+    if ([viewController isKindOfClass:[XBHomeCommonViewController class]]) {
+        XBHomeCommonViewController *homeVC = (XBHomeCommonViewController *)viewController;
         UIButton *leftBtn = homeVC.navigationItem.leftBarButtonItem.customView;
         leftBtn.hidden = YES;
         homeVC.showMenu = NO;
@@ -104,8 +104,8 @@
 - (void)didCloseLeftView:(UIViewController *)mainVC
 {
     UIViewController *viewController = [mainVC.childViewControllers lastObject];
-    if ([viewController isKindOfClass:[XBHomeViewController class]]) {
-        XBHomeViewController *homeVC = (XBHomeViewController *)viewController;
+    if ([viewController isKindOfClass:[XBHomeCommonViewController class]]) {
+        XBHomeCommonViewController *homeVC = (XBHomeCommonViewController *)viewController;
         UIButton *leftBtn = homeVC.navigationItem.leftBarButtonItem.customView;
         leftBtn.hidden = NO;
         homeVC.showMenu = YES;

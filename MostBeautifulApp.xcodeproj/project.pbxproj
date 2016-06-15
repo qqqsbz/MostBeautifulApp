@@ -474,20 +474,9 @@
 		DC22024C1D10EE50007DDF02 /* XBRefresh */ = {
 			isa = PBXGroup;
 			children = (
-				DC2202491D10E99E007DDF02 /* XBRefreshView.h */,
-				DC22024A1D10E99E007DDF02 /* XBRefreshView.m */,
-				DC22023A1D0FFD0A007DDF02 /* XBRefreshHeader.h */,
-				DC22023B1D0FFD0A007DDF02 /* XBRefreshHeader.m */,
-				DC22023C1D0FFD0A007DDF02 /* UIScrollView+XBExtension.m */,
-				DC22023D1D0FFD0A007DDF02 /* UIScrollView+XBExtension.h */,
-				DC22023E1D0FFD0A007DDF02 /* XBRefreshConst.m */,
-				DC22023F1D0FFD0A007DDF02 /* XBRefreshConst.h */,
-				DC2202401D0FFD0A007DDF02 /* UIView+XBFrame.m */,
-				DC2202411D0FFD0A007DDF02 /* UIView+XBFrame.h */,
-				DC2202421D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m */,
-				DC2202431D0FFD0A007DDF02 /* UICollectionView+XBRefresh.h */,
-				DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */,
-				DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */,
+				DCDC57AD1D11309D00DB95AC /* XBRefreshFooter */,
+				DCDC57AC1D11309200DB95AC /* XBRefreshHeader */,
+				DCDC57AB1D11307D00DB95AC /* XBRefresh */,
 			);
 			name = XBRefresh;
 			sourceTree = "<group>";
@@ -987,6 +976,41 @@
 				DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */,
 			);
 			name = Favorite;
+			sourceTree = "<group>";
+		};
+		DCDC57AB1D11307D00DB95AC /* XBRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				DC22023C1D0FFD0A007DDF02 /* UIScrollView+XBExtension.m */,
+				DC22023D1D0FFD0A007DDF02 /* UIScrollView+XBExtension.h */,
+				DC22023F1D0FFD0A007DDF02 /* XBRefreshConst.h */,
+				DC22023E1D0FFD0A007DDF02 /* XBRefreshConst.m */,
+				DC2202401D0FFD0A007DDF02 /* UIView+XBFrame.m */,
+				DC2202411D0FFD0A007DDF02 /* UIView+XBFrame.h */,
+				DC2202431D0FFD0A007DDF02 /* UICollectionView+XBRefresh.h */,
+				DC2202421D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m */,
+				DC2202491D10E99E007DDF02 /* XBRefreshView.h */,
+				DC22024A1D10E99E007DDF02 /* XBRefreshView.m */,
+			);
+			name = XBRefresh;
+			sourceTree = "<group>";
+		};
+		DCDC57AC1D11309200DB95AC /* XBRefreshHeader */ = {
+			isa = PBXGroup;
+			children = (
+				DC22023A1D0FFD0A007DDF02 /* XBRefreshHeader.h */,
+				DC22023B1D0FFD0A007DDF02 /* XBRefreshHeader.m */,
+			);
+			name = XBRefreshHeader;
+			sourceTree = "<group>";
+		};
+		DCDC57AD1D11309D00DB95AC /* XBRefreshFooter */ = {
+			isa = PBXGroup;
+			children = (
+				DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */,
+				DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */,
+			);
+			name = XBRefreshFooter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

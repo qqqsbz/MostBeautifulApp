@@ -46,7 +46,7 @@ typedef void (^XBRefreshComponentRefreshingBlock)();
 @property (copy, nonatomic) XBRefreshComponentRefreshingBlock  refreshingBlock;
 
 /** 创建header */
-+ (instancetype)headerWithRefreshingBlock:(XBRefreshComponentRefreshingBlock)refreshingBlock;
++ (instancetype)refreshWithRefreshingBlock:(XBRefreshComponentRefreshingBlock)refreshingBlock;
 
 
 /** 开始 */

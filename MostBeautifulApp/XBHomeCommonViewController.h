@@ -40,11 +40,20 @@
 /** 加载数据 */
 - (void)reloadData;
 
-/** 正在刷新 */
-- (void)beginRefreshing;
+/** 加载更多数据 */
+- (void)loadMore;
 
-/** 结束刷新 */
-- (void)endRefreshing;
+/** header正在刷新 */
+- (void)headerBeginRefreshing;
+
+/** header结束刷新 */
+- (void)headerEndRefreshing;
+
+/** footer正在刷新 */
+- (void)footerBeginRefreshing;
+
+/** footer结束刷新 */
+- (void)footerEndRefreshing;
 
 /** 设置背景颜色以及跳转到选中页 */
 - (void)resetBackgroundColorIsScrollToItem:(BOOL)isScroll;

@@ -10,4 +10,6 @@
 
 @interface XBRefreshFooter : XBRefreshView
 
++ (instancetype)footerWithRefreshingBlock:(XBRefreshComponentRefreshingBlock)refreshingBlock;
+
 @end

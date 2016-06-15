@@ -13,7 +13,11 @@
 #import "AppFavorite.h"
 #import "AppDelegate.h"
 #import "XBHomeCell.h"
+#import "UIImage+Util.h"
 #import "XBHomeDetailViewController.h"
+#import "XBRefreshHeader.h"
+#import "XBRefreshFooter.h"
+#import "UICollectionView+XBRefresh.h"
 @interface XBHomeCommonViewController ()<SlideCarViewDataDelegate,SlideCarViewDataSource,UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) NSIndexPath       *currentIndexPath;
@@ -38,8 +42,11 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     
     [self buildCollectionView];
     
-//    [self reloadData];
-    [self beginRefreshing];
+    if (self.homeRightType == XBHomeRightTypeDaily) {
+        [self headerBeginRefreshing];
+    } else {
+        [self reloadData];
+    }
     
 }
 
@@ -62,14 +69,33 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     DDLogDebug(@"child must implement reloadData method");
 }
 
-- (void)beginRefreshing
+- (void)loadMore
 {
-    [self.cardView slideCardBeginRefreshing];
+    DDLogDebug(@"child must implement loadMore method");
 }
 
-- (void)endRefreshing
+- (void)headerBeginRefreshing
 {
-    [self.cardView slideCardEndRefreshing];
+    if (self.cardView.xb_header.state != XBRefreshStateRefreshing) {
+        [self.cardView.xb_header beginRefreshing];
+    }
+}
+
+- (void)headerEndRefreshing
+{
+    [self.cardView.xb_header endRefreshing];
+}
+
+- (void)footerBeginRefreshing
+{
+    if (self.cardView.xb_header.state != XBRefreshStateRefreshing) {
+        [self.cardView.xb_footer beginRefreshing];
+    }
+}
+
+- (void)footerEndRefreshing
+{
+    [self.cardView.xb_footer endRefreshing];
 }
 
 #pragma mark -- build view
@@ -82,6 +108,32 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     self.cardView.dataSource = self;
     [self.cardView slideCardRegisterSlideCarNib:[UINib nibWithNibName:NSStringFromClass([XBHomeCell class]) bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:homeReuseIdentifier];
     [self.view addSubview:self.cardView];
+
+    if (self.homeRightType == XBHomeRightTypeDaily) {
+        [self addXBRefreshView];
+    }
+}
+
+- (void)addXBRefreshView
+{
+    // 设置普通状态的动画图片
+    NSMutableArray *idleImages = [NSMutableArray array];
+    for (NSUInteger i = 1; i<=8; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_%zd", i]];
+        [idleImages addObject:[UIImage scaleImage:image toScale:0.3]];
+    }
+    
+    self.cardView.xb_header = [XBRefreshHeader headerWithRefreshingBlock:^{
+        [self reloadData];
+    }];
+    
+    self.cardView.xb_header.images = idleImages;
+    
+    self.cardView.xb_footer = [XBRefreshFooter footerWithRefreshingBlock:^{
+        [self loadMore];
+    }];
+    
+    self.cardView.xb_footer.images = idleImages;
 
 }
 
@@ -134,16 +186,11 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)slideCardScrollViewDidEndDecelerating:(UIScrollView *)scrollView isScrollToItem:(BOOL)isScroll
+- (void)slideCardScrollViewDidScroll:(UIScrollView *)scrollView isScrollToItem:(BOOL)isScroll
 {
     NSInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     self.currentIndexPath = [NSIndexPath indexPathForRow:page inSection:0];
     [self resetBackgroundColorIsScrollToItem:isScroll];
-}
-
-- (void)slideCardDidRefreshing
-{
-    [self reloadData];
 }
 
 - (void)menuAction

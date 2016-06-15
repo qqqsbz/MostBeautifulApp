@@ -19,6 +19,4 @@ typedef NS_ENUM(NSInteger,XBHomeRightType) {
 
 - (instancetype)initWithFrame:(CGRect)frame homeBlock:(dispatch_block_t)block type:(XBHomeRightType)type;
 
-//- (void)showFavoriteWithTitle:(NSString *)title;
-
 @end
