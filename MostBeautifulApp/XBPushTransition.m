@@ -87,8 +87,9 @@
     toVC.toolBar.frame = CGRectMake(0, CGRectGetHeight(containerView.frame), CGRectGetWidth(toolBarFrame), CGRectGetHeight(toolBarFrame));
     
     toVC.menuView.alpha = 0.f;
+//    toVC.backButton.hidden = YES;
     [containerView addSubview:toVC.view];
-    [containerView addSubview:backButton];
+//    [containerView addSubview:backButton];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] * 1.3 delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
         toVC.scrollView.frame = scrollFrame;
@@ -104,6 +105,7 @@
         [UIView animateWithDuration:0.25 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
             toVC.menuView.alpha = 1.f;
         } completion:^(BOOL finished) {
+//            toVC.backButton.hidden = NO;
             [transitionContext completeTransition:YES];
         }];
     }];
@@ -115,7 +117,7 @@
     XBHomeDetailViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     XBHomeViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
-    
+
     toVC.view.alpha = 1.f;
     [containerView insertSubview:toVC.view atIndex:0];
     
@@ -123,6 +125,11 @@
         CGRect frame = fromVC.view.frame;
         frame.origin.x = CGRectGetWidth(frame);
         fromVC.view.frame = frame;
+        
+        CGRect backFrame = fromVC.backButton.frame;
+        backFrame.origin.x = CGRectGetWidth(frame);
+        fromVC.backButton.frame = backFrame;
+        
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:YES];
     }];

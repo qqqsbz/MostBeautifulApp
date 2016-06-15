@@ -63,13 +63,16 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.backButton];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.naviBarMenuView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self.backButton removeFromSuperview];
 }
 
 - (void)setApp:(App *)app
@@ -115,10 +118,13 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [self.scrollView addSubview:self.coverImageView];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.backButton.frame = CGRectMake(0, 0, 35.f, 35.f);
+    self.backButton.frame = CGRectMake(5, 12, 35.f, 35.f);
+    self.backButton.userInteractionEnabled = YES;
     [self.backButton setImage:[UIImage imageNamed:@"detail_icon_back_normal"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(menuAction) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.hidesBackButton = YES;
     
     self.avatorImageView = [UIImageView new];
     self.avatorImageView.layer.masksToBounds = YES;
@@ -224,12 +230,14 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //创建导航菜单
 - (void)buildNavigationBarMenu
 {
-    self.naviBarMenuView = [[XBMenuView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.menuView.frame)) images:self.menuImages type:XBMenuViewTypeNavBar];
+    CGFloat menuHeight   = CGRectGetHeight(self.menuView.frame);
+    CGFloat naviBarMenuY = 17;
+    CGFloat naviBarMenuX = CGRectGetWidth(self.backButton.frame) * 1.8f;
+    
+    self.naviBarMenuView = [[XBMenuView alloc] initWithFrame:CGRectMake(naviBarMenuX, naviBarMenuY , CGRectGetWidth(self.view.frame) - naviBarMenuX * 2, menuHeight) images:self.menuImages type:XBMenuViewTypeNavBar];
     self.naviBarMenuView.delegate = self;
     self.naviBarMenuView.hidden = YES;
     self.naviBarMenuView.userInteractionEnabled = YES;
-    self.navigationItem.titleView.userInteractionEnabled = YES;
-    self.navigationItem.titleView = self.naviBarMenuView;
 }
 
 //设置约束
@@ -324,6 +332,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 
 - (void)menuAction
 {
+    [self.naviBarMenuView removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -353,7 +362,11 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         NSError *error = nil;
         BOOL result = [self.appFavorite toggleFavoriteWithOutError:&error];
         if (result) {
-            [self.menuView replaceImage:[UIImage imageNamed:self.appFavorite.isFavorite ? @"detail_icon_fav_roll_normal" : @"detail_icon_fav_normal"] atIndex:index];
+            
+            UIImage *image = [UIImage imageNamed:self.appFavorite.isFavorite ? @"detail_icon_fav_roll_normal" : @"detail_icon_fav_normal"];
+            [self.menuView replaceImage:image atIndex:index];
+            [self.naviBarMenuView replaceImage:image atIndex:index];
+            
             [self.menuView replaceTitle:self.appFavorite.isFavorite ? @"已收藏" : @"收藏" atIndex:0];
             
             NSString *tip = self.appFavorite.isFavorite ? @"已收藏此文章" : @"已取消对此文章的收藏";

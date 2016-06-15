@@ -392,4 +392,23 @@
     UILabel *label = self.titleLabels[index];
     label.text = title;
 }
+
+/** 防止点击事件无效而无法调用代理方法 */
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint point  = [touch locationInView:self];
+    for (UIView *subview in self.subviews) {
+        if ([subview isKindOfClass:[UIImageView class]]) {
+            CGRect panFrame = CGRectMake(point.x, point.y, CGRectGetWidth(subview.frame) / 2.f, CGRectGetHeight(subview.frame) / 2.f);
+            if (CGRectIntersectsRect(panFrame, subview.frame)) {
+                XBMenuViewDidSelectedType type = subview.tag;
+                if ([self.delegate respondsToSelector:@selector(menuView:didSelectedWithType:atIndex:)]) {
+                    [self.delegate menuView:self didSelectedWithType:type atIndex:subview.tag];
+                }
+            }
+        }
+    }
+}
+
 @end
