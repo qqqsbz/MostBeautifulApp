@@ -13,8 +13,14 @@ typedef void(^SearchBlock)(NSString *text);
 
 @property (assign, nonatomic) BOOL  isBecomeFirstResponder;
 
+@property (strong, nonatomic) NSString  *placeHolderString;
+
 - (instancetype)initWidthSearchBlock:(SearchBlock)searchBlock cancleBlock:(dispatch_block_t)block;
 
 - (instancetype)initWithFrame:(CGRect)frame searchBlock:(SearchBlock)searchBlock cancleBlock:(dispatch_block_t)block;
+
+- (void)startAnimation;
+
+- (void)stopAnimation;
 
 @end

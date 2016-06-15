@@ -7,7 +7,6 @@
 //
 
 #define kIconWH 52.f
-#define kToolBarH 45.f
 #define kAnimationSpace 25.f
 #import "XBDetailCommonViewController.h"
 #import "App.h"
@@ -151,6 +150,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     
     self.contentView = [XBContentView new];
     self.contentView.delegate = self;
+    self.contentView.type = XBContentViewTypeApp;
     [self.scrollView addSubview:self.contentView];
     
     self.shareWeChatView = [[XBShareWeChatView alloc] init];

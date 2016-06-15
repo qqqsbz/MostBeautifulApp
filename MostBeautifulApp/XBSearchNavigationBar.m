@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UITextField   *textField;
 @property (strong, nonatomic) UIButton      *cancleButton;
 @property (copy  , nonatomic) SearchBlock   searchBlock;
+@property (strong, nonatomic) NSArray       *images;
 @property (copy  , nonatomic) dispatch_block_t  cancleBlock;
 @end
 @implementation XBSearchNavigationBar
@@ -52,6 +53,7 @@
     self.rightImageView = [UIImageView new];
     self.rightImageView.userInteractionEnabled = YES;
     self.rightImageView.image = [UIImage imageNamed:@"seach_icon_clear_normal"];
+    self.rightImageView.hidden = YES;
     [self.rightImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cleanAction)]];
     
     UIFont *textFieldFont = [UIFont systemFontOfSize:15.f];
@@ -126,11 +128,31 @@
 - (void)setIsBecomeFirstResponder:(BOOL)isBecomeFirstResponder
 {
     _isBecomeFirstResponder = isBecomeFirstResponder;
+    self.rightImageView.hidden = !isBecomeFirstResponder;
     if (isBecomeFirstResponder) {
         [self.textField becomeFirstResponder];
     } else {
         [self.textField resignFirstResponder];
     }
+}
+
+- (void)setPlaceHolderString:(NSString *)placeHolderString
+{
+    _placeHolderString = placeHolderString;
+    self.textField.placeholder = placeHolderString;
+}
+
+- (void)startAnimation
+{
+    self.leftImageView.animationImages = self.images;
+    self.leftImageView.animationDuration = 0.5f;
+    self.leftImageView.animationRepeatCount = NSIntegerMax;
+    [self.leftImageView startAnimating];
+}
+
+- (void)stopAnimation
+{
+    self.leftImageView.image = [UIImage imageNamed:@"seach_icon_seach"];
 }
 
 - (void)cleanAction
@@ -171,5 +193,20 @@
     }
 }
 
-
+#pragma mark -- lazy loading
+- (NSArray *)images
+{
+    if (!_images) {
+        _images = @[[UIImage imageNamed:@"loading_1"],
+                    [UIImage imageNamed:@"loading_2"],
+                    [UIImage imageNamed:@"loading_3"],
+                    [UIImage imageNamed:@"loading_4"],
+                    [UIImage imageNamed:@"loading_5"],
+                    [UIImage imageNamed:@"loading_6"],
+                    [UIImage imageNamed:@"loading_7"],
+                    [UIImage imageNamed:@"loading_8"]
+                    ];;
+    }
+    return _images;
+}
 @end

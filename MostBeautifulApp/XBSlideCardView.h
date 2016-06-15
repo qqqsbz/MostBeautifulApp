@@ -24,6 +24,8 @@
 
 - (void)slideCardScrollViewDidEndDecelerating:(UIScrollView *)scrollView isScrollToItem:(BOOL)isScroll;
 
+- (void)slideCardDidRefreshing;
+
 @end
 
 @interface XBSlideCardView : UIView
@@ -35,6 +37,10 @@
 @property (assign, nonatomic) BOOL  showMenu;
 
 - (void)slideCardReloadData;
+
+- (void)slideCardBeginRefreshing;
+
+- (void)slideCardEndRefreshing;
 
 - (void)slideCardRegisterSlideCarNib:(UINib *)nib forCellWithReuseIdentifier:(NSString *)reuseIdentifier;
 

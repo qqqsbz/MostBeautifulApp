@@ -10,6 +10,7 @@
 #import "DBUtil.h"
 #import "AppDelegate.h"
 #import "AppFavorite.h"
+#import "UserDefaultsUtil.h"
 @interface XBFavoriteViewController ()
 @property (strong, nonatomic) UILabel  *noDataLabel;
 @end
@@ -37,6 +38,11 @@
 
 - (void)reloadData
 {
+    
+    if (![UserDefaultsUtil userInfo]) {
+        [self showNodata];
+        return;
+    }
     
     [self showLoadinng];
     
@@ -70,9 +76,7 @@
             self.noDataLabel.hidden = YES;
             
         } else {
-            AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            self.noDataLabel.backgroundColor = tempAppDelegate.leftSlideVC.leftVC.view.backgroundColor;
-            self.noDataLabel.hidden = NO;
+            [self showNodata];
         }
         
         [self hideLoading];
@@ -98,6 +102,13 @@
         [self.view addSubview:_noDataLabel];
     }
     return _noDataLabel;
+}
+
+- (void)showNodata
+{
+    AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.noDataLabel.backgroundColor = tempAppDelegate.leftSlideVC.leftVC.view.backgroundColor;
+    self.noDataLabel.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

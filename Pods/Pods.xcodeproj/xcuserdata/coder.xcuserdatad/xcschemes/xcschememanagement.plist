@@ -54,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XZMRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -62,7 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4985D6100CA1A273FC7294204F3C6ECA</key>
+		<key>3276BAF8BEB17225EE9971A69BE20F6E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>36391BC086FCF28B0250B1A1933CE949</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,17 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F74D9EA91F4C43190670066BAC37D44</key>
+		<key>70BC44266C6FFE30D2C57129458E070B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7442FF7D24327E4692447715BFA9C60</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A8C445AE8EE472F3A6CE5F18AA24A3E9</key>
+		<key>765FA870A00E1F1F6B19EF0CB29C7C2F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -98,6 +103,11 @@
 			<true/>
 		</dict>
 		<key>DBE96D472C899450DDE6E4065C7946B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDF49D3241467671D9EA466B9AE5746B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

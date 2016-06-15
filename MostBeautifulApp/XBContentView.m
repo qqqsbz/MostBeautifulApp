@@ -22,9 +22,10 @@
 @end
 @implementation XBContentView
 
-- (instancetype)initWithFrame:(CGRect)frame content:(NSString *)text
+- (instancetype)initWithFrame:(CGRect)frame content:(NSString *)text type:(XBContentViewType)type
 {
     if (self = [super initWithFrame:frame]) {
+        _type = type;
         [XMLParserUtils parserWithContent:text complete:^(NSArray *datas) {
             [self buildView:datas];
         }];
@@ -137,26 +138,32 @@
                 [self addSubview:imageView];
                 [imageView sd_setImageWithURL:[NSURL URLWithString:content.content]];
                 
+                if (self.type == XBContentViewTypeDiscover) {
+                    imageView.layer.borderColor = [UIColor colorWithHexString:@"#E9E9E9"].CGColor;
+                    imageView.layer.borderWidth = 1.f;
+                }
             }
                 break;
               
         }
     }
     
-    UIView *lastView = [self.subviews lastObject];
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(kSpace, CGRectGetMaxY(lastView.frame) + kYSeparatorSpace, width, 1.f)];
-    separatorView.backgroundColor = [UIColor colorWithHexString:@"#D6D6D6"];
-    [self addSubview:separatorView];
-    
-    UIImageView *iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.center.x - kIconWH / 2.f, CGRectGetMaxY(separatorView.frame) + kYIconSpace, kIconWH, kIconWH)];
-    iconImageView.layer.masksToBounds = YES;
-    iconImageView.layer.cornerRadius  = 11.f;
-    self.iconImageView = iconImageView;
-    [self addSubview:iconImageView];
+    if (self.type == XBContentViewTypeApp) {
+        UIView *lastView = [self.subviews lastObject];
+        UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(kSpace, CGRectGetMaxY(lastView.frame) + kYSeparatorSpace, width, 1.f)];
+        separatorView.backgroundColor = [UIColor colorWithHexString:@"#D6D6D6"];
+        [self addSubview:separatorView];
+        
+        UIImageView *iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.center.x - kIconWH / 2.f, CGRectGetMaxY(separatorView.frame) + kYIconSpace, kIconWH, kIconWH)];
+        iconImageView.layer.masksToBounds = YES;
+        iconImageView.layer.cornerRadius  = 11.f;
+        self.iconImageView = iconImageView;
+        [self addSubview:iconImageView];
+    }
     
     
     CGRect frame = self.frame;
-    frame.size.height = CGRectGetMaxY(iconImageView.frame);
+    frame.size.height = CGRectGetMaxY([self.subviews lastObject].frame);
     self.frame = frame;
 }
 

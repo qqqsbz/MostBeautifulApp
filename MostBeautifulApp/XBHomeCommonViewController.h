@@ -13,26 +13,43 @@
 #import "XBSlideCardView.h"
 @interface XBHomeCommonViewController : UIViewController
 
+/** 导航栏右边菜单 */
 @property (strong, nonatomic) XBHomeRightButton *homeRightButton;
 
+/** 导航栏右边菜单栏样式 */
 @property (assign, nonatomic) XBHomeRightType  homeRightType;
 
+/** 当前页 */
 @property (assign, nonatomic) NSInteger  page;
 
+/** 页数 */
 @property (assign, nonatomic) NSInteger  pageSize;
 
+/** 数据 */
 @property (strong, nonatomic) NSArray  *datas;
 
+/** 主view */
 @property (strong, nonatomic) XBSlideCardView   *cardView;
 
+/** 是否显示菜单栏 */
 @property (assign, nonatomic) BOOL  showMenu;
 
+/** 当前选中的cell */
 - (XBHomeCell *)currentHomeCell;
 
+/** 加载数据 */
 - (void)reloadData;
 
+/** 正在刷新 */
+- (void)beginRefreshing;
+
+/** 结束刷新 */
+- (void)endRefreshing;
+
+/** 设置背景颜色以及跳转到选中页 */
 - (void)resetBackgroundColorIsScrollToItem:(BOOL)isScroll;
 
+/** 打开关闭左菜单栏 */
 - (void)menuAction;
 
 @end

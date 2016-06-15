@@ -43,7 +43,7 @@
     
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    fetchRequest.fetchLimit = 100;
+    fetchRequest.fetchLimit = 10;
     fetchRequest.predicate = predicate;
     
     //按时间升序排列
@@ -65,10 +65,11 @@
             [self.cardView slideCardReloadData];
             [super resetBackgroundColorIsScrollToItem:YES];
             self.homeRightButton.hidden = NO;
-
-        } else {
-            [self loadDataFromServer];
+            
         }
+        
+        //从服务器获取最新数据
+        [self loadDataFromServer];
     }];
     
     
@@ -76,14 +77,13 @@
 
 - (void)loadDataFromServer
 {
-    [self showLoadinngInView:self.view];
+    [super beginRefreshing];
     self.homeRightButton.hidden = YES;
-    [[XBHttpClient shareInstance] getTodayWithPageSize:self.pageSize success:^(NSArray *datas) {
+    [[XBHttpClient shareInstance] getTodayWithPage:self.page PageSize:self.pageSize success:^(NSArray *datas) {
         
         self.datas = datas;
         [self.cardView slideCardReloadData];
         [super resetBackgroundColorIsScrollToItem:YES];
-        [self hideLoading];
         self.homeRightButton.hidden = NO;
         
         //保存到数据库
@@ -92,8 +92,9 @@
             [[DBUtil shareDBUtil] add:app];
         }
         
+        [super endRefreshing];
     } failure:^(NSError *error) {
-        [self hideLoading];
+        [super endRefreshing];
         [self showFail:@"加载失败!"];
     }];
 }

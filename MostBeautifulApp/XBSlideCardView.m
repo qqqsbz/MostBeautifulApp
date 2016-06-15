@@ -17,6 +17,9 @@
 
 #import "XBSlideCardView.h"
 #import "XBSlideItem.h"
+#import "UIImage+Util.h"
+#import "XBRefreshHeader.h"
+#import "UICollectionView+XBRefresh.h"
 @interface XBSlideCardView() <UICollectionViewDelegate,UICollectionViewDataSource>
 @property (strong, nonatomic) UICollectionView  *collectionView;
 @property (strong, nonatomic) UIScrollView      *menuView;
@@ -58,6 +61,23 @@
         [self addSubview:self.collectionView];
         [self addSubview:self.menuView];
         
+        // 设置普通状态的动画图片
+        NSMutableArray *idleImages = [NSMutableArray array];
+        for (NSUInteger i = 1; i<=8; i++) {
+            UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading_%zd", i]];
+            [idleImages addObject:[UIImage scaleImage:image toScale:0.3]];
+        }
+        
+        self.collectionView.xb_header = [XBRefreshHeader headerWithRefreshingBlock:^{
+            if ([self.delegate respondsToSelector:@selector(slideCardDidRefreshing)]) {
+                [self.delegate slideCardDidRefreshing];
+            }
+            self.isFirstLoad  = YES;
+        }];
+        
+        self.collectionView.xb_header.images = idleImages;
+        
+        
     }
     return self;
 }
@@ -74,6 +94,16 @@
     [self.collectionView reloadData];
     
     [self slideCardScrollToItemAtIndex:0];
+}
+
+- (void)slideCardBeginRefreshing
+{
+    [self.collectionView.xb_header beginRefreshing];
+}
+
+- (void)slideCardEndRefreshing
+{
+    [self.collectionView.xb_header endRefreshing];
 }
 
 - (void)slideCardRegisterSlideCarNib:(UINib *)nib forCellWithReuseIdentifier:(NSString *)reuseIdentifier
@@ -291,6 +321,7 @@
         self.menuView.alpha = _showMenu ? 1 : 0;
     } completion:nil];
 }
+
 
 #pragma mark -- lazy load
 - (NSMutableArray *)visibleItems

@@ -14,7 +14,16 @@
 		DC09BC361CFEDE1100E73BB0 /* XBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC09BC351CFEDE1100E73BB0 /* XBScrollView.m */; };
 		DC0F64E71CF5705C00914A82 /* NSIntegerFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0F64E61CF5705C00914A82 /* NSIntegerFormatter.m */; };
 		DC130E8A1CF6E19700360830 /* XBHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC130E891CF6E19700360830 /* XBHomeDetailViewController.m */; };
-		DC1B61721CF6ECC7008D6EA8 /* UICollectionView+Refresh.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1B61711CF6ECC7008D6EA8 /* UICollectionView+Refresh.m */; };
+		DC22021B1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22021A1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m */; };
+		DC2202221D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2202211D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m */; };
+		DC2202241D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2202231D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib */; };
+		DC2202441D0FFD0A007DDF02 /* XBRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22023B1D0FFD0A007DDF02 /* XBRefreshHeader.m */; };
+		DC2202451D0FFD0A007DDF02 /* UIScrollView+XBExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22023C1D0FFD0A007DDF02 /* UIScrollView+XBExtension.m */; };
+		DC2202461D0FFD0A007DDF02 /* XBRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22023E1D0FFD0A007DDF02 /* XBRefreshConst.m */; };
+		DC2202471D0FFD0A007DDF02 /* UIView+XBFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2202401D0FFD0A007DDF02 /* UIView+XBFrame.m */; };
+		DC2202481D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2202421D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m */; };
+		DC22024B1D10E99E007DDF02 /* XBRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22024A1D10E99E007DDF02 /* XBRefreshView.m */; };
+		DC2509361D0E601D00C61D30 /* XBDiscoverBeautifulView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2509351D0E601D00C61D30 /* XBDiscoverBeautifulView.m */; };
 		DC2D19FD1D054F77003F9EC1 /* XBLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D19FC1D054F77003F9EC1 /* XBLoginView.m */; };
 		DC2D1A001D055542003F9EC1 /* XBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D19FF1D055542003F9EC1 /* XBLoginViewController.m */; };
 		DC2D1A031D0571C3003F9EC1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A021D0571C3003F9EC1 /* User.m */; };
@@ -107,17 +116,23 @@
 		DC7C9E6F1CF5A214001AF6A1 /* XBSlideItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C9E6E1CF5A214001AF6A1 /* XBSlideItem.m */; };
 		DC7CD0F11D029011005A3FBF /* XBRecruitToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7CD0F01D029011005A3FBF /* XBRecruitToolBar.m */; };
 		DC7CD0F41D029082005A3FBF /* XBRecruitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7CD0F31D029082005A3FBF /* XBRecruitViewController.m */; };
+		DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB411D0D3D5300AEEAEE /* Discover.m */; };
+		DC8DFB451D0D40AD00AEEAEE /* DownloadUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */; };
 		DCA2B85A1CF7DC9D00E40E91 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */; };
 		DCA92BC01CFC2137000F8A97 /* XBContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BBF1CFC2137000F8A97 /* XBContentView.m */; };
 		DCA92BC31CFC21FB000F8A97 /* XMLParserUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC21CFC21FB000F8A97 /* XMLParserUtils.m */; };
 		DCA92BC61CFC2278000F8A97 /* XMLParserContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC41CFC2278000F8A97 /* XMLParserContent.m */; };
 		DCA92BC91CFC2570000F8A97 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC81CFC2570000F8A97 /* NSString+Util.m */; };
+		DCB313391D0D4E23005FD1C5 /* DiscoverComment.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */; };
+		DCC5B7C81D0D30A1009EE8AF /* XBDiscoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC5B7C71D0D30A1009EE8AF /* XBDiscoverCell.xib */; };
+		DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC5B7CA1D0D334F009EE8AF /* XBDiscoverCell.m */; };
 		DCC9C3CD1D01703900B3F729 /* XBShareHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC9C3CC1D01703900B3F729 /* XBShareHeaderView.xib */; };
 		DCC9C3D01D0170EC00B3F729 /* XBShareHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3CF1D0170EC00B3F729 /* XBShareHeaderView.m */; };
 		DCC9C3D21D01719500B3F729 /* XBShareFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC9C3D11D01719500B3F729 /* XBShareFooterView.xib */; };
 		DCC9C3D51D01720E00B3F729 /* XBShareFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3D41D01720E00B3F729 /* XBShareFooterView.m */; };
 		DCC9C3D81D01839200B3F729 /* XBHomeCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3D71D01839200B3F729 /* XBHomeCommonViewController.m */; };
 		DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */; };
+		DCDC8A901D1103F100836F04 /* XBRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */; };
 		DCE627FA1CF4290D0001708E /* SameApp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627F91CF4290D0001708E /* SameApp.m */; };
 		DCE627FD1CF429610001708E /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627FC1CF429610001708E /* Author.m */; };
 		DCE628031CF42BE10001708E /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE628021CF42BE10001708E /* Info.m */; };
@@ -125,6 +140,8 @@
 		DCE628121CF43AFE0001708E /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE628111CF43AFE0001708E /* Comment.m */; };
 		DCE628141CF43D490001708E /* XBHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE628131CF43D490001708E /* XBHomeCell.xib */; };
 		DCE628171CF442690001708E /* XBHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE628161CF442690001708E /* XBHomeCell.m */; };
+		DCE8EDDE1D0D6201007EFB6C /* XBDiscoverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE8EDDD1D0D6201007EFB6C /* XBDiscoverDetailViewController.m */; };
+		DCE8EDE11D0D684E007EFB6C /* XBDiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE8EDE01D0D684E007EFB6C /* XBDiscoverHeaderView.m */; };
 		DCE96CC31CF543C600FE3550 /* XBHomeRightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE96CC21CF543C600FE3550 /* XBHomeRightButton.m */; };
 /* End PBXBuildFile section */
 
@@ -144,8 +161,25 @@
 		DC0F64E61CF5705C00914A82 /* NSIntegerFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSIntegerFormatter.m; sourceTree = "<group>"; };
 		DC130E881CF6E19700360830 /* XBHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBHomeDetailViewController.h; sourceTree = "<group>"; };
 		DC130E891CF6E19700360830 /* XBHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeDetailViewController.m; sourceTree = "<group>"; };
-		DC1B61701CF6ECC7008D6EA8 /* UICollectionView+Refresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Refresh.h"; sourceTree = "<group>"; };
-		DC1B61711CF6ECC7008D6EA8 /* UICollectionView+Refresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Refresh.m"; sourceTree = "<group>"; };
+		DC2202191D0F9C40007DDF02 /* XBDiscoverPublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverPublishViewController.h; sourceTree = "<group>"; };
+		DC22021A1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverPublishViewController.m; sourceTree = "<group>"; };
+		DC2202201D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverPublishSearchViewController.h; sourceTree = "<group>"; };
+		DC2202211D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverPublishSearchViewController.m; sourceTree = "<group>"; };
+		DC2202231D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBDiscoverPublicSearchCell.xib; sourceTree = "<group>"; };
+		DC22023A1D0FFD0A007DDF02 /* XBRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshHeader.h; sourceTree = "<group>"; };
+		DC22023B1D0FFD0A007DDF02 /* XBRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshHeader.m; sourceTree = "<group>"; };
+		DC22023C1D0FFD0A007DDF02 /* UIScrollView+XBExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+XBExtension.m"; sourceTree = "<group>"; };
+		DC22023D1D0FFD0A007DDF02 /* UIScrollView+XBExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+XBExtension.h"; sourceTree = "<group>"; };
+		DC22023E1D0FFD0A007DDF02 /* XBRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshConst.m; sourceTree = "<group>"; };
+		DC22023F1D0FFD0A007DDF02 /* XBRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshConst.h; sourceTree = "<group>"; };
+		DC2202401D0FFD0A007DDF02 /* UIView+XBFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XBFrame.m"; sourceTree = "<group>"; };
+		DC2202411D0FFD0A007DDF02 /* UIView+XBFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XBFrame.h"; sourceTree = "<group>"; };
+		DC2202421D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+XBRefresh.m"; sourceTree = "<group>"; };
+		DC2202431D0FFD0A007DDF02 /* UICollectionView+XBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+XBRefresh.h"; sourceTree = "<group>"; };
+		DC2202491D10E99E007DDF02 /* XBRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshView.h; sourceTree = "<group>"; };
+		DC22024A1D10E99E007DDF02 /* XBRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshView.m; sourceTree = "<group>"; };
+		DC2509341D0E601D00C61D30 /* XBDiscoverBeautifulView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverBeautifulView.h; sourceTree = "<group>"; };
+		DC2509351D0E601D00C61D30 /* XBDiscoverBeautifulView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverBeautifulView.m; sourceTree = "<group>"; };
 		DC2D19FB1D054F77003F9EC1 /* XBLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBLoginView.h; sourceTree = "<group>"; };
 		DC2D19FC1D054F77003F9EC1 /* XBLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBLoginView.m; sourceTree = "<group>"; };
 		DC2D19FE1D055542003F9EC1 /* XBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBLoginViewController.h; sourceTree = "<group>"; };
@@ -322,6 +356,10 @@
 		DC7CD0F01D029011005A3FBF /* XBRecruitToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRecruitToolBar.m; sourceTree = "<group>"; };
 		DC7CD0F21D029082005A3FBF /* XBRecruitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRecruitViewController.h; sourceTree = "<group>"; };
 		DC7CD0F31D029082005A3FBF /* XBRecruitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRecruitViewController.m; sourceTree = "<group>"; };
+		DC8DFB401D0D3D5300AEEAEE /* Discover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discover.h; sourceTree = "<group>"; };
+		DC8DFB411D0D3D5300AEEAEE /* Discover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Discover.m; sourceTree = "<group>"; };
+		DC8DFB431D0D40AD00AEEAEE /* DownloadUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadUrl.h; sourceTree = "<group>"; };
+		DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadUrl.m; sourceTree = "<group>"; };
 		DCA2B8581CF7DC9D00E40E91 /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
 		DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
 		DCA92BBE1CFC2137000F8A97 /* XBContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContentView.h; sourceTree = "<group>"; };
@@ -332,6 +370,11 @@
 		DCA92BC51CFC2278000F8A97 /* XMLParserContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserContent.h; sourceTree = "<group>"; };
 		DCA92BC71CFC2570000F8A97 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		DCA92BC81CFC2570000F8A97 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
+		DCB313371D0D4E23005FD1C5 /* DiscoverComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverComment.h; sourceTree = "<group>"; };
+		DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverComment.m; sourceTree = "<group>"; };
+		DCC5B7C71D0D30A1009EE8AF /* XBDiscoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBDiscoverCell.xib; sourceTree = "<group>"; };
+		DCC5B7C91D0D334F009EE8AF /* XBDiscoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverCell.h; sourceTree = "<group>"; };
+		DCC5B7CA1D0D334F009EE8AF /* XBDiscoverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverCell.m; sourceTree = "<group>"; };
 		DCC9C3CC1D01703900B3F729 /* XBShareHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBShareHeaderView.xib; sourceTree = "<group>"; };
 		DCC9C3CE1D0170EC00B3F729 /* XBShareHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBShareHeaderView.h; sourceTree = "<group>"; };
 		DCC9C3CF1D0170EC00B3F729 /* XBShareHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBShareHeaderView.m; sourceTree = "<group>"; };
@@ -342,6 +385,8 @@
 		DCC9C3D71D01839200B3F729 /* XBHomeCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeCommonViewController.m; sourceTree = "<group>"; };
 		DCC9C3DD1D0187E500B3F729 /* XBFavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBFavoriteViewController.h; sourceTree = "<group>"; };
 		DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFavoriteViewController.m; sourceTree = "<group>"; };
+		DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshFooter.h; sourceTree = "<group>"; };
+		DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshFooter.m; sourceTree = "<group>"; };
 		DCE627F81CF4290D0001708E /* SameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SameApp.h; sourceTree = "<group>"; };
 		DCE627F91CF4290D0001708E /* SameApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SameApp.m; sourceTree = "<group>"; };
 		DCE627FB1CF429610001708E /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
@@ -355,6 +400,10 @@
 		DCE628131CF43D490001708E /* XBHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBHomeCell.xib; sourceTree = "<group>"; };
 		DCE628151CF442690001708E /* XBHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBHomeCell.h; sourceTree = "<group>"; };
 		DCE628161CF442690001708E /* XBHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeCell.m; sourceTree = "<group>"; };
+		DCE8EDDC1D0D6201007EFB6C /* XBDiscoverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverDetailViewController.h; sourceTree = "<group>"; };
+		DCE8EDDD1D0D6201007EFB6C /* XBDiscoverDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverDetailViewController.m; sourceTree = "<group>"; };
+		DCE8EDDF1D0D684E007EFB6C /* XBDiscoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverHeaderView.h; sourceTree = "<group>"; };
+		DCE8EDE01D0D684E007EFB6C /* XBDiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverHeaderView.m; sourceTree = "<group>"; };
 		DCE96CC11CF543C600FE3550 /* XBHomeRightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBHomeRightButton.h; sourceTree = "<group>"; };
 		DCE96CC21CF543C600FE3550 /* XBHomeRightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeRightButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -422,6 +471,27 @@
 			name = HomeDetail;
 			sourceTree = "<group>";
 		};
+		DC22024C1D10EE50007DDF02 /* XBRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				DC2202491D10E99E007DDF02 /* XBRefreshView.h */,
+				DC22024A1D10E99E007DDF02 /* XBRefreshView.m */,
+				DC22023A1D0FFD0A007DDF02 /* XBRefreshHeader.h */,
+				DC22023B1D0FFD0A007DDF02 /* XBRefreshHeader.m */,
+				DC22023C1D0FFD0A007DDF02 /* UIScrollView+XBExtension.m */,
+				DC22023D1D0FFD0A007DDF02 /* UIScrollView+XBExtension.h */,
+				DC22023E1D0FFD0A007DDF02 /* XBRefreshConst.m */,
+				DC22023F1D0FFD0A007DDF02 /* XBRefreshConst.h */,
+				DC2202401D0FFD0A007DDF02 /* UIView+XBFrame.m */,
+				DC2202411D0FFD0A007DDF02 /* UIView+XBFrame.h */,
+				DC2202421D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m */,
+				DC2202431D0FFD0A007DDF02 /* UICollectionView+XBRefresh.h */,
+				DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */,
+				DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */,
+			);
+			name = XBRefresh;
+			sourceTree = "<group>";
+		};
 		DC2D19FA1D054F62003F9EC1 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +556,12 @@
 		DC2D1A4A1D0CFB51003F9EC1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DC58BF3B1CFBDFB300AB7463 /* XBPushTransition.h */,
+				DC58BF3C1CFBDFB300AB7463 /* XBPushTransition.m */,
+				DC7C9E6D1CF5A214001AF6A1 /* XBSlideItem.h */,
+				DC7C9E6E1CF5A214001AF6A1 /* XBSlideItem.m */,
+				DC4FBD231CF6F0F2002B9172 /* XBSlideCardView.h */,
+				DC4FBD241CF6F0F2002B9172 /* XBSlideCardView.m */,
 				DCE628131CF43D490001708E /* XBHomeCell.xib */,
 				DCE628151CF442690001708E /* XBHomeCell.h */,
 				DCE628161CF442690001708E /* XBHomeCell.m */,
@@ -524,6 +600,20 @@
 			children = (
 				DC2D1A4E1D0D0DCB003F9EC1 /* XBDiscoverViewController.h */,
 				DC2D1A4F1D0D0DCB003F9EC1 /* XBDiscoverViewController.m */,
+				DCC5B7C71D0D30A1009EE8AF /* XBDiscoverCell.xib */,
+				DCC5B7C91D0D334F009EE8AF /* XBDiscoverCell.h */,
+				DCC5B7CA1D0D334F009EE8AF /* XBDiscoverCell.m */,
+				DCE8EDDC1D0D6201007EFB6C /* XBDiscoverDetailViewController.h */,
+				DCE8EDDD1D0D6201007EFB6C /* XBDiscoverDetailViewController.m */,
+				DCE8EDDF1D0D684E007EFB6C /* XBDiscoverHeaderView.h */,
+				DCE8EDE01D0D684E007EFB6C /* XBDiscoverHeaderView.m */,
+				DC2509341D0E601D00C61D30 /* XBDiscoverBeautifulView.h */,
+				DC2509351D0E601D00C61D30 /* XBDiscoverBeautifulView.m */,
+				DC2202191D0F9C40007DDF02 /* XBDiscoverPublishViewController.h */,
+				DC22021A1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m */,
+				DC2202201D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.h */,
+				DC2202211D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m */,
+				DC2202231D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib */,
 			);
 			name = Discover;
 			sourceTree = "<group>";
@@ -562,6 +652,7 @@
 		DC2D94BB1D01524E001288EF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC22024C1D10EE50007DDF02 /* XBRefresh */,
 				DC2D1A4B1D0CFB61003F9EC1 /* Detail */,
 				DC2D1A4A1D0CFB51003F9EC1 /* Home */,
 				DC2D951E1D0167C0001288EF /* Share */,
@@ -829,8 +920,6 @@
 				DC0F64E61CF5705C00914A82 /* NSIntegerFormatter.m */,
 				DC64C9B51CF2F14100929724 /* UIColor+Util.h */,
 				DC64C9B61CF2F14100929724 /* UIColor+Util.m */,
-				DC1B61701CF6ECC7008D6EA8 /* UICollectionView+Refresh.h */,
-				DC1B61711CF6ECC7008D6EA8 /* UICollectionView+Refresh.m */,
 				DCA2B8581CF7DC9D00E40E91 /* UIViewController+HUD.h */,
 				DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */,
 				DC54130B1CFFD17600C5BC0F /* UIImage+Util.h */,
@@ -846,12 +935,6 @@
 				DC2D1A0F1D057C42003F9EC1 /* UserDefaultsUtil.m */,
 				DC64C9CA1CF3F86100929724 /* XBHttpClient.h */,
 				DC64C9CB1CF3F86100929724 /* XBHttpClient.m */,
-				DC7C9E6D1CF5A214001AF6A1 /* XBSlideItem.h */,
-				DC7C9E6E1CF5A214001AF6A1 /* XBSlideItem.m */,
-				DC4FBD231CF6F0F2002B9172 /* XBSlideCardView.h */,
-				DC4FBD241CF6F0F2002B9172 /* XBSlideCardView.m */,
-				DC58BF3B1CFBDFB300AB7463 /* XBPushTransition.h */,
-				DC58BF3C1CFBDFB300AB7463 /* XBPushTransition.m */,
 				DCA92BC11CFC21FB000F8A97 /* XMLParserUtils.h */,
 				DCA92BC21CFC21FB000F8A97 /* XMLParserUtils.m */,
 				DCA92BC51CFC2278000F8A97 /* XMLParserContent.h */,
@@ -887,6 +970,12 @@
 				DC2D1A051D057296003F9EC1 /* Statics.m */,
 				DC2D1A2E1D06D0EF003F9EC1 /* Search.h */,
 				DC2D1A2F1D06D0EF003F9EC1 /* Search.m */,
+				DC8DFB401D0D3D5300AEEAEE /* Discover.h */,
+				DC8DFB411D0D3D5300AEEAEE /* Discover.m */,
+				DC8DFB431D0D40AD00AEEAEE /* DownloadUrl.h */,
+				DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */,
+				DCB313371D0D4E23005FD1C5 /* DiscoverComment.h */,
+				DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -972,7 +1061,9 @@
 				DC5413071CFFCC9700C5BC0F /* XBCommentCell.xib in Resources */,
 				DC64C9C81CF3ED2500929724 /* Podfile in Resources */,
 				DC64C99A1CF2E81600929724 /* LaunchScreen.storyboard in Resources */,
+				DCC5B7C81D0D30A1009EE8AF /* XBDiscoverCell.xib in Resources */,
 				DC64C9B31CF2EE5000929724 /* Assets.xcassets in Resources */,
+				DC2202241D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib in Resources */,
 				DC2D951A1D016464001288EF /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				DC2D94E01D015DDD001288EF /* UMShareEditViewControlleriPad.xib in Resources */,
 				DC2D94E31D015DDD001288EF /* UMSShareListController.xib in Resources */,
@@ -1049,6 +1140,7 @@
 				DC54130D1CFFD17600C5BC0F /* UIImage+Util.m in Sources */,
 				DC2D946E1D011277001288EF /* AppFavorite.m in Sources */,
 				DC2D1A381D07C6CA003F9EC1 /* XBSearchDetailViewController.m in Sources */,
+				DC2202461D0FFD0A007DDF02 /* XBRefreshConst.m in Sources */,
 				DC2D948C1D01378D001288EF /* SMProgressHUD.m in Sources */,
 				DC2D948F1D01378D001288EF /* SMProgressHUDLoadingView.m in Sources */,
 				DC64C9CC1CF3F86100929724 /* XBHttpClient.m in Sources */,
@@ -1058,16 +1150,22 @@
 				DC64C9D01CF4089400929724 /* Model.m in Sources */,
 				DC001FD11CFD3BC200BFB6C9 /* XBMenuView.m in Sources */,
 				DC2D95261D016AA1001288EF /* XBShareView.m in Sources */,
+				DC2202451D0FFD0A007DDF02 /* UIScrollView+XBExtension.m in Sources */,
 				DC7CD0F11D029011005A3FBF /* XBRecruitToolBar.m in Sources */,
 				DC64C9D31CF409AD00929724 /* App.m in Sources */,
 				DCE6280F1CF43AD40001708E /* Comments.m in Sources */,
 				DC7C9E6F1CF5A214001AF6A1 /* XBSlideItem.m in Sources */,
+				DCE8EDDE1D0D6201007EFB6C /* XBDiscoverDetailViewController.m in Sources */,
+				DC2202471D0FFD0A007DDF02 /* UIView+XBFrame.m in Sources */,
+				DCE8EDE11D0D684E007EFB6C /* XBDiscoverHeaderView.m in Sources */,
+				DC2509361D0E601D00C61D30 /* XBDiscoverBeautifulView.m in Sources */,
 				DC58BF3D1CFBDFB300AB7463 /* XBPushTransition.m in Sources */,
 				DC09BC361CFEDE1100E73BB0 /* XBScrollView.m in Sources */,
 				DC0F64E71CF5705C00914A82 /* NSIntegerFormatter.m in Sources */,
 				DC2D1A491D0CF8B4003F9EC1 /* XBArticleViewController.m in Sources */,
 				DCE627FA1CF4290D0001708E /* SameApp.m in Sources */,
 				DC2D1A031D0571C3003F9EC1 /* User.m in Sources */,
+				DC2202441D0FFD0A007DDF02 /* XBRefreshHeader.m in Sources */,
 				DC2D19FD1D054F77003F9EC1 /* XBLoginView.m in Sources */,
 				DCE628121CF43AFE0001708E /* Comment.m in Sources */,
 				DC64C9C61CF3EB6400929724 /* XBLeftFooterView.m in Sources */,
@@ -1085,19 +1183,25 @@
 				DC2D1A501D0D0DCB003F9EC1 /* XBDiscoverViewController.m in Sources */,
 				DC2D1A001D055542003F9EC1 /* XBLoginViewController.m in Sources */,
 				DC001FCE1CFD25D200BFB6C9 /* XBShareWeChatView.m in Sources */,
+				DC2202221D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m in Sources */,
 				DC64C9AE1CF2E96500929724 /* XBHomeViewController.m in Sources */,
 				DC4FBD251CF6F0F2002B9172 /* XBSlideCardView.m in Sources */,
 				DC2D1A1D1D0673FE003F9EC1 /* XBSettingCell.m in Sources */,
+				DC8DFB451D0D40AD00AEEAEE /* DownloadUrl.m in Sources */,
 				DC2D1A201D067B8E003F9EC1 /* XBSettingFooterView.m in Sources */,
 				DCC9C3D01D0170EC00B3F729 /* XBShareHeaderView.m in Sources */,
+				DCDC8A901D1103F100836F04 /* XBRefreshFooter.m in Sources */,
 				DC2D1A061D057296003F9EC1 /* Statics.m in Sources */,
 				DC001FD41CFD6D9300BFB6C9 /* XBHomeToolBar.m in Sources */,
 				DC64C9B71CF2F14100929724 /* UIColor+Util.m in Sources */,
 				DCA92BC31CFC21FB000F8A97 /* XMLParserUtils.m in Sources */,
+				DC22024B1D10E99E007DDF02 /* XBRefreshView.m in Sources */,
+				DC22021B1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m in Sources */,
 				DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */,
 				DC2D1A141D066F6A003F9EC1 /* XBSettingViewController.m in Sources */,
 				DC2D1A101D057C42003F9EC1 /* UserDefaultsUtil.m in Sources */,
 				DC2D94901D01378D001288EF /* SMProgressHUDTipView.m in Sources */,
+				DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */,
 				DC2D1A351D07AD41003F9EC1 /* XBSearchCell.m in Sources */,
 				DC2D1A441D081B28003F9EC1 /* XBLiabilityViewController.m in Sources */,
 				DC5413131CFFE69E00C5BC0F /* Application.m in Sources */,
@@ -1108,6 +1212,7 @@
 				DC5413101CFFDC9B00C5BC0F /* XBRefreshAutoFooter.m in Sources */,
 				DCE628031CF42BE10001708E /* Info.m in Sources */,
 				DC64C9BC1CF2F39D00929724 /* Constants.m in Sources */,
+				DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */,
 				DC7CD0F41D029082005A3FBF /* XBRecruitViewController.m in Sources */,
 				DCE627FD1CF429610001708E /* Author.m in Sources */,
 				DC130E8A1CF6E19700360830 /* XBHomeDetailViewController.m in Sources */,
@@ -1115,11 +1220,12 @@
 				DC2D94911D01378D001288EF /* UIView+SMAutolayout.m in Sources */,
 				DC2D94BE1D015363001288EF /* XBDetailCommonViewController.m in Sources */,
 				DC2D1A271D06BD28003F9EC1 /* XBSearchViewController.m in Sources */,
-				DC1B61721CF6ECC7008D6EA8 /* UICollectionView+Refresh.m in Sources */,
+				DC2202481D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m in Sources */,
 				DC2D1A3B1D07C8CD003F9EC1 /* XBSearchPushTransition.m in Sources */,
 				DCA92BC01CFC2137000F8A97 /* XBContentView.m in Sources */,
 				DC2D95231D016A5B001288EF /* XBShareCell.m in Sources */,
 				DCA2B85A1CF7DC9D00E40E91 /* UIViewController+HUD.m in Sources */,
+				DCB313391D0D4E23005FD1C5 /* DiscoverComment.m in Sources */,
 				DC54130A1CFFD05600C5BC0F /* XBCommentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

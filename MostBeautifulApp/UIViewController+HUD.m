@@ -32,7 +32,15 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     }
     
     UIImageView *loadImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40.f, 40.f)];
-    loadImageView.animationImages = @[[UIImage imageNamed:@"loading_1"],[UIImage imageNamed:@"loading_2"],[UIImage imageNamed:@"loading_3"],[UIImage imageNamed:@"loading_4"],[UIImage imageNamed:@"loading_5"],[UIImage imageNamed:@"loading_6"],[UIImage imageNamed:@"loading_7"],[UIImage imageNamed:@"loading_8"]];
+    loadImageView.animationImages = @[[UIImage imageNamed:@"loading_1"],
+                                      [UIImage imageNamed:@"loading_2"],
+                                      [UIImage imageNamed:@"loading_3"],
+                                      [UIImage imageNamed:@"loading_4"],
+                                      [UIImage imageNamed:@"loading_5"],
+                                      [UIImage imageNamed:@"loading_6"],
+                                      [UIImage imageNamed:@"loading_7"],
+                                      [UIImage imageNamed:@"loading_8"]
+                                     ];
     loadImageView.center = view.center;
     loadImageView.animationDuration = 0.8f;
     loadImageView.animationRepeatCount = NSIntegerMax;

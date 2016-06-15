@@ -6,6 +6,8 @@
 //  Copyright © 2016年 coder. All rights reserved.
 //
 
+#define kToolBarH 45.f
+
 #import <UIKit/UIKit.h>
 @class XBHomeToolBar;
 @protocol XBHomeToolBarDelegate <NSObject>

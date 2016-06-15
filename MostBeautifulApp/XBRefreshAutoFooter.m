@@ -10,8 +10,6 @@
 @interface XBRefreshAutoFooter()
 @property (strong, nonatomic) UIView   *contentView;
 @property (strong, nonatomic) UILabel  *loadingLabel;
-@property (strong, nonatomic) UIColor  *normalColor;
-@property (strong, nonatomic) UIColor  *loadColor;
 @property (strong, nonatomic) UIActivityIndicatorView  *indicatorView;
 @end
 @implementation XBRefreshAutoFooter
@@ -33,7 +31,7 @@
     self.loadingLabel = [UILabel new];
     self.loadingLabel.text = @"显示更多";
     self.loadingLabel.textColor = self.normalColor;
-    self.loadingLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16.f];
+//    self.loadingLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16.f];
     
     self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.indicatorView.hidden = YES;
@@ -48,7 +46,8 @@
 {
     [super placeSubviews];
     
-    self.contentView.frame = CGRectMake(30, 5, CGRectGetWidth(self.frame) - 60.f, CGRectGetHeight(self.frame) - 5);
+    CGFloat  w = self.type == XBRefreshAutoFooterTypeDetail ? 60.f : 20.f;
+    self.contentView.frame = CGRectMake(w / 2.f, 5, CGRectGetWidth(self.frame) - w, CGRectGetHeight(self.frame) - 5);
     
     self.loadingLabel.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 2.f - 20.f, -2.5f, 80.f, CGRectGetHeight(self.frame));
     
@@ -107,5 +106,17 @@
     }
 }
 
+
+- (void)setLoadColor:(UIColor *)loadColor
+{
+    _loadColor = loadColor;
+    self.loadingLabel.textColor = loadColor;
+}
+
+- (void)setNormalColor:(UIColor *)normalColor
+{
+    _normalColor = normalColor;
+    self.loadingLabel.textColor = normalColor;
+}
 
 @end

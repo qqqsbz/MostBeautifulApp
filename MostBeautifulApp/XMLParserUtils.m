@@ -61,6 +61,8 @@
         self.parserContent.contentType = XBParserContentTypeImage;
         self.currentValue = self.parserContent.content;
     } else if ([self.currentElementName isEqualToString:@"a"]) {
+        //防止a标签给嵌套到其他标签里面而引起的标签解析错误 如: <p> <a href="xxxx"/> </p>
+        [self parser:parser didEndElement:elementName namespaceURI:namespaceURI qualifiedName:qName];
         self.parserContent = [XMLParserContent new];
         self.parserContent.content = [attributeDict valueForKey:@"href"];
         self.parserContent.contentType = XBParserContentTypeLink;
@@ -92,6 +94,11 @@
     self.currentElementName = @"";
     self.parserContent = nil;
     self.currentValue  = @"";
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
+{
+    DDLogDebug(@"parseError:%@",parseError);
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser

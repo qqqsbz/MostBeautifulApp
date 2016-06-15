@@ -16,4 +16,6 @@
 
 + (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation;
 
++ (UIImage *)scaleImage:(UIImage *)image toScale:(float)scaleSize;
+
 @end

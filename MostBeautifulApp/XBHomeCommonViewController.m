@@ -14,7 +14,6 @@
 #import "AppDelegate.h"
 #import "XBHomeCell.h"
 #import "XBHomeDetailViewController.h"
-#import "UICollectionView+Refresh.h"
 @interface XBHomeCommonViewController ()<SlideCarViewDataDelegate,SlideCarViewDataSource,UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) NSIndexPath       *currentIndexPath;
@@ -39,7 +38,9 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     
     [self buildCollectionView];
     
-    [self reloadData];
+//    [self reloadData];
+    [self beginRefreshing];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -61,6 +62,16 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     DDLogDebug(@"child must implement reloadData method");
 }
 
+- (void)beginRefreshing
+{
+    [self.cardView slideCardBeginRefreshing];
+}
+
+- (void)endRefreshing
+{
+    [self.cardView slideCardEndRefreshing];
+}
+
 #pragma mark -- build view
 - (void)buildCollectionView
 {
@@ -71,6 +82,7 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     self.cardView.dataSource = self;
     [self.cardView slideCardRegisterSlideCarNib:[UINib nibWithNibName:NSStringFromClass([XBHomeCell class]) bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:homeReuseIdentifier];
     [self.view addSubview:self.cardView];
+
 }
 
 - (void)buildMenuButton
@@ -90,7 +102,7 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     
 }
 
-#pragma mark -- UICollectionViewDatasource
+#pragma mark -- XBSlideCarViewDatasource
 - (NSInteger)slideCardNumberOfItems
 {
     return self.datas.count;
@@ -110,7 +122,7 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
 }
 
 
-#pragma mark -- UICollectionViewDelegate
+#pragma mark -- XBSlideCarViewDelegate
 - (void)slideCardCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.currentIndexPath = indexPath;
@@ -127,6 +139,11 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     NSInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     self.currentIndexPath = [NSIndexPath indexPathForRow:page inSection:0];
     [self resetBackgroundColorIsScrollToItem:isScroll];
+}
+
+- (void)slideCardDidRefreshing
+{
+    [self reloadData];
 }
 
 - (void)menuAction
@@ -164,6 +181,8 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
 {
     return (XBHomeCell *)[self.cardView slideCardCellForIndexPath:self.currentIndexPath];
 }
+
+#pragma mark -- setting
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,7 @@
 #import "User.h"
 #import "Comment.h"
 #import "Search.h"
+#import "Discover.h"
 #import <Mantle/Mantle.h>
 
 @interface XBHttpClient()
@@ -23,8 +24,12 @@ static NSString *kComment = @"/apps/comment/?"; // 留言
 static NSString *kSearch  = @"/search/?";//搜索
 static NSString *kAppDetail = @"/apps/app/%d/?";//查询app详细信息
 static NSString *kLiability = @"/category/100/all/?type=zuimei.daily";//限免推荐
+static NSString *kHotDiscover = @"/community/recommend_apps/?";//最热分享
+static NSString *kNovelDiscover = @"/community/apps/?";//最新分享
+static NSString *kDiscoverComment = @"/community/comments/?";
+static NSString *kDiscoverDetail = @"/community/app/show/?";//分享详情
 static NSString *kArticle = @"/media/list/?type=zhuanlan";//文章专栏
-static NSString *kFindApp = @"/community/recommend_apps/?";//发现应用
+//static NSString *kFindApp = @"/community/recommend_apps/?";//发现应用
 static NSString *kAppStore = @"https://itunes.apple.com/cn/app/zui-mei-ying-yong/id739652274?mt=8";//美我一下
 static NSString *kSinaLogin = @"http://zuimeia.com/api/user/weibo/signup/?openUDID=d41d8cd98f00b204e9800998ecf8427e2c09ef55&systemVersion=9.1&appVersion=2.3.0&resolution=%7B640,%201136%7D&platform=1";
 static NSString *kSuccessPrefix = @"result";
@@ -46,10 +51,11 @@ static NSInteger kSuccessCode = 1;
     return client;
 }
 
-- (void)getTodayWithPageSize:(NSInteger)pageSize success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
+- (void)getTodayWithPage:(NSInteger)page PageSize:(NSInteger)pageSize success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
 {
     NSString *api = [self.api stringByReplacingOccurrencesOfString:kPrefix withString:kToday];
     api = [api stringByReplacingOccurrencesOfString:kPagePrefix withString:[NSString stringWithFormat:@"%ld",(long)pageSize]];
+    api = [api stringByAppendingString:[NSString stringWithFormat:@"&page=%d",page]];
     DDLogCDebug(@"api:%@",api);
     [self GET:api parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject valueForKey:kSuccessPrefix] integerValue] == kSuccessCode) {
@@ -226,6 +232,99 @@ static NSInteger kSuccessCode = 1;
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
     }];
+}
+
+- (void)getHotDiscoverWithPage:(NSInteger)page pageSize:(NSInteger)pageSize success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
+{
+    NSString *api = [self.api stringByReplacingOccurrencesOfString:kPrefix withString:kHotDiscover];
+    api = [api stringByReplacingOccurrencesOfString:kPagePrefix withString:[NSString stringWithFormat:@"%ld",(long)pageSize]];
+    api = [api stringByAppendingString:[NSString stringWithFormat:@"&page=%d",page]];
+    DDLogCDebug(@"api:%@",api);
+    
+    [self GET:api parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject valueForKey:kSuccessPrefix] integerValue] == kSuccessCode) {
+            NSDictionary  *data = [responseObject valueForKey:kSuccessData];
+            id app = [data valueForKey:kSuccessApps];
+            NSError *error = nil;
+            if ([app isKindOfClass:[NSArray class]]) {
+                app = [MTLJSONAdapter modelsOfClass:[Discover class] fromJSONArray:app error:&error];
+            } else if ([app isKindOfClass:[NSDictionary class]]) {
+                app = [MTLJSONAdapter modelOfClass:[Discover class] fromJSONDictionary:app error:&error];
+            }
+            
+            if (!error) {
+                success(app);
+            } else {
+                failure(error);
+            }
+        }
+
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure(error);
+    }];
+
+}
+
+- (void)getNovelDiscoverWithPos:(NSInteger)pos pageSize:(NSInteger)pageSize success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
+{
+    NSString *api = [self.api stringByReplacingOccurrencesOfString:kPrefix withString:kNovelDiscover];
+    api = [api stringByReplacingOccurrencesOfString:kPagePrefix withString:[NSString stringWithFormat:@"%ld",(long)pageSize]];
+    api = [api stringByAppendingString:[NSString stringWithFormat:@"&pos=%d",pos]];
+    DDLogCDebug(@"api:%@",api);
+    
+    [self GET:api parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject valueForKey:kSuccessPrefix] integerValue] == kSuccessCode) {
+            NSDictionary  *data = [responseObject valueForKey:kSuccessData];
+            id app = [data valueForKey:kSuccessApps];
+            NSError *error = nil;
+            if ([app isKindOfClass:[NSArray class]]) {
+                app = [MTLJSONAdapter modelsOfClass:[Discover class] fromJSONArray:app error:&error];
+            } else if ([app isKindOfClass:[NSDictionary class]]) {
+                app = [MTLJSONAdapter modelOfClass:[Discover class] fromJSONDictionary:app error:&error];
+            }
+            
+            if (!error) {
+                success(app);
+            } else {
+                failure(error);
+            }
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure(error);
+    }];
+
+}
+
+
+- (void)getCommentWithDiscoverId:(NSInteger)appId commentId:(NSInteger)commentId pageSize:(NSInteger)pageSize success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
+{
+    NSString *api = [self.api stringByReplacingOccurrencesOfString:kPrefix withString:kDiscoverComment];
+    api = [api stringByReplacingOccurrencesOfString:kPagePrefix withString:[NSString stringWithFormat:@"%ld",(long)pageSize]];
+    api = [api stringByAppendingString:[NSString stringWithFormat:@"&comment_id=%d",commentId]];
+    api = [api stringByAppendingString:[NSString stringWithFormat:@"&app_id=%d",appId]];
+    DDLogCDebug(@"api:%@",api);
+    [self GET:api parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject valueForKey:kSuccessPrefix] integerValue] == kSuccessCode) {
+            NSDictionary  *data = [responseObject valueForKey:kSuccessData];
+            id app = [data valueForKey:kSuccessComments];
+            NSError *error = nil;
+            if ([app isKindOfClass:[NSArray class]]) {
+                app = [MTLJSONAdapter modelsOfClass:[Comment class] fromJSONArray:app error:&error];
+            } else if ([app isKindOfClass:[NSDictionary class]]) {
+                app = [MTLJSONAdapter modelOfClass:[Comment class] fromJSONDictionary:app error:&error];
+            }
+            
+            if (!error) {
+                success(app);
+            } else {
+                failure(error);
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure(error);
+    }];
+
 }
 
 - (NSString *)api
