@@ -87,13 +87,10 @@
     toVC.toolBar.frame = CGRectMake(0, CGRectGetHeight(containerView.frame), CGRectGetWidth(toolBarFrame), CGRectGetHeight(toolBarFrame));
     
     toVC.menuView.alpha = 0.f;
-//    toVC.backButton.hidden = YES;
     [containerView addSubview:toVC.view];
-//    [containerView addSubview:backButton];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] * 1.3 delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
         toVC.scrollView.frame = scrollFrame;
-//        toVC.backButton.frame = backFrame;
         backButton.frame = backFrame;
         coverImageView.frame = coverFrame;
         toVC.avatorImageView.frame = avatorFrame;
@@ -105,7 +102,6 @@
         [UIView animateWithDuration:0.25 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
             toVC.menuView.alpha = 1.f;
         } completion:^(BOOL finished) {
-//            toVC.backButton.hidden = NO;
             [transitionContext completeTransition:YES];
         }];
     }];
@@ -114,24 +110,44 @@
 
 - (void)popAnimation:(id <UIViewControllerContextTransitioning>)transitionContext
 {
+    
     XBHomeDetailViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     XBHomeViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
+    
+    toVC.view.transform = CGAffineTransformMakeScale(0.94f, 0.94f);
+    
+    UIView *backgroundView = [[UIView alloc] initWithFrame:toVC.view.bounds];
+    backgroundView.backgroundColor = [UIColor blackColor];
+    
+    UIView *maskView = [[UIView alloc] initWithFrame:toVC.view.bounds];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.55f];
 
     toVC.view.alpha = 1.f;
-    [containerView insertSubview:toVC.view atIndex:0];
+    [containerView insertSubview:backgroundView atIndex:0];
+    [containerView insertSubview:toVC.view belowSubview:fromVC.view];
+    [containerView insertSubview:maskView aboveSubview:toVC.view];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
         CGRect frame = fromVC.view.frame;
         frame.origin.x = CGRectGetWidth(frame);
         fromVC.view.frame = frame;
         
-        CGRect backFrame = fromVC.backButton.frame;
-        backFrame.origin.x = CGRectGetWidth(frame);
-        fromVC.backButton.frame = backFrame;
+        maskView.alpha = 0.f;
+        
+        toVC.view.transform = CGAffineTransformMakeScale(1.f, 1.f);
         
     } completion:^(BOOL finished) {
-        [transitionContext completeTransition:YES];
+       
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        
+        if ([transitionContext transitionWasCancelled]) { //手势取消
+            [toVC.view removeFromSuperview];
+        }
+        
+        [maskView removeFromSuperview];
+        [backgroundView removeFromSuperview];
     }];
 }
 

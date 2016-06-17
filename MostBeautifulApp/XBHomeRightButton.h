@@ -15,7 +15,10 @@ typedef NS_ENUM(NSInteger,XBHomeRightType) {
 };
 @interface XBHomeRightButton : UIView
 
+/** 设置当前日期 */
 @property (strong, nonatomic) NSString  *currentDateString;
+/** 显示返回首页的按钮 */
+@property (assign, nonatomic) BOOL      showHome;
 
 - (instancetype)initWithFrame:(CGRect)frame homeBlock:(dispatch_block_t)block type:(XBHomeRightType)type;
 

@@ -29,7 +29,7 @@
     self.textView.text = app.digest;
     self.authorLabel.text = app.authorUsername;
     self.favoriteCountLabel.text = [NSIntegerFormatter formatToNSString:app.info.up];
-    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:app.coverImage] placeholderImage:[UIImage imageNamed:@"home_logo_normal"]];
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:app.coverImage] placeholderImage:[UIImage imageNamed:@"common_logo_normal"]];
     
     NSRange titleRange = NSMakeRange(0, app.title.length);
     NSRange subTitleRange = NSMakeRange(titleRange.length + 1, app.subTitle.length);

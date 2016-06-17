@@ -19,6 +19,7 @@
 #import "Application.h"
 #import "XBHttpClient.h"
 #import "SMProgressHUD.h"
+#import "UIView+XBFrame.h"
 #import "NSIntegerFormatter.h"
 #import "UIViewController+HUD.h"
 #import <DDLog.h>

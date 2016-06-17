@@ -99,6 +99,7 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     DDLogDebug(@"parseError:%@",parseError);
+    self.complete(self.parserContents);
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser

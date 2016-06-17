@@ -30,13 +30,13 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.page = 1;
     
     self.pageSize = 10;
     
     self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self buildMenuButton];
     
@@ -53,6 +53,7 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
     AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [tempAppDelegate.leftSlideVC setPanEnabled:YES];
 }
@@ -139,18 +140,18 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
 
 - (void)buildMenuButton
 {
-    UIButton *menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    menuBtn.frame = CGRectMake(0, 0, 20, 18);
-    [menuBtn setBackgroundImage:[UIImage imageNamed:@"home_icon_sidebar_normal"] forState:UIControlStateNormal];
-    [menuBtn addTarget:self action:@selector(menuAction) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:menuBtn];
+    self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.backButton.frame = CGRectMake(8, 38, 28.f, 26.f);
+    [self.backButton setBackgroundImage:[UIImage imageNamed:@"home_icon_sidebar_normal"] forState:UIControlStateNormal];
+    [self.backButton addTarget:self action:@selector(menuAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.backButton];
     
-    self.homeRightButton = [[XBHomeRightButton alloc] initWithFrame:CGRectMake(0, 0, 120, 30.f) homeBlock:^(){
+    self.homeRightButton = [[XBHomeRightButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame) - 120 - 12, 28, 120, 40.f) homeBlock:^(){
         self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.cardView slideCardScrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
         [self resetBackgroundColorIsScrollToItem:YES];
     } type:self.homeRightType];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.homeRightButton];
+    [self.view addSubview:self.homeRightButton];
     
 }
 
@@ -191,6 +192,11 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     NSInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
     self.currentIndexPath = [NSIndexPath indexPathForRow:page inSection:0];
     [self resetBackgroundColorIsScrollToItem:isScroll];
+    
+    //默认当滚动到第三个起并且不是"我的收藏"、"文章专栏"显示返回首页按钮
+    if (page >= 2 && (self.homeRightType != XBHomeRightTypeFavorite && self.homeRightType != XBHomeRightTypeArticle)) {
+        self.homeRightButton.showHome = YES;
+    }
 }
 
 - (void)menuAction

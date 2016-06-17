@@ -123,6 +123,7 @@
 		DCA92BC31CFC21FB000F8A97 /* XMLParserUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC21CFC21FB000F8A97 /* XMLParserUtils.m */; };
 		DCA92BC61CFC2278000F8A97 /* XMLParserContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC41CFC2278000F8A97 /* XMLParserContent.m */; };
 		DCA92BC91CFC2570000F8A97 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC81CFC2570000F8A97 /* NSString+Util.m */; };
+		DCAB85241D138B3E0037B0A1 /* XBInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAB85231D138B3E0037B0A1 /* XBInteractiveTransition.m */; };
 		DCB313391D0D4E23005FD1C5 /* DiscoverComment.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */; };
 		DCC5B7C81D0D30A1009EE8AF /* XBDiscoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC5B7C71D0D30A1009EE8AF /* XBDiscoverCell.xib */; };
 		DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC5B7CA1D0D334F009EE8AF /* XBDiscoverCell.m */; };
@@ -370,6 +371,8 @@
 		DCA92BC51CFC2278000F8A97 /* XMLParserContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserContent.h; sourceTree = "<group>"; };
 		DCA92BC71CFC2570000F8A97 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		DCA92BC81CFC2570000F8A97 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
+		DCAB85221D138B3E0037B0A1 /* XBInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBInteractiveTransition.h; sourceTree = "<group>"; };
+		DCAB85231D138B3E0037B0A1 /* XBInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBInteractiveTransition.m; sourceTree = "<group>"; };
 		DCB313371D0D4E23005FD1C5 /* DiscoverComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverComment.h; sourceTree = "<group>"; };
 		DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverComment.m; sourceTree = "<group>"; };
 		DCC5B7C71D0D30A1009EE8AF /* XBDiscoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBDiscoverCell.xib; sourceTree = "<group>"; };
@@ -545,8 +548,6 @@
 		DC2D1A4A1D0CFB51003F9EC1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				DC58BF3B1CFBDFB300AB7463 /* XBPushTransition.h */,
-				DC58BF3C1CFBDFB300AB7463 /* XBPushTransition.m */,
 				DC7C9E6D1CF5A214001AF6A1 /* XBSlideItem.h */,
 				DC7C9E6E1CF5A214001AF6A1 /* XBSlideItem.m */,
 				DC4FBD231CF6F0F2002B9172 /* XBSlideCardView.h */,
@@ -565,6 +566,10 @@
 		DC2D1A4B1D0CFB61003F9EC1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				DCAB85221D138B3E0037B0A1 /* XBInteractiveTransition.h */,
+				DCAB85231D138B3E0037B0A1 /* XBInteractiveTransition.m */,
+				DC58BF3B1CFBDFB300AB7463 /* XBPushTransition.h */,
+				DC58BF3C1CFBDFB300AB7463 /* XBPushTransition.m */,
 				DCA92BBE1CFC2137000F8A97 /* XBContentView.h */,
 				DCA92BBF1CFC2137000F8A97 /* XBContentView.m */,
 				DC001FCC1CFD25D200BFB6C9 /* XBShareWeChatView.h */,
@@ -1220,6 +1225,7 @@
 				DC64C9B71CF2F14100929724 /* UIColor+Util.m in Sources */,
 				DCA92BC31CFC21FB000F8A97 /* XMLParserUtils.m in Sources */,
 				DC22024B1D10E99E007DDF02 /* XBRefreshView.m in Sources */,
+				DCAB85241D138B3E0037B0A1 /* XBInteractiveTransition.m in Sources */,
 				DC22021B1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m in Sources */,
 				DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */,
 				DC2D1A141D066F6A003F9EC1 /* XBSettingViewController.m in Sources */,

@@ -34,14 +34,12 @@ static NSString *reuseIdentifier = @"XBSearchCell";
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    [self.navigationController.view addSubview:self.searchNavigationBar];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     self.searchNavigationBar.isBecomeFirstResponder = NO;
-    [self.searchNavigationBar removeFromSuperview];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
@@ -53,7 +51,7 @@ static NSString *reuseIdentifier = @"XBSearchCell";
         self.keyWord = [self.keyWord stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (self.keyWord.length <= 0) return ;
         
-        [self showLoadinng];
+        [self showLoadinngInView:self.view];
         
         NSDictionary *param = @{@"keyword":text,
                                 @"platform":[NSNumber numberWithInt:1],
@@ -77,12 +75,13 @@ static NSString *reuseIdentifier = @"XBSearchCell";
             [self.searchNavigationBar removeFromSuperview];
         }];
     }];
-    self.searchNavigationBar.backgroundColor = [UIColor whiteColor];
     self.searchNavigationBar.isBecomeFirstResponder = YES;
-    [self.navigationController.view addSubview:self.searchNavigationBar];
+    self.searchNavigationBar.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.searchNavigationBar];
+    //隐藏导航栏 以免会挡道searchNavigationBar
+    self.navigationController.navigationBarHidden = YES;
     
-    
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchNavigationBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMaxY(self.searchNavigationBar.frame))];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

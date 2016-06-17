@@ -95,8 +95,7 @@
     UIViewController *viewController = [mainVC.childViewControllers lastObject];
     if ([viewController isKindOfClass:[XBHomeCommonViewController class]]) {
         XBHomeCommonViewController *homeVC = (XBHomeCommonViewController *)viewController;
-        UIButton *leftBtn = homeVC.navigationItem.leftBarButtonItem.customView;
-        leftBtn.hidden = YES;
+        homeVC.backButton.hidden = YES;
         homeVC.showMenu = NO;
     }
 }
@@ -106,8 +105,7 @@
     UIViewController *viewController = [mainVC.childViewControllers lastObject];
     if ([viewController isKindOfClass:[XBHomeCommonViewController class]]) {
         XBHomeCommonViewController *homeVC = (XBHomeCommonViewController *)viewController;
-        UIButton *leftBtn = homeVC.navigationItem.leftBarButtonItem.customView;
-        leftBtn.hidden = NO;
+        homeVC.backButton.hidden = NO;
         homeVC.showMenu = YES;
     }
 }

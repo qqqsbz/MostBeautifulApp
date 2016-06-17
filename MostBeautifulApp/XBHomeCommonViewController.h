@@ -13,6 +13,9 @@
 #import "XBSlideCardView.h"
 @interface XBHomeCommonViewController : UIViewController
 
+/** 返回按钮 */
+@property (strong, nonatomic) UIButton  *backButton;
+
 /** 导航栏右边菜单 */
 @property (strong, nonatomic) XBHomeRightButton *homeRightButton;
 

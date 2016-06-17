@@ -56,15 +56,18 @@ static NSString *reuseIdentifier = @"XBSettingCell";
     [self.tableView reloadData];
     [self.view addSubview:self.tableView];
     
-    self.footerView = [[XBSettingFooterView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), CGRectGetWidth(self.view.frame), kFooterH) didSelectedLoginOutBlock:^{
-        [UserDefaultsUtil clearUserInfo];
-        [[SMProgressHUD shareInstancetype] showTip:@"退成成功"];
-        self.footerView.hidden = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:kLoginOutSuccessNotification object:nil];
-    }];
-    self.footerView.backgroundColor = [UIColor whiteColor];
-    self.footerView.hidden = [UserDefaultsUtil userInfo] == nil;
-    [self.view addSubview:self.footerView];
+    if (![UserDefaultsUtil userInfo]) {
+        self.tableView.xb_height += kFooterH;
+    } else {
+        self.footerView = [[XBSettingFooterView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), CGRectGetWidth(self.view.frame), kFooterH) didSelectedLoginOutBlock:^{
+            [UserDefaultsUtil clearUserInfo];
+            [[SMProgressHUD shareInstancetype] showTip:@"退出成功"];
+            self.footerView.hidden = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginOutSuccessNotification object:nil];
+        }];
+        self.footerView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:self.footerView];
+    }
 }
 
 - (void)buildLeftButton

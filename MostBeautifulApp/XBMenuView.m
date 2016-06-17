@@ -291,11 +291,11 @@
         [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
             CGRect firstFrame = firstImaegView.frame;
-            firstFrame.origin.x -= kAnimationSpace * 3;
+            firstFrame.origin.x -= kAnimationSpace;
             firstImaegView.frame = firstFrame;
             
             CGRect lastFrame = lastImageView.frame;
-            lastFrame.origin.x -= kAnimationSpace * 3;
+            lastFrame.origin.x -= kAnimationSpace;
             lastImageView.frame = lastFrame;
             
         } completion:^(BOOL finished) {
@@ -343,11 +343,11 @@
         [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             
             CGRect firstFrame = firstImaegView.frame;
-            firstFrame.origin.x += kAnimationSpace * 3;
+            firstFrame.origin.x += kAnimationSpace;
             firstImaegView.frame = firstFrame;
             
             CGRect lastFrame = lastImageView.frame;
-            lastFrame.origin.x += kAnimationSpace * 3;
+            lastFrame.origin.x += kAnimationSpace;
             lastImageView.frame = lastFrame;
             
         } completion:^(BOOL finished) {

@@ -71,7 +71,10 @@
     NSArray *viewControllers = tempAppDelegate.mainNavigationController.childViewControllers;
     for (UIViewController *vc in viewControllers) {
         if ([vc isKindOfClass:[XBHomeViewController class]]) {
+            
             self.view.backgroundColor = vc.view.backgroundColor;
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChangeBackgroundColorNotification object:vc.view.backgroundColor];
         }
     }
 }

@@ -35,7 +35,7 @@
 #pragma mark -- XBMenuViewDelegate
 - (void)menuView:(XBMenuView *)menuView didSelectedWithType:(XBMenuViewDidSelectedType)type atIndex:(NSInteger)index
 {
-    if (![UserDefaultsUtil userInfo]) {
+    if (type == XBMenuViewDidSelectedTypeFavorite && ![UserDefaultsUtil userInfo]) {
         [self presentViewController:[[XBLoginViewController alloc] init] animated:YES completion:nil];
         return;
     }

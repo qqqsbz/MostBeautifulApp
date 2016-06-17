@@ -12,6 +12,7 @@
 #import "XBContentView.h"
 #import "XBHomeToolBar.h"
 #import "NSString+Util.h"
+#import "XBSearchNavigationBar.h"
 #import "XBSearchViewController.h"
 #import "XBSearchDetailViewController.h"
 #import "XBDetailCommonViewController.h"
@@ -63,7 +64,7 @@
     toVC.coverImageView.frame = [cell convertRect:cell.bounds toView:containerView];
     
     UIButton *backButton = toVC.backButton;
-    CGRect backFrame = [toVC.backButton convertRect:toVC.backButton.bounds toView:containerView];
+    CGRect backFrame = [toVC.backButton convertRect:toVC.backButton.frame toView:containerView];
     backButton.frame = CGRectMake(-60, CGRectGetMinY(backButton.frame), CGRectGetWidth(backButton.frame), CGRectGetHeight(backButton.frame));
     
     CGRect avatorFrame = toVC.avatorImageView.frame;
@@ -84,7 +85,7 @@
     
     toVC.menuView.alpha = 0.f;
     [containerView addSubview:toVC.view];
-    [containerView addSubview:backButton];
+//    [containerView addSubview:backButton];
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scaleAnimation.fromValue = @(0.7f);
@@ -152,15 +153,23 @@
     XBSearchViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
     
+    
     toVC.view.alpha = 1.f;
-    [containerView insertSubview:toVC.view atIndex:0];
+    [containerView insertSubview:toVC.view belowSubview:fromVC.view];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] * 0.6 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
         CGRect frame = fromVC.view.frame;
-        frame.origin.x = CGRectGetWidth(frame);
-        fromVC.view.frame = frame;
+        fromVC.view.xb_x = CGRectGetWidth(frame);
+        
+        fromVC.backButton.xb_x = CGRectGetWidth(frame);
+        
+        CGRect naviBarFrame = fromVC.naviBarMenuView.frame;
+        fromVC.naviBarMenuView.xb_x = CGRectGetWidth(frame) + CGRectGetMinX(naviBarFrame);
+        
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:YES];
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     }];
 }
 

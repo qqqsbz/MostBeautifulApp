@@ -8,6 +8,8 @@
 
 #define kIconWH 52.f
 #define kAnimationSpace 25.f
+#define  kScreenWidth  [UIScreen mainScreen].bounds.size.width
+
 #import "XBDetailCommonViewController.h"
 #import "App.h"
 #import "Comment.h"
@@ -24,13 +26,13 @@
 #import "XBRefreshAutoFooter.h"
 #import "AppFavorite.h"
 #import "SMProgressHUD.h"
+#import "XBInteractiveTransition.h"
 #import <MJRefresh/MJRefresh.h>
 
 @interface XBDetailCommonViewController ()<XBContentViewDelegate,XBMenuViewDelegate,XBHomeToolBarDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,XBShareWeChatViewDelegate>
 @property (strong, nonatomic) UIView                *commnetView;
 @property (strong, nonatomic) UILabel               *commentLabel;
 @property (strong, nonatomic) UIView                *commentSeparatorView;
-@property (strong, nonatomic) XBMenuView            *naviBarMenuView;
 @property (strong, nonatomic) UITableView           *commentTableView;
 @property (strong, nonatomic) XBCommentCell         *commentPrototype;
 @property (strong, nonatomic) XBRefreshAutoFooter   *commentTableViewFooter;
@@ -40,6 +42,10 @@
 @property (strong, nonatomic) NSArray            *datas;
 @property (strong, nonatomic) NSMutableArray     *menuImages;
 @property (strong, nonatomic) NSMutableArray     *menuTitles;
+@property (assign, nonatomic) CGFloat            coverHeight;
+
+/** 手势处理 */
+@property (strong, nonatomic) XBInteractiveTransition  *interactiveTransition;
 
 @end
 
@@ -57,6 +63,11 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     
     [self buildView];
     
+ 
+    //初始化手势过渡的代理
+    self.interactiveTransition = [XBInteractiveTransition interactiveTransitionWithTransitionType:XBInteractiveTransitionTypePop GestureDirection:XBInteractiveTransitionGestureDirectionRight];
+    //给当前控制器的视图添加手势
+    [_interactiveTransition addPanGestureForViewController:self];
 }
 
 
@@ -64,15 +75,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.backButton];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.naviBarMenuView];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    [self.backButton removeFromSuperview];
 }
 
 - (void)setApp:(App *)app
@@ -100,6 +108,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //创建控件
 - (void)buildView
 {
+    
     CGFloat y = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     CGRect frame = CGRectMake(0, y , CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - y -kToolBarH);
     
@@ -115,6 +124,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [self.view addSubview:self.toolBar];
     
     self.coverImageView = [UIImageView new];
+    self.coverImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.scrollView addSubview:self.coverImageView];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -122,9 +132,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.backButton.userInteractionEnabled = YES;
     [self.backButton setImage:[UIImage imageNamed:@"detail_icon_back_normal"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(menuAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.navigationController.navigationBarHidden = YES;
-    self.navigationItem.hidesBackButton = YES;
+    [self.view addSubview:self.backButton];
     
     self.avatorImageView = [UIImageView new];
     self.avatorImageView.layer.masksToBounds = YES;
@@ -238,6 +246,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.naviBarMenuView.delegate = self;
     self.naviBarMenuView.hidden = YES;
     self.naviBarMenuView.userInteractionEnabled = YES;
+    [self.view addSubview:self.naviBarMenuView];
 }
 
 //设置约束
@@ -341,6 +350,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     return [XBPushTransition transitionWithTransitionType:operation == UINavigationControllerOperationPush ? XBPushTransitionTypePush : XBPushTransitionTypePop];
 }
 
+- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+    //手势开始的时候才需要传入手势过渡代理，如果直接点击pop，应该传入空，否者无法通过点击正常pop
+    return _interactiveTransition.interation ? _interactiveTransition : nil;
+}
+
+
 #pragma mark -- XBContentViewDelegate
 - (void)contentAttributedLabel:(TTTAttributedLabel *)label
           didSelectLinkWithURL:(NSURL *)url
@@ -400,13 +415,34 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     DDLogDebug(@"Comment");
 }
 
-#pragma mark -- UIScrollView delegate
+#pragma mark -- UIScollView delegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+//    if (self.coverHeight != self.coverImageView.xb_height) {
+//        [self.coverImageView updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo(self.coverHeight);
+//        }];
+//        
+//    }
+    
+    DDLogDebug(@"scrollViewDidEndDragging");
+}
+
+- (void)scrollViewDidEndDecelerating
+{
+    DDLogDebug(@"scrollViewDidEndDecelerating");
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    //解决当没有更多数据的时候重复获取评论的请求
-    if (self.commentTableViewFooter.previousState == MJRefreshStateNoMoreData) return;
-    
     //计算封面图片进行缩放
+//    CGFloat offsetY = self.scrollView.contentOffset.y;
+//    if (offsetY < 0) {
+//        [self.coverImageView updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo(self.coverImageView.xb_height + fabsf(offsetY));
+//        }];
+//    }
     
     
     //设置菜单栏动画
@@ -490,24 +526,28 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         }];
     }
     
-    //加载评论
-    BOOL isLoad = scrollView.contentOffset.y >= scrollView.contentSize.height - CGRectGetHeight(self.view.frame);
-    if (isLoad) {
+    
+    //滚动到tableview的位置并且有评论、有更多数据才加载评论
+    BOOL isLoad   = scrollView.contentOffset.y >= scrollView.contentSize.height - CGRectGetHeight(self.view.frame);
+    BOOL isNoData = self.commentTableViewFooter.previousState == MJRefreshStateNoMoreData;
+    if (isLoad && !isNoData) {
         [self.commentTableView.mj_footer beginRefreshing];
     }
-    
+
     //计算工具栏在什么时候进行滚动
     BOOL isScroll = scrollView.contentOffset.y >= scrollView.contentSize.height * 0.57;
     CGFloat toolBarW = CGRectGetWidth(self.toolBar.frame);
     CGFloat toolBarH = CGRectGetHeight(self.toolBar.frame);
     if (isScroll) {
-        if (self.toolBar.isScroll) return;
-        [self.toolBar scrollRectToVisible:CGRectMake(toolBarW, 0, toolBarW, toolBarH) animated:YES];
-        self.toolBar.isScroll = YES;
+        if (!self.toolBar.isScroll) {
+            [self.toolBar scrollRectToVisible:CGRectMake(toolBarW, 0, toolBarW, toolBarH) animated:YES];
+            self.toolBar.isScroll = YES;
+        }
     } else {
-        if (!self.toolBar.isScroll) return;
-        [self.toolBar scrollRectToVisible:CGRectMake(0, 0, toolBarW, toolBarH) animated:YES];
-        self.toolBar.isScroll = NO;
+        if (self.toolBar.isScroll) {
+            [self.toolBar scrollRectToVisible:CGRectMake(0, 0, toolBarW, toolBarH) animated:YES];
+            self.toolBar.isScroll = NO;
+        }
     }
     
 }
@@ -550,6 +590,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
             
         } failure:^(NSError *error) {
             [self showFail:@"获取数据失败...."];
+            [self.commentTableView.mj_footer endRefreshing];
         }];
         
         

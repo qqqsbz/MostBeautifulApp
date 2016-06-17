@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UILabel           *titleLabel;
 @property (strong, nonatomic) UILabel           *subTitleLabel;
 @property (strong, nonatomic) XBMenuView        *menuView;
+@property (strong, nonatomic) XBMenuView        *naviBarMenuView;
 @property (strong, nonatomic) UIImageView       *coverImageView;
 @property (strong, nonatomic) UIImageView       *avatorImageView;
 @property (strong, nonatomic) UIScrollView      *scrollView;

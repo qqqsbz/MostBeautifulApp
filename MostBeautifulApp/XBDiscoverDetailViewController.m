@@ -19,6 +19,7 @@
 #import "XBRefreshAutoFooter.h"
 #import "XBDiscoverBeautifulView.h"
 #import "XBDiscoverHeaderView.h"
+#import "XBInteractiveTransition.h"
 #import <MJRefresh/UIView+MJExtension.h>
 @interface XBDiscoverDetailViewController () <XBMenuViewDelegate,XBContentViewDelegate,XBHomeToolBarDelegate,XBDiscoverBeautifulViewDataSource,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UIScrollView          *scrollView;
@@ -34,6 +35,8 @@
 @property (strong, nonatomic) XBRefreshAutoFooter   *commentTableViewFooter;
 @property (strong, nonatomic) XBDiscoverHeaderView  *headerView;
 @property (strong, nonatomic) XBDiscoverBeautifulView  *beautifulView;
+/** 手势 */
+@property (strong, nonatomic) XBInteractiveTransition  *interactiveTransition;
 
 @property (assign, nonatomic) NSInteger     commentPageSize;
 @property (strong, nonatomic) NSArray       *datas;
@@ -59,18 +62,26 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
+    //初始化手势过渡的代理
+    self.interactiveTransition = [XBInteractiveTransition interactiveTransitionWithTransitionType:XBInteractiveTransitionTypePop GestureDirection:XBInteractiveTransitionGestureDirectionRight];
+    //给当前控制器的视图添加手势
+    [_interactiveTransition addPanGestureForViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)setDiscover:(Discover *)discover
@@ -308,10 +319,6 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 #pragma mark -- UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
-    //解决当没有更多数据的时候重复获取评论的请求
-    if (self.commentTableViewFooter.previousState == MJRefreshStateNoMoreData) return;
-
     //设置菜单栏动画
     CGFloat menuOffsetY = [self.menuView convertRect:self.menuView.bounds toView:self.view].origin.y;
     BOOL isHideMenu = menuOffsetY <= CGRectGetHeight(self.navigationController.navigationBar.frame);
@@ -393,11 +400,13 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         }];
     }
     
-    //滚动到tableview的位置并且有评论数据才加载评论
-    BOOL isLoad = scrollView.contentOffset.y >= scrollView.contentSize.height - CGRectGetHeight(self.view.frame);
-    if (isLoad && self.discover.comments.count > 0) {
+    //滚动到tableview的位置并且有评论、有更多数据才加载评论
+    BOOL isLoad   = scrollView.contentOffset.y >= scrollView.contentSize.height - CGRectGetHeight(self.view.frame);
+    BOOL isNoData = self.commentTableViewFooter.previousState == MJRefreshStateNoMoreData;
+    if ((isLoad && self.discover.comments.count > 0) && !isNoData) {
         [self.commentTableView.mj_footer beginRefreshing];
     }
+
     
     //计算工具栏在什么时候进行滚动
     BOOL isScroll = scrollView.contentOffset.y >= scrollView.contentSize.height * 0.57;
@@ -412,6 +421,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         [self.toolBar scrollRectToVisible:CGRectMake(0, 0, toolBarW, toolBarH) animated:YES];
         self.toolBar.isScroll = NO;
     }
+    
 }
 
 - (void)addFooterView
@@ -456,6 +466,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
             
         } failure:^(NSError *error) {
             [self showFail:@"获取数据失败...."];
+            [self.commentTableView.mj_footer endRefreshing];
         }];
         
         

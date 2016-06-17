@@ -41,6 +41,7 @@
 
 - (void)initialization
 {
+    self.userInteractionEnabled = YES;
     
     self.textView = [UIView new];
     self.textView.backgroundColor = [UIColor colorWithHexString:@"#E6E7E9"];
@@ -188,7 +189,7 @@
 
 - (void)textFieldChange:(UITextField *)textField
 {
-    if (self.searchBlock) {
+    if (self.isChangeSearch && self.searchBlock) {
         self.searchBlock(textField.text);
     }
 }

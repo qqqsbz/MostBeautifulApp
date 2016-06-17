@@ -70,6 +70,7 @@
             break;
         case XBRefreshStateRefreshing:
         {
+            self.pullingImageView.alpha = 0;
             CGRect loadingFrame = self.loadingImageView.frame;
             self.loadingImageView.frame = self.pullingImageView.frame;
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{

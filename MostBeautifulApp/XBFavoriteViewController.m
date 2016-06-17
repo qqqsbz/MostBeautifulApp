@@ -23,17 +23,20 @@
     
     [super viewDidLoad];
     
+    self.homeRightButton.currentDateString = @"";
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     if (self.datas.count > 0) {
         [super resetBackgroundColorIsScrollToItem:NO];
     }
     
     [self reloadData];
-    
+
 }
 
 - (void)reloadData
@@ -93,7 +96,9 @@
 - (UILabel *)noDataLabel
 {
     if (!_noDataLabel) {
-        _noDataLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+        CGFloat y = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) + CGRectGetHeight(self.navigationController.navigationBar.frame);
+        
+        _noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, y, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - y)];
         _noDataLabel.textColor = [UIColor whiteColor];
         _noDataLabel.textAlignment = NSTextAlignmentCenter;
         _noDataLabel.text = @"暂无收藏的文章哦^_^";
@@ -107,7 +112,7 @@
 - (void)showNodata
 {
     AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.noDataLabel.backgroundColor = tempAppDelegate.leftSlideVC.leftVC.view.backgroundColor;
+    self.view.backgroundColor = tempAppDelegate.leftSlideVC.leftVC.view.backgroundColor;
     self.noDataLabel.hidden = NO;
 }
 

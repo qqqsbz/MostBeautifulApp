@@ -137,6 +137,12 @@
     
 }
 
+- (void)setShowHome:(BOOL)showHome
+{
+    _showHome = showHome;
+    self.homeImageView.hidden = !showHome;
+}
+
 - (void)setTypeWithTitle:(NSString *)title
 {
     self.showFavorite = YES;
