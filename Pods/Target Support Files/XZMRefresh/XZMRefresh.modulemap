@@ -1,0 +1,6 @@
+framework module XZMRefresh {
+  umbrella header "XZMRefresh-umbrella.h"
+
+  export *
+  module * { export * }
+}

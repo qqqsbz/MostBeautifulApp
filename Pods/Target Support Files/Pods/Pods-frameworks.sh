@@ -82,3 +82,28 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/AFNetworking.framework"
+  install_framework "Pods/CocoaLumberjack.framework"
+  install_framework "Pods/MBProgressHUD.framework"
+  install_framework "Pods/MJRefresh.framework"
+  install_framework "Pods/Mantle.framework"
+  install_framework "Pods/Masonry.framework"
+  install_framework "Pods/NJKWebViewProgress.framework"
+  install_framework "Pods/SDWebImage.framework"
+  install_framework "Pods/TTTAttributedLabel.framework"
+  install_framework "Pods/XZMRefresh.framework"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/AFNetworking.framework"
+  install_framework "Pods/CocoaLumberjack.framework"
+  install_framework "Pods/MBProgressHUD.framework"
+  install_framework "Pods/MJRefresh.framework"
+  install_framework "Pods/Mantle.framework"
+  install_framework "Pods/Masonry.framework"
+  install_framework "Pods/NJKWebViewProgress.framework"
+  install_framework "Pods/SDWebImage.framework"
+  install_framework "Pods/TTTAttributedLabel.framework"
+  install_framework "Pods/XZMRefresh.framework"
+fi

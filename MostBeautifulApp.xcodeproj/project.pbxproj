@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		684B9A882F6696A28499CDCB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FDA659BEC1609DC65CE2A3 /* libPods.a */; };
+		7CF1687319E453C03952BB28 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3771EF75D0125EF202AF95A3 /* Pods.framework */; };
 		DC001FCE1CFD25D200BFB6C9 /* XBShareWeChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC001FCD1CFD25D200BFB6C9 /* XBShareWeChatView.m */; };
 		DC001FD11CFD3BC200BFB6C9 /* XBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC001FD01CFD3BC200BFB6C9 /* XBMenuView.m */; };
 		DC001FD41CFD6D9300BFB6C9 /* XBHomeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC001FD31CFD6D9300BFB6C9 /* XBHomeToolBar.m */; };
@@ -149,7 +149,7 @@
 /* Begin PBXFileReference section */
 		063CD82A39BD47FF4891D76A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		13A2448AF7DAE51A5A5C268B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		19FDA659BEC1609DC65CE2A3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3771EF75D0125EF202AF95A3 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC001FCC1CFD25D200BFB6C9 /* XBShareWeChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBShareWeChatView.h; sourceTree = "<group>"; };
 		DC001FCD1CFD25D200BFB6C9 /* XBShareWeChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBShareWeChatView.m; sourceTree = "<group>"; };
 		DC001FCF1CFD3BC200BFB6C9 /* XBMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBMenuView.h; sourceTree = "<group>"; };
@@ -429,10 +429,10 @@
 				DC2D94E61D015DFC001288EF /* SystemConfiguration.framework in Frameworks */,
 				DC2D95191D016464001288EF /* TencentOpenAPI.framework in Frameworks */,
 				DC2D94DB1D015DDD001288EF /* libUMSocial_Sdk_5.2.1.a in Frameworks */,
-				684B9A882F6696A28499CDCB /* libPods.a in Frameworks */,
 				DC2D95181D016464001288EF /* libSocialQQ.a in Frameworks */,
 				DC2D951B1D016464001288EF /* libSocialWechat.a in Frameworks */,
 				DC2D95151D016464001288EF /* libSocialSinaSSO.a in Frameworks */,
+				7CF1687319E453C03952BB28 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +451,7 @@
 				DC2D94E91D015E66001288EF /* Security.framework */,
 				DC2D94E71D015E0B001288EF /* ImageIO.framework */,
 				DC2D94E51D015DFB001288EF /* SystemConfiguration.framework */,
-				19FDA659BEC1609DC65CE2A3 /* libPods.a */,
+				3771EF75D0125EF202AF95A3 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

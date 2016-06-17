@@ -9,6 +9,17 @@
 #import "Comment.h"
 
 @implementation Comment
+
+- (void)setContent:(NSString *)content
+{
+    content = [content stringByReplacingOccurrencesOfString:@"<p>" withString:@""];
+    content = [content stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
+    content = [content stringByReplacingOccurrencesOfString:@"<br/>" withString:@"\n"];
+    content = [content stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];
+    
+    _content = content;
+}
+
 + (NSString *)managedObjectEntityName
 {
     return NSStringFromClass(self);

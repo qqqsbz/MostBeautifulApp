@@ -25,7 +25,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QrFy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATg-YE-JVY" userLabel="name">
                         <rect key="frame" x="60" y="10" width="28" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微博美友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQ8-Cx-U0S" userLabel="sign">
@@ -43,7 +43,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detail_comment_bg" translatesAutoresizingMaskIntoConstraints="NO" id="blX-eH-i72" userLabel="qipao">
                         <rect key="frame" x="10" y="50" width="297" height="29"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我记得这个游戏很早就有了，不过那会儿好像是掌机的？&lt;br/&gt;也有PC版本，这游戏很温暖，值得一玩！就是广告太多…" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fib-0U-8hn" userLabel="content">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我记得这个游戏很早就有了，不过那会儿好像是掌机的？&lt;br/&gt;也有PC版本，这游戏很温暖，值得一玩！就是广告太多…" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fib-0U-8hn" userLabel="content" customClass="TTTAttributedLabel">
                         <rect key="frame" x="25" y="60" width="267" height="9"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
@@ -73,7 +73,7 @@
             <connections>
                 <outlet property="avatorImageView" destination="L9T-4M-mKk" id="CFi-RY-hDF"/>
                 <outlet property="bubbleImageView" destination="blX-eH-i72" id="kJn-4D-hPa"/>
-                <outlet property="contentLabel" destination="fib-0U-8hn" id="uAL-vH-k7W"/>
+                <outlet property="contentLabel" destination="fib-0U-8hn" id="lkl-0z-RYh"/>
                 <outlet property="nameLabel" destination="ATg-YE-JVY" id="QYA-Iv-eWJ"/>
                 <outlet property="signLabel" destination="qQ8-Cx-U0S" id="SE8-ez-LZb"/>
                 <outlet property="timeLabel" destination="i5z-4V-vWc" id="06v-CY-qXE"/>

@@ -77,6 +77,7 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
     [leftButton setImage:[UIImage imageNamed:@"home_icon_sidebar_normal"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(menuAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+//    [self.navigationController.navigationBar addSubview:leftButton];
     
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -91,6 +92,8 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
     self.segmentedControl.tintColor = [UIColor whiteColor];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlAction:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.segmentedControl;
+
+
 }
 
 

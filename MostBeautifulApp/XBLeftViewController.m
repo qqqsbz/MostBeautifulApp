@@ -38,8 +38,6 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     
     [self buildFooterView];
     
-    [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBackGroundColor:) name:kChangeBackgroundColorNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:kLoginOutSuccessNotification object:nil];
     
@@ -49,6 +47,11 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     //设置默认颜色
     UIColor *color = [UIColor colorWithHexString:@"#40A0D0"];
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeBackgroundColorNotification object:color];
+    
+    //默认选中第一个
+    [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    [self pushToViewController:[[XBHomeViewController alloc] init]];
 }
 
 - (void)buildTableView
@@ -109,7 +112,7 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 {
     XBLeftCell *cell = (XBLeftCell *)[tableView cellForRowAtIndexPath:indexPath];
     cell.dotImageView.hidden = NO;
-    
+
     
     if (indexPath.row == 0) {
         
@@ -121,6 +124,8 @@ static NSString *reuseIdentifier = @"XBLeftCell";
         
     } else if (indexPath.row == 2) {
         
+        AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        tempAppDelegate.mainNavigationController.navigationBarHidden = NO;
         [self pushToViewController:[[XBDiscoverViewController alloc] init]];
         
     } else if (indexPath.row == 3) {

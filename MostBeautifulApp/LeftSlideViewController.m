@@ -270,6 +270,10 @@
     }
     [self.mainVC.view removeGestureRecognizer:self.sideslipTapGes];
     self.sideslipTapGes = nil;
+    
+    if ([self.delegate respondsToSelector:@selector(didCloseLeftView:)]) {
+        [self.delegate didCloseLeftView:self.mainVC];
+    }
 }
 
 /**

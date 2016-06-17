@@ -30,7 +30,7 @@
     self.window.backgroundColor = [UIColor whiteColor];   //设置通用背景颜色
     [self.window makeKeyAndVisible];
     
-    XBHomeViewController *mainVC = [[XBHomeViewController alloc] init];
+    UIViewController *mainVC = [[UIViewController alloc] init];
     self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:mainVC];
     XBLeftViewController *leftVC = [[XBLeftViewController alloc] init];
     self.leftSlideVC = [[LeftSlideViewController alloc] initWithLeftView:leftVC andMainView:self.mainNavigationController];

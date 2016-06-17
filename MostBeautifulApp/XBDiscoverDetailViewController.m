@@ -62,12 +62,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    //初始化手势过渡的代理
-    self.interactiveTransition = [XBInteractiveTransition interactiveTransitionWithTransitionType:XBInteractiveTransitionTypePop GestureDirection:XBInteractiveTransitionGestureDirectionRight];
-    //给当前控制器的视图添加手势
-    [_interactiveTransition addPanGestureForViewController:self];
+//    
+//    
+//    //初始化手势过渡的代理
+//    self.interactiveTransition = [XBInteractiveTransition interactiveTransitionWithTransitionType:XBInteractiveTransitionTypePop GestureDirection:XBInteractiveTransitionGestureDirectionRight];
+//    //给当前控制器的视图添加手势
+//    [_interactiveTransition addPanGestureForViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated

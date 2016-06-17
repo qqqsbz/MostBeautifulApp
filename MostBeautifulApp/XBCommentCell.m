@@ -9,6 +9,7 @@
 #import "XBCommentCell.h"
 #import "UIImage+Util.h"
 #import "Comment.h"
+#import "TTTAttributedLabel.h"
 @implementation XBCommentCell
 
 - (void)awakeFromNib {
