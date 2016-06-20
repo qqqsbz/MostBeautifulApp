@@ -16,4 +16,12 @@
 @property (assign, nonatomic) NSInteger down;
 @property (assign, nonatomic) NSInteger av;
 @property (strong, nonatomic) NSArray   *downUsers;
+@property (strong, nonatomic) NSString  *upUsersDetail;
+
+- (NSArray *)unarchiveObjectWithDataFromUpUsers;
+
+- (NSArray *)unarchiveObjectWithDataFromDownUsers;
+
+- (NSArray *)unarchiveObjectWithDataFromFavUsers;
+
 @end

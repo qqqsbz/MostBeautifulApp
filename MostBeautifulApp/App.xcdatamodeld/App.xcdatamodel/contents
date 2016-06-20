@@ -95,6 +95,7 @@
         <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="up" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="upUsers" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
+        <relationship name="upUsersDetail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Author" syncable="YES"/>
     </entity>
     <entity name="SameApp" syncable="YES">
         <attribute name="digest" optional="YES" attributeType="String" syncable="YES"/>
@@ -110,7 +111,7 @@
         <element name="Author" positionX="-36" positionY="153" width="128" height="180"/>
         <element name="Comment" positionX="18" positionY="180" width="128" height="240"/>
         <element name="Comments" positionX="0" positionY="171" width="128" height="90"/>
-        <element name="Info" positionX="-18" positionY="162" width="128" height="165"/>
+        <element name="Info" positionX="-18" positionY="162" width="128" height="180"/>
         <element name="SameApp" positionX="-54" positionY="144" width="128" height="120"/>
         <element name="SearchHistory" positionX="-9" positionY="135" width="128" height="45"/>
     </elements>

@@ -17,6 +17,8 @@ typedef void(^OneComplete)(id result);
 
 - (BOOL)add:(MTLModel<MTLManagedObjectSerializing> *)model;
 
+- (BOOL)adds:(NSArray<MTLModel<MTLManagedObjectSerializing> *> *)models;
+
 - (void)update:(MTLModel<MTLManagedObjectSerializing> *)model;
 
 - (void)remove:(NSManagedObject *)model;

@@ -12,7 +12,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.f];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

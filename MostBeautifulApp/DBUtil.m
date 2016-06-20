@@ -40,6 +40,17 @@
     return NO;
 }
 
+- (BOOL)adds:(NSArray<MTLModel<MTLManagedObjectSerializing> *> *)models
+{
+    BOOL result = NO;
+    
+    for (MTLModel<MTLManagedObjectSerializing> *model in models) {
+        result = [self add:model];
+    }
+    
+    return result;
+}
+
 - (void)update:(MTLModel<MTLManagedObjectSerializing> *)model
 {
     [Application saveSharedManagedObjectContext];

@@ -13,14 +13,32 @@
 @protocol XBHomeToolBarDelegate <NSObject>
 
 @optional
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedBeautiful:(UIImageView *)imageView;
+- (void)toolBarDidSelectedBeautiful:(XBHomeToolBar *)toolbar;
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedFeel:(UIImageView *)imageView;
+- (void)toolBarDidSelectedFeel:(XBHomeToolBar *)toolbar;
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedComment:(UILabel *)commentLabel;
+- (void)toolBarDidSelectedComment:(XBHomeToolBar *)toolbar;
 
 @end
 @interface XBHomeToolBar : UIScrollView
+/** 是否已经滚动*/
 @property (assign, nonatomic) BOOL  isScroll;
+
+/** 显示美的个数 */
+@property (strong, nonatomic) UILabel       *voteLabel;
+
+/** 美一下的图标 */
+@property (strong, nonatomic) UIImageView   *voteImageView;
+
+/** 美一下的文字 */
+@property (strong, nonatomic) UILabel       *voteTitleLabel;
+
+/** 一般般图标 */
+@property (strong, nonatomic) UIImageView   *greenImageView;
+
+/** 一般般文字 */
+@property (strong, nonatomic) UILabel       *greenLabel;
+
 @property (weak, nonatomic) id<XBHomeToolBarDelegate> toolBarDelegate;
+
 @end

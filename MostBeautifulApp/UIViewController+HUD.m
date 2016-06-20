@@ -74,9 +74,13 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     [self showFail:hit afterDelay:1.f];
 }
 
-- (void)showFail:(NSString *)hit afterDelay:(NSTimeInterval)delay
+- (void)showFail:(NSString *)hit inView:(UIView *)view
 {
-    UIView *view = [[UIApplication sharedApplication].delegate window];
+    [self showFail:hit inView:view afterDelay:0];
+}
+
+- (void)showFail:(NSString *)hit inView:(UIView *)view afterDelay:(NSTimeInterval)delay
+{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.mode = MBProgressHUDModeCustomView;
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fail"]];
@@ -84,6 +88,12 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
     hud.square = YES;
     hud.labelText = hit;
     [hud hide:YES afterDelay:delay];
+}
+
+- (void)showFail:(NSString *)hit afterDelay:(NSTimeInterval)delay
+{
+    UIView *view = [[UIApplication sharedApplication].delegate window];
+    [self showFail:hit inView:view afterDelay:delay];
 }
 
 @end

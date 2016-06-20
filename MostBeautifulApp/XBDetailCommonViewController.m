@@ -12,6 +12,8 @@
 
 #import "XBDetailCommonViewController.h"
 #import "App.h"
+#import "User.h"
+#import "Info.h"
 #import "Comment.h"
 #import "Comments.h"
 #import "XBContentView.h"
@@ -22,27 +24,49 @@
 #import "XBScrollView.h"
 #import "XBCommentCell.h"
 #import "XBShareView.h"
-#import "NSString+Util.h"
+#import "XBHomeToolBar.h"
 #import "XBRefreshAutoFooter.h"
+#import "XBLoginViewController.h"
+#import "XBInteractiveTransition.h"
+#import "XBPublishCommentViewController.h"
+#import "NSString+Util.h"
+#import "NSIntegerFormatter.h"
 #import "AppFavorite.h"
 #import "SMProgressHUD.h"
-#import "XBInteractiveTransition.h"
+#import "UserDefaultsUtil.h"
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
 #import <MJRefresh/MJRefresh.h>
 
 @interface XBDetailCommonViewController ()<XBContentViewDelegate,XBMenuViewDelegate,XBHomeToolBarDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,XBShareWeChatViewDelegate>
+/** 评论view */
 @property (strong, nonatomic) UIView                *commnetView;
+/** 评论标题 */
 @property (strong, nonatomic) UILabel               *commentLabel;
+/** 评论分割线 */
 @property (strong, nonatomic) UIView                *commentSeparatorView;
+/** 评论tableview */
 @property (strong, nonatomic) UITableView           *commentTableView;
+/** 评论cell */
 @property (strong, nonatomic) XBCommentCell         *commentPrototype;
+/** 评论加载更多 */
 @property (strong, nonatomic) XBRefreshAutoFooter   *commentTableViewFooter;
 
+/** 评论当前页数 */
 @property (assign, nonatomic) NSInteger          commnetPage;
+/** 评论一页显示的数据条数 */
 @property (assign, nonatomic) NSInteger          commentPageSize;
+/** 评论数据 */
 @property (strong, nonatomic) NSArray            *datas;
+/** 按钮图标 */
 @property (strong, nonatomic) NSMutableArray     *menuImages;
+/** 按钮标题 */
 @property (strong, nonatomic) NSMutableArray     *menuTitles;
+/** 封面长度 */
 @property (assign, nonatomic) CGFloat            coverHeight;
+/** 是否"美一下" */
+@property (assign, nonatomic,getter=isBeautiful) BOOL  beautiful;
+/** 是否"一般般" */
+@property (assign, nonatomic,getter=isFeel)      BOOL  feel;
 
 /** 手势处理 */
 @property (strong, nonatomic) XBInteractiveTransition  *interactiveTransition;
@@ -93,6 +117,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [self.avatorImageView sd_setImageWithURL:[NSURL URLWithString:app.iconImage]];
     [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:app.coverImage]];
     
+    [self checkIsBeautifulOrFeel];
+    
     [self buildMenu];
     
     [self.contentView updateConstraints:^(MASConstraintMaker *make) {
@@ -108,18 +134,13 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //创建控件
 - (void)buildView
 {
-    
-    CGFloat y = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-    CGRect frame = CGRectMake(0, y , CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - y -kToolBarH);
-    
-    self.scrollView = [[UIScrollView alloc] initWithFrame:frame];
+    self.scrollView = [UIScrollView new];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#F6F6F6"];
     self.scrollView.scrollEnabled = YES;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
-    self.toolBar = [[XBHomeToolBar alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.scrollView.frame), CGRectGetWidth(self.view.frame), kToolBarH)];
-    self.toolBar.backgroundColor = [UIColor colorWithHexString:@"#F6F6F6"];
+    self.toolBar = [XBHomeToolBar new];
     self.toolBar.toolBarDelegate = self;
     [self.view addSubview:self.toolBar];
     
@@ -253,12 +274,28 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 - (void)addConstraint
 {
     CGFloat width = CGRectGetWidth(self.view.frame);
+    CGFloat y = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
     
+    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(y);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+    }];
+    
+    [self.toolBar makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.scrollView.bottom);
+        make.left.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.height.mas_offset(kToolBarH);
+    }];
+    
+    CGFloat imageH = width * 0.578;
     [self.coverImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scrollView);
         make.left.equalTo(self.scrollView);
         make.width.equalTo(self.scrollView);
-        make.height.mas_offset(width * 0.578);
+        make.height.mas_offset(imageH);
     }];
     
     
@@ -400,19 +437,70 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 }
 
 #pragma mark -- XBHomeToolBarDelegate
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedBeautiful:(UIImageView *)imageView
+- (void)toolBarDidSelectedBeautiful:(XBHomeToolBar *)toolBar
 {
-    DDLogDebug(@"Beautiful");
+    User *user = [self checkUserIsLogin];
+    if (!user) return;
+    
+    if (self.isBeautiful) {
+        [[SMProgressHUD shareInstancetype] showTip:@"已完成对此文章的美一下"];
+        return;
+    }
+    
+    NSDictionary *params = @{
+                             @"signature":@"1d2901dfec1ef2e57485c5dffd368913",
+                             @"timestamp":@"1466153683",
+                             @"user_id":[NSNumber numberWithInteger:user.uid]
+                             };
+    [[XBHttpClient shareInstance] upWithAppId:[self.app.modelId integerValue] params:params success:^(Info *info) {
+        
+        [[SMProgressHUD shareInstancetype] showTip:@"表态成功 ^_^"];
+        self.app.info = info;
+        
+        [self checkIsBeautifulOrFeel];
+        
+    } failure:^(NSError *error) {
+        [[SMProgressHUD shareInstancetype] showTip:@"表态失败 T_T"];
+    }];
 }
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedFeel:(UIImageView *)imageView
+- (void)toolBarDidSelectedFeel:(XBHomeToolBar *)toolBar
 {
-    DDLogDebug(@"Feel");
+    User *user = [self checkUserIsLogin];
+    if (!user) return;
+    
+    if (self.isFeel) {
+        [[SMProgressHUD shareInstancetype] showTip:@"已完成对此文章的一般般"];
+        return;
+    }
+    
+    NSDictionary *params = @{
+                             @"signature":@"1d2901dfec1ef2e57485c5dffd368913",
+                             @"timestamp":@"1466153683",
+                             @"user_id":[NSNumber numberWithInteger:user.uid]
+                            };
+    [[XBHttpClient shareInstance] downWithAppId:[self.app.modelId integerValue] params:params success:^(Info *info) {
+        
+        [[SMProgressHUD shareInstancetype] showTip:@"表态成功 ^_^"];
+        self.app.info = info;
+        
+        [self checkIsBeautifulOrFeel];
+
+    } failure:^(NSError *error) {
+        [[SMProgressHUD shareInstancetype] showTip:@"表态失败 T_T"];
+    }];
 }
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedComment:(UILabel *)commentLabel
+- (void)toolBarDidSelectedComment:(XBHomeToolBar *)toolBar
 {
-    DDLogDebug(@"Comment");
+    if (![self checkUserIsLogin]) return;
+    
+    XBPublishCommentViewController *pcVC = [[XBPublishCommentViewController alloc] init];
+    pcVC.app = self.app;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pcVC];
+    [self presentViewController:navigationController animated:YES completion:^{
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }];
 }
 
 #pragma mark -- UIScollView delegate
@@ -437,14 +525,19 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //计算封面图片进行缩放
-//    CGFloat offsetY = self.scrollView.contentOffset.y;
+    CGFloat offsetY = self.scrollView.contentOffset.y;
 //    if (offsetY < 0) {
 //        [self.coverImageView updateConstraints:^(MASConstraintMaker *make) {
 //            make.height.mas_equalTo(self.coverImageView.xb_height + fabsf(offsetY));
 //        }];
 //    }
     
-    //
+    //封面进行滚动
+    if (offsetY > 0 && offsetY <= self.coverImageView.xb_height) {
+//        [self.coverImageView updateConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_offset(self.coverImageView.xb_y - offsetY);
+//        }];
+    }
     
     //设置菜单栏动画
     CGFloat menuOffsetY = [self.menuView convertRect:self.menuView.bounds toView:self.view].origin.y;
@@ -583,14 +676,16 @@ static NSString *reuseIdentifier = @"XBCommentCell";
                 
             } else {
                 
-                [self.commentTableView updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.mas_equalTo(self.commentTableView.contentSize.height - 5);
-                }];
+                if (self.datas.count > 0) {
+                    [self.commentTableView updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo(self.commentTableView.contentSize.height - 5);
+                    }];
+                }
                 [self.commentTableView.mj_footer endRefreshingWithNoMoreData];
             }
             
         } failure:^(NSError *error) {
-            [self showFail:@"获取数据失败...."];
+            [self showFail:@"获取数据失败...." inView:self.view];
             [self.commentTableView.mj_footer endRefreshing];
         }];
         
@@ -637,6 +732,78 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     }
     return _shareView;
 }
+
+#pragma mark -- public method
+- (User *)checkUserIsLogin
+{
+    User *user = [UserDefaultsUtil userInfo];
+    if (!user) {
+        [self presentViewController:[[XBLoginViewController alloc] init] animated:YES completion:nil];
+        return nil;
+    }
+    return user;
+}
+
+- (void)checkIsBeautifulOrFeel
+{
+    User *user = [self checkUserIsLogin];
+    if (!user) return;
+    
+    Info *info = self.app.info;
+    NSArray *users = [info.upUsers isKindOfClass:[NSData class]] ? [info unarchiveObjectWithDataFromUpUsers] : info.upUsers;
+    for (NSString *userId in users) {
+        if (user.uid == [userId integerValue]) {
+            self.beautiful = YES;
+            self.feel = NO;
+        }
+    }
+    
+    NSArray *downUsers = [info.downUsers isKindOfClass:[NSData class]] ? [info unarchiveObjectWithDataFromDownUsers] : info.downUsers;
+    for (NSString *userId in downUsers) {
+        if (user.uid == [userId integerValue]) {
+            self.feel = YES;
+            self.beautiful = NO;
+        }
+    }
+    
+    self.toolBar.voteLabel.text = [NSIntegerFormatter formatToNSString:users.count];
+    if (self.isBeautiful) {
+        
+        self.toolBar.voteImageView.image = [UIImage imageNamed:@"detail_icon_flower_selected"];
+        self.toolBar.voteTitleLabel.text = @"美过了";
+        
+        UIFont *titleFont = self.toolBar.voteTitleLabel.font;
+        self.toolBar.voteTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:titleFont.pointSize];
+    
+    } else {
+        
+        self.toolBar.voteImageView.image = [UIImage imageNamed:@"detail_icon_flower_normal"];
+        self.toolBar.voteTitleLabel.text = @"美一下";
+        
+        UIFont *titleFont = self.toolBar.voteTitleLabel.font;
+        self.toolBar.voteTitleLabel.font = [UIFont systemFontOfSize:titleFont.pointSize];
+    }
+    
+    if (self.isFeel) {
+        
+        self.toolBar.greenImageView.image = [UIImage imageNamed:@"detail_icon_leaf_selected"];
+        self.toolBar.greenLabel.text = @"已表态";
+        
+        UIFont *greenFont = self.toolBar.greenLabel.font;
+        self.toolBar.greenLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:greenFont.pointSize];
+        
+    } else {
+        
+        self.toolBar.greenImageView.image = [UIImage imageNamed:@"detail_icon_leaf_normal"];
+        self.toolBar.greenLabel.text = @"一般般";
+        
+        UIFont *greenFont = self.toolBar.greenLabel.font;
+        self.toolBar.greenLabel.font = [UIFont systemFontOfSize:greenFont.pointSize];
+        
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

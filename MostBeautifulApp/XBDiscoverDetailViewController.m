@@ -9,6 +9,8 @@
 #define kAnimationSpace 25.f
 
 #import "XBDiscoverDetailViewController.h"
+#import "User.h"
+#import "App.h"
 #import "Author.h"
 #import "Comment.h"
 #import "XBMenuView.h"
@@ -16,10 +18,15 @@
 #import "XBHomeToolBar.h"
 #import "XBCommentCell.h"
 #import "NSString+Util.h"
+#import "UserDefaultsUtil.h"
 #import "XBRefreshAutoFooter.h"
 #import "XBDiscoverBeautifulView.h"
 #import "XBDiscoverHeaderView.h"
 #import "XBInteractiveTransition.h"
+#import "XBDiscoverPushTransition.h"
+#import "XBLoginViewController.h"
+#import "XBPublishCommentViewController.h"
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
 #import <MJRefresh/UIView+MJExtension.h>
 @interface XBDiscoverDetailViewController () <XBMenuViewDelegate,XBContentViewDelegate,XBHomeToolBarDelegate,XBDiscoverBeautifulViewDataSource,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UIScrollView          *scrollView;
@@ -38,9 +45,15 @@
 /** 手势 */
 @property (strong, nonatomic) XBInteractiveTransition  *interactiveTransition;
 
+/** 是否"美一下" */
+@property (assign, nonatomic,getter=isBeautiful) BOOL  beautiful;
+/** 是否"一般般" */
+@property (assign, nonatomic,getter=isFeel)      BOOL  feel;
+/** 评论页数 */
 @property (assign, nonatomic) NSInteger     commentPageSize;
+/** 评论数据*/
 @property (strong, nonatomic) NSArray       *datas;
-
+/** 菜单图标 */
 @property (strong, nonatomic) NSArray  *menuImages;
 @end
 
@@ -62,26 +75,24 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    
-//    
+
+    
 //    //初始化手势过渡的代理
-//    self.interactiveTransition = [XBInteractiveTransition interactiveTransitionWithTransitionType:XBInteractiveTransitionTypePop GestureDirection:XBInteractiveTransitionGestureDirectionRight];
-//    //给当前控制器的视图添加手势
-//    [_interactiveTransition addPanGestureForViewController:self];
+    self.interactiveTransition = [XBInteractiveTransition interactiveTransitionWithTransitionType:XBInteractiveTransitionTypePop GestureDirection:XBInteractiveTransitionGestureDirectionRight];
+    //给当前控制器的视图添加手势
+    [_interactiveTransition addPanGestureForViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)setDiscover:(Discover *)discover
@@ -97,6 +108,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     
     //设置按钮
     [self fillMenu];
+    
+    [self checkIsBeautifulOrFeel];
     
     //给出html格式 让系统进行解析并创建子view
     NSString *content = [[NSString stringWithFormat:@"<p>%@</p>",discover.desc] stringByReplacingOccurrencesOfString:@"<br/>" withString:@"\n"];
@@ -142,13 +155,14 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //创建视图
 - (void)buildView
 {
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.hidesBackButton = YES;
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0, 0, 35.f, 35.f);
+    backButton.frame = CGRectMake(8, 30, 35.f, 35.f);
     [backButton setImage:[UIImage imageNamed:@"detail_icon_back_normal"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.view.backgroundColor = [UIColor whiteColor];
     
     self.scrollView = [UIScrollView new];
     self.scrollView.delegate = self;
@@ -158,7 +172,6 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [self.view addSubview:self.scrollView];
     
     self.toolBar = [XBHomeToolBar new];
-    self.toolBar.backgroundColor = [UIColor colorWithHexString:@"#F6F6F6"];
     self.toolBar.toolBarDelegate = self;
     [self.view addSubview:self.toolBar];
     
@@ -205,6 +218,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.commentPrototype = [self.commentTableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     [self addFooterView];
     [self.scrollView addSubview:self.commentTableView];
+    
     
     [self addConstraints];
 }
@@ -465,7 +479,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
             }
             
         } failure:^(NSError *error) {
-            [self showFail:@"获取数据失败...."];
+            [self showFail:@"获取数据失败...." inView:self.view];
             [self.commentTableView.mj_footer endRefreshing];
         }];
         
@@ -489,80 +503,103 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 }
 
 #pragma mark -- XBHomeToolBarDelegate
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedBeautiful:(UIImageView *)imageView
+- (void)toolBarDidSelectedBeautiful:(XBHomeToolBar *)toolBar
 {
-//    post
-//    http://zuimeia.com/api/community/app/up/?openUDID=d41d8cd98f00b204e9800998ecf8427e2c09ef55&systemVersion=9.3.2&appVersion=2.3.0&resolution=%7B640,%201136%7D&platform=1
-//    app_id	31603
-//    signature	b184de97cc213ef68647752d74f6f0d3
-//    timestamp	1465867042
-//    user_id	2211002
+    User *user = [self checkUserIsLogin];
+    if (!user) return;
     
-//    response
-//    {
-//        "data": {
-//            "up_users": [{
-//                "userName": "\u5434xbin",
-//                "career": "\u5fae\u535a\u7f8e\u53cb",
-//                "gender": "\u7537",
-//                "bg_color": "#08AAD9",
-//                "avatar_url": "http://tva3.sinaimg.cn/crop.0.0.664.664.180/4191fde3jw8f2e4csit1rj20ig0ig0td.jpg",
-//                "identity": 0,
-//                "flowers": 0,
-//                "id": 2211002,
-//                "enname": ""
-//            }],
-//            "collect_users": [],
-//            "up_times": 1,
-//            "collect_times": 0,
-//            "down_times": 0,
-//            "show_times": 18,
-//            "id": 31603,
-//            "down_users": []
-//        },
-//        "result": 1
-//    }
+    if (self.isBeautiful) {
+        [[SMProgressHUD shareInstancetype] showTip:@"已完成对此文章的美一下"];
+        return;
+    }
+    
+    [self showLoadinngInView:self.view];
+    
+    NSDictionary *params = @{
+                             @"app_id":[NSNumber numberWithInteger:[self.discover.modelId integerValue]],
+                             @"signature":@"1d2901dfec1ef2e57485c5dffd368913",
+                             @"timestamp":@"1466153683",
+                             @"user_id":[NSNumber numberWithInteger:user.uid]
+                             };
+    
+    [[XBHttpClient shareInstance] discoverUpWithParams:params success:^(NSArray *authors) {
+        
+        [[SMProgressHUD shareInstancetype] showTip:@"表态成功 ^_^"];
+        
+        self.discover.upUsers = authors;
+        
+        self.discover.downUsers = nil;
+        
+        [self checkIsBeautifulOrFeel];
+        
+        [self hideLoading];
+        
+    } failure:^(NSError *error) {
+        
+        [self hideLoading];
+        
+        [[SMProgressHUD shareInstancetype] showTip:@"表态失败 T_T"];
+    
+    }];
 }
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedFeel:(UIImageView *)imageView
+- (void)toolBarDidSelectedFeel:(XBHomeToolBar *)toolBar
 {
-//    post
-//    http://zuimeia.com/api/community/app/down/?openUDID=d41d8cd98f00b204e9800998ecf8427e2c09ef55&systemVersion=9.3.2&appVersion=2.3.0&resolution=%7B640,%201136%7D&platform=1
-//    app_id	31603
-//    signature	7d4c59a7b8004e0b2ec52107e6b06821
-//    timestamp	1465867568
-//    user_id	2211002
+    User *user = [self checkUserIsLogin];
+    if (!user) return;
     
+    if (self.isFeel) {
+        [[SMProgressHUD shareInstancetype] showTip:@"已完成对此文章的一般般"];
+        return;
+    }
     
-//    response
-//    {
-//        "data": {
-//            "up_users": [],
-//            "collect_users": [],
-//            "up_times": 0,
-//            "collect_times": 0,
-//            "down_times": 1,
-//            "show_times": 18,
-//            "id": 31603,
-//            "down_users": [{
-//                "userName": "\u5434xbin",
-//                "career": "\u5fae\u535a\u7f8e\u53cb",
-//                "gender": "\u7537",
-//                "bg_color": "#08AAD9",
-//                "avatar_url": "http://tva3.sinaimg.cn/crop.0.0.664.664.180/4191fde3jw8f2e4csit1rj20ig0ig0td.jpg",
-//                "identity": 0,
-//                "flowers": 0,
-//                "id": 2211002,
-//                "enname": ""
-//            }]
-//        },
-//        "result": 1
-//    }
+    [self showLoadinngInView:self.view];
+    NSDictionary *params = @{
+                             @"app_id":[NSNumber numberWithInteger:[self.discover.modelId integerValue]],
+                             @"signature":@"1d2901dfec1ef2e57485c5dffd368913",
+                             @"timestamp":@"1466153683",
+                             @"user_id":[NSNumber numberWithInteger:user.uid]
+                             };
+    
+    [[XBHttpClient shareInstance] discoverDownWithParams:params success:^(NSArray *authors) {
+        
+        
+        [[SMProgressHUD shareInstancetype] showTip:@"表态成功 ^_^"];
+        
+        self.discover.downUsers = authors;
+        
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:self.discover.upUsers];
+        for (Author *author in self.discover.upUsers) {
+            if ([author.modelId integerValue] == user.uid) {
+                [temp removeObject:author];
+            }
+        }
+        
+        self.discover.upUsers = temp;
+        
+        [self checkIsBeautifulOrFeel];
+        
+        [self hideLoading];
+        
+    } failure:^(NSError *error) {
+        
+        [self hideLoading];
+        
+        [[SMProgressHUD shareInstancetype] showTip:@"表态失败 T_T"];
+    
+    }];
 }
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedComment:(UILabel *)commentLabel
+- (void)toolBarDidSelectedComment:(XBHomeToolBar *)toolBar
 {
-
+    if (![self checkUserIsLogin]) return;
+    
+    XBPublishCommentViewController *pcVC = [[XBPublishCommentViewController alloc] init];
+    pcVC.discover = self.discover;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pcVC];
+    [self presentViewController:navigationController animated:YES completion:^{
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    }];
 }
 
 #pragma mark -- XBDiscoverBeautifulViewDataSource
@@ -602,6 +639,86 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     return result;
 }
 
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
+{
+    return [XBDiscoverPushTransition transitionWithTransitionType:operation == UINavigationControllerOperationPush ? XBDiscoverPushTransitionTypePush : XBDiscoverPushTransitionTypePop];
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+    
+    //手势开始的时候才需要传入手势过渡代理，如果直接点击pop，应该传入空，否者无法通过点击正常pop
+    return _interactiveTransition.interation ? _interactiveTransition : nil;
+}
+
+
+#pragma mark -- public method
+- (User *)checkUserIsLogin
+{
+    User *user = [UserDefaultsUtil userInfo];
+    if (!user) {
+        [self presentViewController:[[XBLoginViewController alloc] init] animated:YES completion:nil];
+        return nil;
+    }
+    return user;
+}
+
+- (void)checkIsBeautifulOrFeel
+{
+    User *user = [self checkUserIsLogin];
+    if (!user) return;
+    
+    for (Author *author in self.discover.upUsers) {
+        if (user.uid == [author.modelId integerValue]) {
+            self.beautiful = YES;
+            self.feel = NO;
+        }
+    }
+
+    for (Author *author in self.discover.downUsers) {
+        if (user.uid == [author.modelId integerValue]) {
+            self.feel = YES;
+            self.beautiful = NO;
+        }
+    }
+
+    self.toolBar.voteLabel.text = [NSIntegerFormatter formatToNSString:self.discover.upUsers.count];
+    if (self.isBeautiful) {
+        
+        self.toolBar.voteImageView.image = [UIImage imageNamed:@"detail_icon_flower_selected"];
+        self.toolBar.voteTitleLabel.text = @"美过了";
+        
+        UIFont *titleFont = self.toolBar.voteTitleLabel.font;
+        self.toolBar.voteTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:titleFont.pointSize];
+        
+    } else {
+        
+        self.toolBar.voteImageView.image = [UIImage imageNamed:@"detail_icon_flower_normal"];
+        self.toolBar.voteTitleLabel.text = @"美一下";
+        
+        UIFont *titleFont = self.toolBar.voteTitleLabel.font;
+        self.toolBar.voteTitleLabel.font = [UIFont systemFontOfSize:titleFont.pointSize];
+    }
+    
+    if (self.isFeel) {
+        
+        self.toolBar.greenImageView.image = [UIImage imageNamed:@"detail_icon_leaf_selected"];
+        self.toolBar.greenLabel.text = @"已表态";
+        
+        UIFont *greenFont = self.toolBar.greenLabel.font;
+        self.toolBar.greenLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:greenFont.pointSize];
+        
+    } else {
+        
+        self.toolBar.greenImageView.image = [UIImage imageNamed:@"detail_icon_leaf_normal"];
+        self.toolBar.greenLabel.text = @"一般般";
+        
+        UIFont *greenFont = self.toolBar.greenLabel.font;
+        self.toolBar.greenLabel.font = [UIFont systemFontOfSize:greenFont.pointSize];
+        
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

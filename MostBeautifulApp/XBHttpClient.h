@@ -11,6 +11,7 @@
 @class User;
 @class App;
 @class Discover;
+@class Info;
 @interface XBHttpClient : AFHTTPSessionManager
 + (instancetype)shareInstance;
 
@@ -32,6 +33,17 @@
                    pageSize:(NSInteger)pageSize
                     success:(void (^)(NSArray *datas))success
                     failure:(void (^)(NSError *error))failure;
+//发表评论
+- (void)postCommentWithAppId:(NSInteger)appId
+                      params:(NSDictionary *)params
+                     success:(void (^)(BOOL result))success
+                     failure:(void (^)(NSError *error))failure;
+//发现---发表评论
+- (void)postDiscoverCommentWithParams:(NSDictionary *)params
+                              success:(void (^)(BOOL result))success
+                              failure:(void (^)(NSError *error))failure;
+
+
 //用户登录
 - (void)userLoginWithParamter:(NSDictionary *)paramter
                       success:(void (^)(User *user))success
@@ -68,5 +80,28 @@
                    pageSize:(NSInteger)pageSize
                     success:(void (^)(NSArray *datas))success
                     failure:(void (^)(NSError *error))failure;
+
+//美一下
+- (void)upWithAppId:(NSInteger)appId
+             params:(NSDictionary *)params
+            success:(void (^)(Info *info))success
+            failure:(void (^)(NSError *error))failure;
+
+//一般般
+- (void)downWithAppId:(NSInteger)appId
+               params:(NSDictionary *)params
+              success:(void (^)(Info *info))success
+              failure:(void (^)(NSError *error))failure;
+
+//发现 美一下
+- (void)discoverUpWithParams:(NSDictionary *)params
+                     success:(void (^)(NSArray *authors))success
+                     failure:(void (^)(NSError *error))failure;
+
+//发现 一般般
+- (void)discoverDownWithParams:(NSDictionary *)params
+                       success:(void (^)(NSArray *authors))success
+                       failure:(void (^)(NSError *error))failure;
+
 
 @end

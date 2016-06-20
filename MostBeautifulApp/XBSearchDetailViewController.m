@@ -70,19 +70,19 @@
 }
 
 #pragma mark -- XBHomeToolBarDelegate
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedBeautiful:(UIImageView *)imageView
+- (void)toolBarDidSelectedBeautiful:(XBHomeToolBar *)toolBar
 {
-    [super toolBar:toolbar didSelectedBeautiful:imageView];
+    [super toolBarDidSelectedBeautiful:toolBar];
 }
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedFeel:(UIImageView *)imageView
+- (void)toolBarDidSelectedFeel:(XBHomeToolBar *)toolBar
 {
-    [super toolBar:toolbar didSelectedFeel:imageView];
+    [super toolBarDidSelectedFeel:toolBar];
 }
 
-- (void)toolBar:(XBHomeToolBar *)toolbar didSelectedComment:(UILabel *)commentLabel
+- (void)toolBarDidSelectedComment:(XBHomeToolBar *)toolBar
 {
-    [super toolBar:toolbar didSelectedComment:commentLabel];
+    [super toolBarDidSelectedComment:toolBar];
 }
 
 #pragma mark -- XBShareWeChatViewDelegate

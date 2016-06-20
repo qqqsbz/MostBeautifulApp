@@ -6,7 +6,7 @@
 //  Copyright © 2016年 coder. All rights reserved.
 //
 
-#define kYSpace 5.f
+#define kYSpace 7.f
 #define kYCommentSpace 6.f
 #define kWidth  CGRectGetWidth(self.frame)
 #define kVoteW  kWidth * 0.48
@@ -21,13 +21,8 @@
 @property (strong, nonatomic) UIView        *firstView;
 @property (strong, nonatomic) UIView        *secondView;
 @property (strong, nonatomic) UIView        *voteView;
-@property (strong, nonatomic) UILabel       *voteLabel;
 @property (strong, nonatomic) UIView        *voteSeparatorView;
-@property (strong, nonatomic) UIImageView   *voteImageView;
-@property (strong, nonatomic) UILabel       *voteTitleLabel;
 @property (strong, nonatomic) UIView        *greenView;
-@property (strong, nonatomic) UIImageView   *greenImageView;
-@property (strong, nonatomic) UILabel       *greenLabel;
 @property (strong, nonatomic) UIImageView   *rightDragImageView;
 @property (strong, nonatomic) UIImageView   *leftDragImageView;
 @property (strong, nonatomic) UILabel       *commentLabel;
@@ -58,7 +53,7 @@
     self.showsHorizontalScrollIndicator = NO;
     self.delegate = self;
     
-    self.backgroundColor = [UIColor colorWithHexString:@"#DDE2E4"];
+    self.backgroundColor = [UIColor colorWithHexString:@"#E4E8E9"];
     UIFont *textFont = [UIFont fontWithName:@"Helvetica-Bold" size:13.f];
     UIFont *numFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.f];
     
@@ -69,9 +64,9 @@
     self.firstView.backgroundColor = [UIColor clearColor];
     
     self.voteView = [UIView new];
-    self.voteView.backgroundColor = [UIColor colorWithHexString:@"#E96B4B"];
+    self.voteView.backgroundColor = [UIColor colorWithHexString:@"#EF805D"];
     self.voteView.layer.masksToBounds = YES;
-    self.voteView.layer.cornerRadius  = 18.f;
+    self.voteView.layer.cornerRadius  = 16.f;
     self.voteView.tag = kVoteTag;
     [self.voteView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)]];
     
@@ -92,9 +87,9 @@
     self.voteTitleLabel.text = @"美一下";
 
     self.greenView = [UIView new];
-    self.greenView.backgroundColor = [UIColor colorWithHexString:@"#41BF92"];
+    self.greenView.backgroundColor = [UIColor colorWithHexString:@"#4CC8A3"];
     self.greenView.layer.masksToBounds = YES;
-    self.greenView.layer.cornerRadius  = 18.f;
+    self.greenView.layer.cornerRadius  = 16.f;
     self.greenView.tag = kGreenTag;
     [self.greenView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)]];
 
@@ -250,16 +245,16 @@
 {
     UIView *view = [tapGesture view];
     if (view.tag == kVoteTag) {
-        if ([self.toolBarDelegate respondsToSelector:@selector(toolBar:didSelectedBeautiful:)]) {
-            [self.toolBarDelegate toolBar:self didSelectedBeautiful:self.voteImageView];
+        if ([self.toolBarDelegate respondsToSelector:@selector(toolBarDidSelectedBeautiful:)]) {
+            [self.toolBarDelegate toolBarDidSelectedBeautiful:self];
         }
     } else if (view.tag == kGreenTag) {
-        if ([self.toolBarDelegate respondsToSelector:@selector(toolBar:didSelectedFeel:)]) {
-            [self.toolBarDelegate toolBar:self didSelectedFeel:self.greenImageView];
+        if ([self.toolBarDelegate respondsToSelector:@selector(toolBarDidSelectedFeel:)]) {
+            [self.toolBarDelegate toolBarDidSelectedFeel:self];
         }
     } else if (view.tag == kCommentTag) {
-        if ([self.toolBarDelegate respondsToSelector:@selector(toolBar:didSelectedComment:)]) {
-            [self.toolBarDelegate toolBar:self didSelectedComment:self.commentLabel];
+        if ([self.toolBarDelegate respondsToSelector:@selector(toolBarDidSelectedComment:)]) {
+            [self.toolBarDelegate toolBarDidSelectedComment:self];
         }
     }
 }

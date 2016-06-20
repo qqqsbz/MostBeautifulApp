@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XBDiscoverPublishViewController : UITableViewController
+@interface XBDiscoverPublishViewController : UITableViewController <UINavigationControllerDelegate>
 
 @end

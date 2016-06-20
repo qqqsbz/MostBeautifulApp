@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Discover.h"
-@interface XBDiscoverDetailViewController : UIViewController
+@interface XBDiscoverDetailViewController : UIViewController <UINavigationControllerDelegate>
 @property (strong, nonatomic) Discover  *discover;
 @end

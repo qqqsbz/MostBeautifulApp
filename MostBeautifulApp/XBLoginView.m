@@ -69,7 +69,7 @@
     self.loginLabel.font = [UIFont systemFontOfSize:19.f];
     
     self.checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.checkButton setImage:[UIImage imageNamed:@"checkBox"] forState:UIControlStateNormal];
+    [self.checkButton setImage:[UIImage imageNamed:@"publish-checkbox-selected"] forState:UIControlStateNormal];
     
     NSString *protocolText = @"《用户协议》";
     NSString *text = [NSString stringWithFormat:@"我已阅读并同意%@",protocolText];

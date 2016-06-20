@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7CF1687319E453C03952BB28 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3771EF75D0125EF202AF95A3 /* Pods.framework */; };
+		6E6D2D8E7AB087C78DA433DC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A271D9C45DA1E33B61AFB0A7 /* libPods.a */; };
 		DC001FCE1CFD25D200BFB6C9 /* XBShareWeChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC001FCD1CFD25D200BFB6C9 /* XBShareWeChatView.m */; };
 		DC001FD11CFD3BC200BFB6C9 /* XBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC001FD01CFD3BC200BFB6C9 /* XBMenuView.m */; };
 		DC001FD41CFD6D9300BFB6C9 /* XBHomeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC001FD31CFD6D9300BFB6C9 /* XBHomeToolBar.m */; };
@@ -133,6 +133,7 @@
 		DCC9C3D51D01720E00B3F729 /* XBShareFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3D41D01720E00B3F729 /* XBShareFooterView.m */; };
 		DCC9C3D81D01839200B3F729 /* XBHomeCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3D71D01839200B3F729 /* XBHomeCommonViewController.m */; };
 		DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */; };
+		DCCD2D8B1D178D4E006002B6 /* XBPublishCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */; };
 		DCDC8A901D1103F100836F04 /* XBRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */; };
 		DCE627FA1CF4290D0001708E /* SameApp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627F91CF4290D0001708E /* SameApp.m */; };
 		DCE627FD1CF429610001708E /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627FC1CF429610001708E /* Author.m */; };
@@ -144,12 +145,13 @@
 		DCE8EDDE1D0D6201007EFB6C /* XBDiscoverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE8EDDD1D0D6201007EFB6C /* XBDiscoverDetailViewController.m */; };
 		DCE8EDE11D0D684E007EFB6C /* XBDiscoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE8EDE01D0D684E007EFB6C /* XBDiscoverHeaderView.m */; };
 		DCE96CC31CF543C600FE3550 /* XBHomeRightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE96CC21CF543C600FE3550 /* XBHomeRightButton.m */; };
+		DCFEA9B81D13E55A00DB7118 /* XBDiscoverPushTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFEA9B71D13E55A00DB7118 /* XBDiscoverPushTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		063CD82A39BD47FF4891D76A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		13A2448AF7DAE51A5A5C268B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		3771EF75D0125EF202AF95A3 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A271D9C45DA1E33B61AFB0A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC001FCC1CFD25D200BFB6C9 /* XBShareWeChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBShareWeChatView.h; sourceTree = "<group>"; };
 		DC001FCD1CFD25D200BFB6C9 /* XBShareWeChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBShareWeChatView.m; sourceTree = "<group>"; };
 		DC001FCF1CFD3BC200BFB6C9 /* XBMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBMenuView.h; sourceTree = "<group>"; };
@@ -388,6 +390,8 @@
 		DCC9C3D71D01839200B3F729 /* XBHomeCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeCommonViewController.m; sourceTree = "<group>"; };
 		DCC9C3DD1D0187E500B3F729 /* XBFavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBFavoriteViewController.h; sourceTree = "<group>"; };
 		DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFavoriteViewController.m; sourceTree = "<group>"; };
+		DCCD2D891D178D4E006002B6 /* XBPublishCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPublishCommentViewController.h; sourceTree = "<group>"; };
+		DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPublishCommentViewController.m; sourceTree = "<group>"; };
 		DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshFooter.h; sourceTree = "<group>"; };
 		DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshFooter.m; sourceTree = "<group>"; };
 		DCE627F81CF4290D0001708E /* SameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SameApp.h; sourceTree = "<group>"; };
@@ -409,6 +413,8 @@
 		DCE8EDE01D0D684E007EFB6C /* XBDiscoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverHeaderView.m; sourceTree = "<group>"; };
 		DCE96CC11CF543C600FE3550 /* XBHomeRightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBHomeRightButton.h; sourceTree = "<group>"; };
 		DCE96CC21CF543C600FE3550 /* XBHomeRightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeRightButton.m; sourceTree = "<group>"; };
+		DCFEA9B61D13E55A00DB7118 /* XBDiscoverPushTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverPushTransition.h; sourceTree = "<group>"; };
+		DCFEA9B71D13E55A00DB7118 /* XBDiscoverPushTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverPushTransition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,7 +438,7 @@
 				DC2D95181D016464001288EF /* libSocialQQ.a in Frameworks */,
 				DC2D951B1D016464001288EF /* libSocialWechat.a in Frameworks */,
 				DC2D95151D016464001288EF /* libSocialSinaSSO.a in Frameworks */,
-				7CF1687319E453C03952BB28 /* Pods.framework in Frameworks */,
+				6E6D2D8E7AB087C78DA433DC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +457,7 @@
 				DC2D94E91D015E66001288EF /* Security.framework */,
 				DC2D94E71D015E0B001288EF /* ImageIO.framework */,
 				DC2D94E51D015DFB001288EF /* SystemConfiguration.framework */,
-				3771EF75D0125EF202AF95A3 /* Pods.framework */,
+				A271D9C45DA1E33B61AFB0A7 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -585,6 +591,8 @@
 				DC54130F1CFFDC9B00C5BC0F /* XBRefreshAutoFooter.m */,
 				DC2D94BC1D015363001288EF /* XBDetailCommonViewController.h */,
 				DC2D94BD1D015363001288EF /* XBDetailCommonViewController.m */,
+				DCCD2D891D178D4E006002B6 /* XBPublishCommentViewController.h */,
+				DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -592,13 +600,15 @@
 		DC2D1A4C1D0D0D79003F9EC1 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				DCFEA9B61D13E55A00DB7118 /* XBDiscoverPushTransition.h */,
+				DCFEA9B71D13E55A00DB7118 /* XBDiscoverPushTransition.m */,
 				DC2D1A4E1D0D0DCB003F9EC1 /* XBDiscoverViewController.h */,
 				DC2D1A4F1D0D0DCB003F9EC1 /* XBDiscoverViewController.m */,
+				DCE8EDDC1D0D6201007EFB6C /* XBDiscoverDetailViewController.h */,
+				DCE8EDDD1D0D6201007EFB6C /* XBDiscoverDetailViewController.m */,
 				DCC5B7C71D0D30A1009EE8AF /* XBDiscoverCell.xib */,
 				DCC5B7C91D0D334F009EE8AF /* XBDiscoverCell.h */,
 				DCC5B7CA1D0D334F009EE8AF /* XBDiscoverCell.m */,
-				DCE8EDDC1D0D6201007EFB6C /* XBDiscoverDetailViewController.h */,
-				DCE8EDDD1D0D6201007EFB6C /* XBDiscoverDetailViewController.m */,
 				DCE8EDDF1D0D684E007EFB6C /* XBDiscoverHeaderView.h */,
 				DCE8EDE01D0D684E007EFB6C /* XBDiscoverHeaderView.m */,
 				DC2509341D0E601D00C61D30 /* XBDiscoverBeautifulView.h */,
@@ -1211,6 +1221,7 @@
 				DC64C9A71CF2E90100929724 /* LeftSlideViewController.m in Sources */,
 				DC2D1A501D0D0DCB003F9EC1 /* XBDiscoverViewController.m in Sources */,
 				DC2D1A001D055542003F9EC1 /* XBLoginViewController.m in Sources */,
+				DCCD2D8B1D178D4E006002B6 /* XBPublishCommentViewController.m in Sources */,
 				DC001FCE1CFD25D200BFB6C9 /* XBShareWeChatView.m in Sources */,
 				DC2202221D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m in Sources */,
 				DC64C9AE1CF2E96500929724 /* XBHomeViewController.m in Sources */,
@@ -1239,6 +1250,7 @@
 				DCA92BC61CFC2278000F8A97 /* XMLParserContent.m in Sources */,
 				DCA92BC91CFC2570000F8A97 /* NSString+Util.m in Sources */,
 				DC2D1A231D06A2AA003F9EC1 /* XBRecruitNavigationBar.m in Sources */,
+				DCFEA9B81D13E55A00DB7118 /* XBDiscoverPushTransition.m in Sources */,
 				DC5413101CFFDC9B00C5BC0F /* XBRefreshAutoFooter.m in Sources */,
 				DCE628031CF42BE10001708E /* Info.m in Sources */,
 				DC64C9BC1CF2F39D00929724 /* Constants.m in Sources */,

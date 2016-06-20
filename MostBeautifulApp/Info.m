@@ -7,7 +7,7 @@
 //
 
 #import "Info.h"
-
+#import "Author.h"
 @implementation Info
 
 + (NSString *)managedObjectEntityName
@@ -24,11 +24,24 @@
 {
     return @{@"upUsers":@"up_users",
              @"favUsers":@"fav_users",
-             @"downUsers":@"down_users"
+             @"downUsers":@"down_users",
+             @"upUsersDetail":@"up_users_detail"
              };
 }
 
-+ (NSValueTransformer *)JSONTransformerForKey:(NSString *)key{
++ (NSDictionary *)relationshipModelClassesByPropertyKey
+{
+    return @{
+             @"upUsersDetail":[Author class]
+            };
+}
+
++ (NSValueTransformer *)upUsersDetailJSONTransformer
+{
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[Author class]];
+}
+
++ (NSValueTransformer *)JSONTransformerForKey:(NSString *)key {
     if ([key isEqualToString:@"upUsers"] || [key isEqualToString:@"favUsers"] || [key isEqualToString:@"downUsers"]) {
         return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSArray *array) {
             return [NSKeyedArchiver archivedDataWithRootObject:array];
@@ -39,5 +52,22 @@
         return nil;
     }
 }
+
+#pragma mark -- unarchive
+- (NSArray *)unarchiveObjectWithDataFromUpUsers
+{
+    return [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)self.upUsers];
+}
+
+- (NSArray *)unarchiveObjectWithDataFromDownUsers
+{
+    return [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)self.downUsers];
+}
+
+- (NSArray *)unarchiveObjectWithDataFromFavUsers
+{
+    return [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)self.favUsers];
+}
+
 
 @end

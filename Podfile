@@ -1,5 +1,4 @@
 platform :ios, '7.0'
-use_frameworks!
 
 pod 'Mantle', '1.5'
 pod 'AFNetworking', '2.5.0'

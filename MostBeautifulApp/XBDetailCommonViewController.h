@@ -46,12 +46,10 @@
         didSelectedWithType:(XBMenuViewDidSelectedType)type
         atIndex:(NSInteger)index;
 
-- (void)toolBar:(XBHomeToolBar *)toolbar
-            didSelectedBeautiful:(UIImageView *)imageView;
+- (void)toolBarDidSelectedBeautiful:(XBHomeToolBar *)toolBar;
 
-- (void)toolBar:(XBHomeToolBar *)toolbar
-            didSelectedFeel:(UIImageView *)imageView;
+- (void)toolBarDidSelectedFeel:(XBHomeToolBar *)toolBar;
 
-- (void)toolBar:(XBHomeToolBar *)toolbar
-            didSelectedComment:(UILabel *)commentLabel;
+- (void)toolBarDidSelectedComment:(XBHomeToolBar *)toolBar;
+
 @end

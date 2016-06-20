@@ -103,10 +103,7 @@
         self.homeRightButton.hidden = NO;
         
         //保存到数据库
-        for (App *app in datas) {
-            app.type = XBAppTypeApp;
-            [[DBUtil shareDBUtil] add:app];
-        }
+        [[DBUtil shareDBUtil] adds:datas];
         
         [super headerEndRefreshing];
         [self.cardView slideCardScrollToFirst];

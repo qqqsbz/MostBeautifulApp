@@ -50,8 +50,6 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     
     //默认选中第一个
     [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-    
-    [self pushToViewController:[[XBHomeViewController alloc] init]];
 }
 
 - (void)buildTableView

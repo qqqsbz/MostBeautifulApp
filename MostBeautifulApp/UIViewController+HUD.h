@@ -18,6 +18,10 @@
 
 - (void)showFail:(NSString *)hit;
 
+- (void)showFail:(NSString *)hit inView:(UIView *)view;
+
+- (void)showFail:(NSString *)hit inView:(UIView *)view afterDelay:(NSTimeInterval)delay;
+
 - (void)showFail:(NSString *)hit afterDelay:(NSTimeInterval)delay;
 
 @end

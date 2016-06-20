@@ -32,7 +32,7 @@
     [super viewWillAppear:animated];
     
     if (self.datas.count > 0) {
-        [super resetBackgroundColorIsScrollToItem:NO];
+        [super resetBackgroundColorIsScrollToItem:YES];
     }
     
     [self reloadData];
@@ -73,7 +73,7 @@
                 self.datas = array;
                 [super.cardView slideCardReloadData];
                 [super resetBackgroundColorIsScrollToItem:YES];
-                
+                [super.cardView slideCardScrollToFirst];
             }
             
             self.noDataLabel.hidden = YES;

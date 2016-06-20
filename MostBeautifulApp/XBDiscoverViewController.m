@@ -77,7 +77,6 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
     [leftButton setImage:[UIImage imageNamed:@"home_icon_sidebar_normal"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(menuAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-//    [self.navigationController.navigationBar addSubview:leftButton];
     
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -222,6 +221,7 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     XBDiscoverPublishViewController *vc = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([XBDiscoverPublishViewController class])];
+    self.navigationController.delegate = vc;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -299,6 +299,7 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
     Discover *discover = tableView.tag == 0 ? self.hotDatas[indexPath.row] : self.novelDatas[indexPath.row];
     XBDiscoverDetailViewController *vc = [[XBDiscoverDetailViewController alloc] init];
     vc.discover = discover;
+    self.navigationController.delegate = vc;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
