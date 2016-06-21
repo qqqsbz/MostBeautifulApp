@@ -21,6 +21,8 @@
 
 /** 返回按钮 */
 @property (strong, nonatomic) UIButton          *backButton;
+/** header */
+@property (strong, nonatomic) UIView            *headerView;
 /** 标题view */
 @property (strong, nonatomic) UIView            *titleView;
 /** 标题 */
@@ -53,6 +55,9 @@
 
 /** 导航栏右边按钮 */
 @property (assign, nonatomic) XBHomeRightType  homeRightType;
+
+/** 封面缓存图 */
+@property (strong, nonatomic) UIImageView  *tempImageView;
 
 - (void)shareWeChatViewDidSelected;
 

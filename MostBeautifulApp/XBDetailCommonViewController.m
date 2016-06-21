@@ -38,6 +38,7 @@
 #import <MJRefresh/MJRefresh.h>
 
 @interface XBDetailCommonViewController ()<XBContentViewDelegate,XBMenuViewDelegate,XBHomeToolBarDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,XBShareWeChatViewDelegate>
+
 /** 评论view */
 @property (strong, nonatomic) UIView                *commnetView;
 /** 评论标题 */
@@ -70,6 +71,9 @@
 
 /** 手势处理 */
 @property (strong, nonatomic) XBInteractiveTransition  *interactiveTransition;
+
+/** 上一次的offsetY */
+@property (assign, nonatomic) CGFloat  previousOffsetY;
 
 @end
 
@@ -116,7 +120,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.contentView.text = [[NSString stringWithFormat:@"<p>%@</p>",app.digest] stringByAppendingString:app.content];
     self.contentView.iconURLString = app.iconImage;
     [self.avatorImageView sd_setImageWithURL:[NSURL URLWithString:app.iconImage]];
-    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:app.coverImage]];
+    [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:app.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        self.tempImageView.image = image;
+    
+        self.tempImageView.layer.masksToBounds = YES;
+    }];
     
     [self checkIsBeautifulOrFeel];
     
@@ -135,8 +144,17 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //创建控件
 - (void)buildView
 {
+ 
+    UIColor *backgroundColor = [UIColor colorWithHexString:@"#F6F6F6"];
+    self.view.backgroundColor = backgroundColor;
+    
+    self.tempImageView = [UIImageView new];
+    self.tempImageView.hidden = YES;
+    self.tempImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:self.tempImageView];
+    
     self.scrollView = [UIScrollView new];
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#F6F6F6"];
+    self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.scrollEnabled = YES;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
@@ -149,6 +167,10 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.coverImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.scrollView addSubview:self.coverImageView];
     
+    self.headerView = [UIView new];
+    self.headerView.backgroundColor = backgroundColor;
+    [self.scrollView addSubview:self.headerView];
+    
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.backButton.frame = CGRectMake(5, 12, 35.f, 35.f);
     self.backButton.userInteractionEnabled = YES;
@@ -159,10 +181,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.avatorImageView = [UIImageView new];
     self.avatorImageView.layer.masksToBounds = YES;
     self.avatorImageView.layer.cornerRadius  = 12.;
-    [self.scrollView addSubview:self.avatorImageView];
+//    [self.scrollView addSubview:self.avatorImageView];
+    [self.headerView addSubview:self.avatorImageView];
     
     self.titleView = [UIView new];
-    [self.scrollView addSubview:self.titleView];
+//    [self.scrollView addSubview:self.titleView];
+    [self.headerView addSubview:self.titleView];
     
     self.titleLabel = [UILabel new];
     self.titleLabel.numberOfLines = 1;
@@ -182,10 +206,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     
     self.menuView = [XBMenuView new];
     self.menuView.delegate = self;
+    self.menuView.backgroundColor = backgroundColor;
     [self.scrollView addSubview:self.menuView];
     
     self.contentView = [XBContentView new];
     self.contentView.delegate = self;
+    self.contentView.backgroundColor = backgroundColor;
     self.contentView.type = XBContentViewTypeApp;
     [self.scrollView addSubview:self.contentView];
     
@@ -299,10 +325,23 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         make.height.mas_offset(imageH);
     }];
     
+    [self.tempImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.scrollView);
+        make.left.equalTo(self.coverImageView);
+        make.width.equalTo(self.coverImageView.width);
+        make.height.mas_offset(imageH);
+    }];
+
+    [self.headerView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.scrollView);
+        make.top.equalTo(self.coverImageView.bottom);
+        make.width.equalTo(self.scrollView.width);
+        make.height.mas_equalTo(kIconWH + 10);
+    }];
     
     [self.avatorImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.scrollView).offset(10.f);
-        make.top.equalTo(self.coverImageView.bottom).offset(10.f);
+        make.left.equalTo(self.headerView).offset(10.f);
+        make.top.equalTo(self.headerView).offset(8.f);
         make.width.mas_equalTo(kIconWH);
         make.height.mas_equalTo(kIconWH);
     }];
@@ -310,9 +349,10 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [self.titleView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.avatorImageView);
         make.left.equalTo(self.avatorImageView.right).offset(10.f);
-        make.width.equalTo(self.scrollView.width).offset(-(kIconWH + 30));
+        make.width.equalTo(self.headerView.width).offset(-(kIconWH + 30));
         make.height.equalTo(self.avatorImageView);
     }];
+    
     
     [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleView).offset(5);
@@ -329,7 +369,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     
     [self.menuView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.scrollView);
-        make.top.equalTo(self.titleView.bottom);
+        make.top.equalTo(self.headerView.bottom);
         make.width.equalTo(self.scrollView.width);
         make.height.mas_equalTo(50.f);
     }];
@@ -533,12 +573,36 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //        }];
 //    }
     
+    DDLogDebug(@"offsetY:%f",offsetY);
+    
     //封面进行滚动
     if (offsetY > 0 && offsetY <= self.coverImageView.xb_height) {
-//        [self.coverImageView updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_offset(self.coverImageView.xb_y - offsetY);
-//        }];
+        
+        self.coverImageView.hidden = YES;
+        
+        self.tempImageView.hidden = NO;
+        
+//        if (self.previousOffsetY < offsetY) { //向上
+////            self.tempImageView.xb_y -=  0.45f;
+//            self.tempImageView.xb_y -=  offsetY * 0.01f;
+//            
+//            DDLogDebug(@"xb_y:%f",self.tempImageView.xb_y);
+//            
+//        } else {
+////             self.tempImageView.xb_y +=  self.tempImageView.xb_y == 20 ? 0 : 0.45f;
+//            self.tempImageView.xb_y +=  offsetY * 0.01f;
+//        }
+        
+        
+    } else {
+        
+        self.coverImageView.hidden = NO;
+        
+        self.tempImageView.hidden = YES;
+        
     }
+    
+    self.previousOffsetY = offsetY;
     
     //设置菜单栏动画
     CGFloat menuOffsetY = [self.menuView convertRect:self.menuView.bounds toView:self.view].origin.y;

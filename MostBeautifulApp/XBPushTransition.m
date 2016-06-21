@@ -57,6 +57,7 @@
     UIView *containerView = [transitionContext containerView];
     XBHomeCell *cell = (XBHomeCell *)[fromVC currentHomeCell];
     
+    UIColor *headBackgroundColor = toVC.headerView.backgroundColor;
     UIImageView *coverImageView = toVC.coverImageView;
     
     [coverImageView layoutIfNeeded];
@@ -87,8 +88,13 @@
     
     toVC.toolBar.frame = CGRectMake(0, CGRectGetHeight(containerView.frame), CGRectGetWidth(toolBarFrame), CGRectGetHeight(toolBarFrame));
     
-    toVC.menuView.alpha = 0.f;
+    for (UIView *subView in toVC.menuView.subviews) {
+        subView.alpha = 0;
+    }
+    
     toVC.titleView.alpha = 0.5f;
+    toVC.headerView.backgroundColor = [UIColor clearColor];
+    toVC.menuView.backgroundColor = [UIColor clearColor];
     [containerView addSubview:toVC.view];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] * 1.3 delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -101,11 +107,23 @@
         toVC.toolBar.frame = toolBarFrame;
         toVC.titleView.alpha = 1.f;
     } completion:^(BOOL finished) {
-        toVC.coverImageView.hidden = NO;
+
+        toVC.headerView.backgroundColor = headBackgroundColor;
+        
+        toVC.menuView.backgroundColor = headBackgroundColor;
+        
         [UIView animateWithDuration:0.25 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            toVC.menuView.alpha = 1.f;
+            
+            for (UIView *subView in toVC.menuView.subviews) {
+                subView.alpha = 1;
+            }
+            
         } completion:^(BOOL finished) {
+            
+            toVC.coverImageView.hidden = NO;
+            
             [transitionContext completeTransition:YES];
+            
         }];
     }];
     
@@ -125,7 +143,7 @@
     
     UIView *maskView = [[UIView alloc] initWithFrame:toVC.view.bounds];
     maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.55f];
-
+    
     toVC.view.alpha = 1.f;
     [containerView insertSubview:backgroundView atIndex:0];
     [containerView insertSubview:toVC.view belowSubview:fromVC.view];
@@ -146,6 +164,7 @@
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         
         if ([transitionContext transitionWasCancelled]) { //手势取消
+           
             [toVC.view removeFromSuperview];
         }
         
