@@ -73,6 +73,8 @@
     CGRect titleFrame = toVC.titleView.frame;
     toVC.titleView.frame = toVC.avatorImageView.frame;
     
+    [toVC.toolBar layoutIfNeeded];
+    [toVC.contentView layoutIfNeeded];
     CGRect scrollFrame  = toVC.scrollView.frame;
     CGRect contentFrame = toVC.contentView.frame;
     CGRect toolBarFrame = toVC.toolBar.frame;

@@ -19,22 +19,39 @@
 @class TTTAttributedLabel;
 @interface XBDetailCommonViewController : UIViewController
 
+/** 返回按钮 */
 @property (strong, nonatomic) UIButton          *backButton;
+/** 标题view */
 @property (strong, nonatomic) UIView            *titleView;
+/** 标题 */
 @property (strong, nonatomic) UILabel           *titleLabel;
+/** 子标题 */
 @property (strong, nonatomic) UILabel           *subTitleLabel;
+/** 分享、收藏、下载 */
 @property (strong, nonatomic) XBMenuView        *menuView;
+/** 导航栏上的菜单 */
 @property (strong, nonatomic) XBMenuView        *naviBarMenuView;
+/** 封面图片 */
 @property (strong, nonatomic) UIImageView       *coverImageView;
+/** 应用图片 */
 @property (strong, nonatomic) UIImageView       *avatorImageView;
+/** 滚动view */
 @property (strong, nonatomic) UIScrollView      *scrollView;
+/** 工具栏 */
 @property (strong, nonatomic) XBHomeToolBar     *toolBar;
+/** 图文内容view  */
 @property (strong, nonatomic) XBContentView     *contentView;
+/** 分享到微信 */
 @property (strong, nonatomic) XBShareWeChatView *shareWeChatView;
+/** 分享view */
 @property (strong, nonatomic) XBShareView       *shareView;
 
+/** 当前要显示的app信息 */
 @property (strong, nonatomic) App           *app;
+/** 收藏的app */
 @property (strong, nonatomic) AppFavorite   *appFavorite;
+
+/** 导航栏右边按钮 */
 @property (assign, nonatomic) XBHomeRightType  homeRightType;
 
 - (void)shareWeChatViewDidSelected;

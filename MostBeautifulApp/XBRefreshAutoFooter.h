@@ -12,8 +12,17 @@ typedef NS_ENUM(NSInteger,XBXBRefreshAutoFooterType){
     XBRefreshAutoFooterTypeDiscover
 };
 @interface XBRefreshAutoFooter : MJRefreshAutoFooter
+
+/** 非刷新状态下的文字颜色 */
 @property (strong, nonatomic) UIColor  *normalColor;
+
+/** 刷新状态下的文字颜色 */
 @property (strong, nonatomic) UIColor  *loadColor;
+
+/** 记录上次刷新的状态 */
 @property (assign, nonatomic) MJRefreshState  previousState;
+
+/** 根据类型进行展示 */
 @property (assign, nonatomic) XBXBRefreshAutoFooterType  type;
+
 @end

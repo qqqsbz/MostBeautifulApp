@@ -39,11 +39,16 @@ typedef void(^complete)(BOOL finished);
 
 - (instancetype)initWithFrame:(CGRect)frame images:(NSArray<UIImage *> *)images titles:(NSArray<NSString *> *)titles type:(XBMenuViewType)type;
 
+/** 根据下标替换图片 */
 - (void)replaceImage:(UIImage *)image atIndex:(NSInteger)index;
 
+/** 根据下标替换文字 */
 - (void)replaceTitle:(NSString *)title atIndex:(NSInteger)index;
 
+/** 显示  */
 - (void)showWithComplete:(complete)complete;
 
+/** 隐藏 */
 - (void)hideWithComplete:(complete)complete;
+
 @end

@@ -83,6 +83,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.commnetPage = 1;
+    
     self.commentPageSize = 5;
     
     [self buildView];

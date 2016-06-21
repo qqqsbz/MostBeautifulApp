@@ -22,12 +22,16 @@ typedef NS_ENUM(NSInteger,XBContentViewType) {
 };
 @interface XBContentView : UIView
 
+/** 要解析的文本内容 */
 @property (strong, nonatomic) NSString  *text;
 
+/** 图标网址 */
 @property (strong, nonatomic) NSString  *iconURLString;
 
+/** XBContentViewTypeDiscover: 发现应用 */
 @property (assign, nonatomic) XBContentViewType  type;
 
+/** 代理方法 */
 @property (weak, nonatomic) id<XBContentViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame content:(NSString *)text type:(XBContentViewType)type;

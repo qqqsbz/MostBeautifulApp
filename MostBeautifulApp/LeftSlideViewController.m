@@ -17,6 +17,10 @@
 @property (nonatomic,strong) UITableView *leftTableview;
 @property (nonatomic,assign) CGFloat leftTableviewW;
 @property (nonatomic,strong) UIView *contentView;
+
+/** 是否是滑动 */
+@property (assign, nonatomic) BOOL  isSlide;
+
 @end
 
 
@@ -102,6 +106,7 @@
         needMoveWithTap = NO;
     }
     
+    
     //根据视图位置判断是左滑还是右边滑动
     if (needMoveWithTap && (rec.view.frame.origin.x >= 0) && (rec.view.frame.origin.x <= (kScreenWidth - kMainPageDistance)))
     {
@@ -119,12 +124,23 @@
         
         rec.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,scale, scale);
         [rec setTranslation:CGPointMake(0, 0) inView:self.view];
-
         
-        CGFloat leftScale = 1.f;
+        if (self.closed) {
+            CGFloat leftScale = self.mainVC.view.xb_x * 2.f / kScreenWidth;
+            
+            leftScale = leftScale > 1.f ? 1 : leftScale;
+            
+            self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity, leftScale,leftScale);
+            
+            self.leftTableview.alpha = leftScale;
         
-        self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity, leftScale,leftScale);
-        
+        } else {
+            
+            self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1 , 1);
+            
+            self.leftTableview.alpha = 1.f;
+            
+        }
         
         //tempAlpha kLeftAlpha~0
         CGFloat tempAlpha = kLeftAlpha - kLeftAlpha * (rec.view.frame.origin.x / (kScreenWidth - kMainPageDistance));
@@ -148,6 +164,9 @@
     
     //手势结束后修正位置,超过约一半时向多出的一半偏移
     if (rec.state == UIGestureRecognizerStateEnded) {
+        
+        self.isSlide = YES;
+        
         if (fabs(_scalef) > vCouldChangeDeckStateDistance)
         {
             if (self.closed)
@@ -180,6 +199,10 @@
     
     if ((!self.closed) && (tap.state == UIGestureRecognizerStateEnded))
     {
+        self.leftTableview.alpha = 1.f;
+        
+        self.isSlide = NO;
+        
         [UIView animateWithDuration:kDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         
             tap.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
@@ -214,6 +237,8 @@
         
     } completion:^(BOOL finished) {
         
+        self.leftTableview.alpha = 0.5f;
+        
         [self removeSingleTap];
         
         if ([self.delegate respondsToSelector:@selector(didCloseLeftView:)]) {
@@ -228,23 +253,48 @@
  */
 - (void)openLeftView;
 {
-    self.leftTableview.transform = CGAffineTransformMakeScale(0.8f, 0.8f);
     
-    [UIView animateWithDuration:kDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    self.leftTableview.alpha = 1.f;
+    
+    if (!self.isSlide) {
         
-        self.mainVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,kMainPageScale,kMainPageScale);
-        self.mainVC.view.center = kMainPageCenter;
-        self.closed = NO;
+        self.leftTableview.transform = CGAffineTransformMakeScale(0.8f, 0.8f);
         
-        self.leftTableview.center = CGPointMake((kScreenWidth - kMainPageDistance) * 0.5, kScreenHeight * 0.5);
-        self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
-        self.contentView.alpha = 0;
-        
-    } completion:^(BOOL finished) {
-        
-        [self disableTapButton];
+        [UIView animateWithDuration:kDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            
+            self.mainVC.view.transform = CGAffineTransformScale(CGAffineTransformIdentity,kMainPageScale,kMainPageScale);
+            self.mainVC.view.center = kMainPageCenter;
+            self.closed = NO;
+            
+            self.leftTableview.center = CGPointMake((kScreenWidth - kMainPageDistance) * 0.5, kScreenHeight * 0.5);
+            self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+            self.contentView.alpha = 0;
+            
+        } completion:^(BOOL finished) {
+            
+            [self disableTapButton];
+            
+        }];
 
-    }];
+    } else {
+        
+        [UIView animateWithDuration:kDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    
+            self.mainVC.view.center = kMainPageCenter;
+            self.closed = NO;
+            
+            self.leftTableview.center = CGPointMake((kScreenWidth - kMainPageDistance) * 0.5, kScreenHeight * 0.5);
+            self.leftTableview.transform = CGAffineTransformScale(CGAffineTransformIdentity,1.0,1.0);
+            self.contentView.alpha = 0;
+            
+        } completion:^(BOOL finished) {
+            
+            [self disableTapButton];
+            
+        }];
+        
+    }
+    
     
     if ([self.delegate respondsToSelector:@selector(didOpenLeftView:)]) {
         [self.delegate didOpenLeftView:self.mainVC];

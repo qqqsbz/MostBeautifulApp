@@ -39,6 +39,7 @@
 /** 一般般文字 */
 @property (strong, nonatomic) UILabel       *greenLabel;
 
+/** 代理方法 */
 @property (weak, nonatomic) id<XBHomeToolBarDelegate> toolBarDelegate;
 
 @end
