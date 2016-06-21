@@ -134,6 +134,7 @@
 		DCC9C3D81D01839200B3F729 /* XBHomeCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3D71D01839200B3F729 /* XBHomeCommonViewController.m */; };
 		DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */; };
 		DCCD2D8B1D178D4E006002B6 /* XBPublishCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */; };
+		DCCD2D8E1D193E18006002B6 /* daily.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCCD2D8D1D193E18006002B6 /* daily.gif */; };
 		DCDC8A901D1103F100836F04 /* XBRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */; };
 		DCE627FA1CF4290D0001708E /* SameApp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627F91CF4290D0001708E /* SameApp.m */; };
 		DCE627FD1CF429610001708E /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627FC1CF429610001708E /* Author.m */; };
@@ -392,6 +393,7 @@
 		DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFavoriteViewController.m; sourceTree = "<group>"; };
 		DCCD2D891D178D4E006002B6 /* XBPublishCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPublishCommentViewController.h; sourceTree = "<group>"; };
 		DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPublishCommentViewController.m; sourceTree = "<group>"; };
+		DCCD2D8D1D193E18006002B6 /* daily.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = daily.gif; sourceTree = "<group>"; };
 		DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshFooter.h; sourceTree = "<group>"; };
 		DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshFooter.m; sourceTree = "<group>"; };
 		DCE627F81CF4290D0001708E /* SameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SameApp.h; sourceTree = "<group>"; };
@@ -820,6 +822,7 @@
 		DC64C9891CF2E81600929724 /* MostBeautifulApp */ = {
 			isa = PBXGroup;
 			children = (
+				DCCD2D8C1D193DF8006002B6 /* screenShots */,
 				DC2D94BB1D01524E001288EF /* Common */,
 				DC2D946F1D0113D7001288EF /* CoreData */,
 				DC64C9CD1CF4088600929724 /* Model */,
@@ -993,6 +996,14 @@
 			name = Favorite;
 			sourceTree = "<group>";
 		};
+		DCCD2D8C1D193DF8006002B6 /* screenShots */ = {
+			isa = PBXGroup;
+			children = (
+				DCCD2D8D1D193E18006002B6 /* daily.gif */,
+			);
+			name = screenShots;
+			sourceTree = "<group>";
+		};
 		DCDC57AB1D11307D00DB95AC /* XBRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1112,6 +1123,7 @@
 				DC2D94E41D015DDD001288EF /* UMSocialSDKResourcesNew.bundle in Resources */,
 				DC64C9951CF2E81600929724 /* Main.storyboard in Resources */,
 				DCE628141CF43D490001708E /* XBHomeCell.xib in Resources */,
+				DCCD2D8E1D193E18006002B6 /* daily.gif in Resources */,
 				DC2D94DF1D015DDD001288EF /* UMShareEditViewController.xib in Resources */,
 				DC64C9BE1CF2F53F00929724 /* XBLeftCell.xib in Resources */,
 				DC2D1A161D06726F003F9EC1 /* XBSettingCell.xib in Resources */,

@@ -4,30 +4,40 @@
 <li>用到的第三方库
 
 <ul>
-<li>AFNetworking   : OC的网络请求库</li>
-<li>YYWebImageView : YY大神的图片加载库</li>
-<li>YYText         : YY大神的文字排版库</li>
-<li>PKHUD          ：Swift的一个HUD</li>
-<li>SnapKit        ：Swift版的Masonry,屏幕适配库</li>
+<li>AFNetworking         : OC的网络请求库</li>
+<li>CocoaLumberjack      : 日志库</li>
+<li>Mantle               : json与model之间的转换库</li>
+<li>Masonry              : 第三方自动布局库</li>
+<li>MBProgressHUD        : HUD库</li>
+<li>MJRrefresh           : 上下拉刷新库</li>
+<li>NJKWebViewProgress   : 网页加载提示条库</li>
+<li>SDWebImage           : 网络加载图片库</li>
+<li>TTTAttributedLabel   : 富文本库</li>
 </ul></li>
 <li>目录结构分析
 
 <ul>
-<li>Base           : 项目的一些基类</li>
-<li>Classify       : 侧滑菜单界面</li>
-<li>FindApp        : 发现应用界面</li>
-<li>FindAppDetail  : 发现应用详情界面</li>
-<li>Home           : 每日最美界面</li>
-<li>HomeDetail     : 每日最美详情界面</li>
-<li>Search         : 搜索界面（这个界面有个参数加密了。所以没有实现。感觉这个功能挺赞的）</li>
-<li>Setting        : 设置界面</li>
-<li>Other          : 其它(包括API，APP的一些参数)</li>
+<li>Common           : 项目的一些基类</li>
+<li>CoreData         : CoreData数据库以及访问数据库的类</li>
+<li>Model            : 模型类</li>
+<li>Utils  			 : 工具类 比如：访问服务器获取数据的通用类</li>
+<li>Category         : 类别</li>
+<li>App     		 : 项目根路径</li>
+<li>Home             : 每日最美</li>
+<li>Liability        : 限免推荐</li>
+<li>Discover         : 发现应用</li>
+<li>Article          : 文章专栏</li>
+<li>Favorite         : 我的收藏</li>
+<li>Left             : 抽屉类</li>
+<li>Kits             : 第三方库</li>
 </ul></li>
 <li>后续工作
 
 <ul>
 <li>修复现有问题</li>
-<li>实现未实现的功能</li>
-<li>增加更多动画体验</li>
-</ul></li>
-<li>更新Tips
+<li>实现未实现的功能 争取早日破解最美加密算法</li>
+<li>完善App</li>
+</ul>
+
+<h4>附图</h4>
+![image](https://github.com/qqqsbz/CircleTaskView/blob/master/CircleTask/circle.gif)

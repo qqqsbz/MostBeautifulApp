@@ -1,1 +1,0 @@
-../../../XZMRefresh/XZMRefresh/Custom/Footer/XZMRefreshGifFooter.h
