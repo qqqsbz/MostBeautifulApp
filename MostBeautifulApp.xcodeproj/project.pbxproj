@@ -135,6 +135,9 @@
 		DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC9C3DE1D0187E500B3F729 /* XBFavoriteViewController.m */; };
 		DCCD2D8B1D178D4E006002B6 /* XBPublishCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */; };
 		DCCD2D901D19400F006002B6 /* home.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCCD2D8F1D19400F006002B6 /* home.gif */; };
+		DCCD2D931D194100006002B6 /* daily01.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCCD2D911D194100006002B6 /* daily01.gif */; };
+		DCCD2D941D194100006002B6 /* daily02.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCCD2D921D194100006002B6 /* daily02.gif */; };
+		DCCD2D961D19421D006002B6 /* discover01.gif in Resources */ = {isa = PBXBuildFile; fileRef = DCCD2D951D19421D006002B6 /* discover01.gif */; };
 		DCDC8A901D1103F100836F04 /* XBRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */; };
 		DCE627FA1CF4290D0001708E /* SameApp.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627F91CF4290D0001708E /* SameApp.m */; };
 		DCE627FD1CF429610001708E /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE627FC1CF429610001708E /* Author.m */; };
@@ -394,6 +397,9 @@
 		DCCD2D891D178D4E006002B6 /* XBPublishCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPublishCommentViewController.h; sourceTree = "<group>"; };
 		DCCD2D8A1D178D4E006002B6 /* XBPublishCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPublishCommentViewController.m; sourceTree = "<group>"; };
 		DCCD2D8F1D19400F006002B6 /* home.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = home.gif; sourceTree = "<group>"; };
+		DCCD2D911D194100006002B6 /* daily01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = daily01.gif; sourceTree = "<group>"; };
+		DCCD2D921D194100006002B6 /* daily02.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = daily02.gif; sourceTree = "<group>"; };
+		DCCD2D951D19421D006002B6 /* discover01.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = discover01.gif; sourceTree = "<group>"; };
 		DCDC8A8E1D1103F100836F04 /* XBRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRefreshFooter.h; sourceTree = "<group>"; };
 		DCDC8A8F1D1103F100836F04 /* XBRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRefreshFooter.m; sourceTree = "<group>"; };
 		DCE627F81CF4290D0001708E /* SameApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SameApp.h; sourceTree = "<group>"; };
@@ -999,6 +1005,9 @@
 		DCCD2D8C1D193DF8006002B6 /* screenShots */ = {
 			isa = PBXGroup;
 			children = (
+				DCCD2D951D19421D006002B6 /* discover01.gif */,
+				DCCD2D911D194100006002B6 /* daily01.gif */,
+				DCCD2D921D194100006002B6 /* daily02.gif */,
 				DCCD2D8F1D19400F006002B6 /* home.gif */,
 			);
 			name = screenShots;
@@ -1103,6 +1112,7 @@
 				DC2D94DE1D015DDD001288EF /* UMSCommentInputControlleriPad.xib in Resources */,
 				DC2D1A321D07AAF4003F9EC1 /* XBSearchCell.xib in Resources */,
 				DCC9C3D21D01719500B3F729 /* XBShareFooterView.xib in Resources */,
+				DCCD2D931D194100006002B6 /* daily01.gif in Resources */,
 				DC2D95171D016464001288EF /* WeiboSDK.bundle in Resources */,
 				DC2D94E21D015DDD001288EF /* UMSnsAccountViewController.xib in Resources */,
 				DC2D95201D01680D001288EF /* XBShareCell.xib in Resources */,
@@ -1117,12 +1127,14 @@
 				DC2202241D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib in Resources */,
 				DC2D951A1D016464001288EF /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				DC2D94E01D015DDD001288EF /* UMShareEditViewControlleriPad.xib in Resources */,
+				DCCD2D961D19421D006002B6 /* discover01.gif in Resources */,
 				DC2D94E31D015DDD001288EF /* UMSShareListController.xib in Resources */,
 				DC2D94DA1D015DDD001288EF /* UMSocialLocalizable.strings in Resources */,
 				DC2D94DC1D015DDD001288EF /* UMSCommentDetailController.xib in Resources */,
 				DC2D94DD1D015DDD001288EF /* UMSCommentInputController.xib in Resources */,
 				DC2D94E41D015DDD001288EF /* UMSocialSDKResourcesNew.bundle in Resources */,
 				DC64C9951CF2E81600929724 /* Main.storyboard in Resources */,
+				DCCD2D941D194100006002B6 /* daily02.gif in Resources */,
 				DCE628141CF43D490001708E /* XBHomeCell.xib in Resources */,
 				DC2D94DF1D015DDD001288EF /* UMShareEditViewController.xib in Resources */,
 				DC64C9BE1CF2F53F00929724 /* XBLeftCell.xib in Resources */,

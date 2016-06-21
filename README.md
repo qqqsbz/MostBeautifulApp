@@ -41,3 +41,6 @@
 
 <h4>附图</h4>
 ![image](https://github.com/qqqsbz/CircleTaskView/blob/master/CircleTask/circle.gif)
+
+
+<p>tips:由于gif太大 上传太慢 请各位下载亲自进行查看！谢谢。</p>
