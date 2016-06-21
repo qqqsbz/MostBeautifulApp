@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger,XBAppType) {
 @property (strong, nonatomic) NSString  *authorGender;
 @property (strong, nonatomic) NSString  *qrcodeImage;
 @property (strong, nonatomic) NSString  *createTime;
-//@property (strong, nonatomic) Comments  *comments;
+@property (strong, nonatomic) Comments  *comments;
 @property (strong, nonatomic) NSString  *coverCommentArticle;
 @property (strong, nonatomic) NSString  *digest;
 @property (strong, nonatomic) NSString  *size;

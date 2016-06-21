@@ -139,6 +139,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         CGFloat height = CGRectGetMaxY(self.commentTableView.frame);
         [self.scrollView setContentSize:CGSizeMake(CGRectGetWidth(self.scrollView.frame), height)];
     });
+    
 }
 
 //创建控件
@@ -584,13 +585,13 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         
 //        if (self.previousOffsetY < offsetY) { //向上
 ////            self.tempImageView.xb_y -=  0.45f;
-//            self.tempImageView.xb_y -=  offsetY * 0.01f;
+//            self.tempImageView.xb_y -=  offsetY * 0.015f;
 //            
 //            DDLogDebug(@"xb_y:%f",self.tempImageView.xb_y);
 //            
 //        } else {
 ////             self.tempImageView.xb_y +=  self.tempImageView.xb_y == 20 ? 0 : 0.45f;
-//            self.tempImageView.xb_y +=  offsetY * 0.01f;
+//            self.tempImageView.xb_y +=  offsetY * 0.015f;
 //        }
         
         
@@ -745,6 +746,13 @@ static NSString *reuseIdentifier = @"XBCommentCell";
                     [self.commentTableView updateConstraints:^(MASConstraintMaker *make) {
                         make.height.mas_equalTo(self.commentTableView.contentSize.height - 5);
                     }];
+                } else {
+                    //如果没有评论则不显示
+                    self.commnetView.hidden = YES;
+                    self.commentTableView.hidden = YES;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.scrollView.frame),(CGRectGetMaxY(self.shareWeChatView.frame)));
+                    });
                 }
                 [self.commentTableView.mj_footer endRefreshingWithNoMoreData];
             }

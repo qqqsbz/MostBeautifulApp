@@ -50,10 +50,10 @@
     return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[Info class]];
 }
 
-//+ (NSValueTransformer *)commentsJSONTransformer
-//{
-//    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[Comments class]];
-//}
++ (NSValueTransformer *)commentsJSONTransformer
+{
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[Comments class]];
+}
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {

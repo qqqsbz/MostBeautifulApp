@@ -47,6 +47,7 @@
         <attribute name="videoIsPortrait" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="videoShareUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="videoUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comments" syncable="YES"/>
         <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Info" syncable="YES"/>
         <relationship name="sameApps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SameApp" syncable="YES"/>
         <relationship name="upUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SameApp" syncable="YES"/>
@@ -106,7 +107,7 @@
     </entity>
     <entity name="SearchHistory" parentEntity="App" syncable="YES"/>
     <elements>
-        <element name="App" positionX="-63" positionY="-18" width="128" height="780"/>
+        <element name="App" positionX="-63" positionY="-18" width="128" height="795"/>
         <element name="AppFavorite" positionX="36" positionY="189" width="128" height="75"/>
         <element name="Author" positionX="-36" positionY="153" width="128" height="180"/>
         <element name="Comment" positionX="18" positionY="180" width="128" height="240"/>
