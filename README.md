@@ -1,4 +1,3 @@
-# MostBeautifulApp
 <h2>高仿最美应用 OC版</h2>
 <ul>
 <li>用到的第三方库
