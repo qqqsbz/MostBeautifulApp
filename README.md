@@ -44,5 +44,3 @@
 ![image](https://github.com/qqqsbz/MostBeautifulApp/blob/master/MostBeautifulApp/daily02.gif)
 ![image](https://github.com/qqqsbz/MostBeautifulApp/blob/master/MostBeautifulApp/discover01.gif)
 
-
-<p>tips:由于gif太大 上传太慢 请各位下载亲自进行查看！谢谢。</p>
