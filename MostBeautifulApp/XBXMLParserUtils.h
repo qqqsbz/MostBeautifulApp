@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 typedef void (^Complete)(NSArray *datas);
 
-@class XMLParserContent;
-@interface XMLParserUtils : NSObject
+@class XBXMLParserContent;
+@interface XBXMLParserUtils : NSObject
 
 + (instancetype)parserWithContent:(NSString *)content complete:(Complete)block;
 

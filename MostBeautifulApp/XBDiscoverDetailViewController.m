@@ -18,7 +18,7 @@
 #import "XBHomeToolBar.h"
 #import "XBCommentCell.h"
 #import "NSString+Util.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 #import "XBRefreshAutoFooter.h"
 #import "XBDiscoverBeautifulView.h"
 #import "XBDiscoverHeaderView.h"
@@ -534,6 +534,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         
         [self hideLoading];
         
+        [self.beautifulView reloadData];
+        
     } failure:^(NSError *error) {
         
         [self hideLoading];
@@ -580,6 +582,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         [self checkIsBeautifulOrFeel];
         
         [self hideLoading];
+        
+        [self.beautifulView reloadData];
         
     } failure:^(NSError *error) {
         
@@ -655,7 +659,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 #pragma mark -- public method
 - (User *)checkUserIsLogin
 {
-    User *user = [UserDefaultsUtil userInfo];
+    User *user = [XBUserDefaultsUtil userInfo];
     if (!user) {
         [self presentViewController:[[XBLoginViewController alloc] init] animated:YES completion:nil];
         return nil;

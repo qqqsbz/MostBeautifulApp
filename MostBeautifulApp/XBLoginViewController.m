@@ -9,7 +9,7 @@
 #import "XBLoginViewController.h"
 #import "User.h"
 #import "XBLoginView.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 #import "NSIntegerFormatter.h"
 #import "UMSocialSnsPlatformManager.h"
 #import "UMSocialAccountManager.h"
@@ -50,7 +50,7 @@
             [[XBHttpClient shareInstance] userLoginWithParamter:params success:^(User *user) {
                 [self hideLoading];
                 
-                [UserDefaultsUtil updateUserInfo:user];
+                [XBUserDefaultsUtil updateUserInfo:user];
                 
                 [self dismissViewControllerAnimated:YES completion:^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:kLoginOutSuccessNotification object:nil];

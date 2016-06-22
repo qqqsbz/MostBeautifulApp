@@ -1,5 +1,5 @@
  //
-//  UserDefaultsUtil.m
+//  XBUserDefaultsUtil.m
 //  iPenYou
 //
 //  Created by fanly frank on 10/17/14.
@@ -7,9 +7,9 @@
 //
 static NSString *const kBeautifulUserInfo = @"BEAUTIFUL_USER_INFO";
 
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 
-@implementation UserDefaultsUtil
+@implementation XBUserDefaultsUtil
 
 //user info
 + (id)userInfo

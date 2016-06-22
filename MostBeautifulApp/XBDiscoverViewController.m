@@ -38,8 +38,12 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.hotPage = 1;
+    
     self.hotPageSize = 10;
+    
     self.novelPageSize = 10;
     
     self.loadingImages = @[
@@ -67,7 +71,7 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
     //修复跳转到详情页后 返回不默认选中已选页面
     self.segmentedControl.selectedSegmentIndex = self.currentPage;
     
-    [self.contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(self.contentScrollView.frame) * self.currentPage,self.contentScrollView.contentOffset.y) animated:NO];
+    [self.contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(self.contentScrollView.frame) * self.currentPage,0) animated:NO];
 }
 
 - (void)buildNavigationItem
@@ -98,16 +102,17 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
 
 - (void)buildContentScrollView
 {
-    self.contentScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    CGFloat y = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame) + self.navigationController.navigationBar.xb_height;
+    self.contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, y, self.view.xb_width, self.view.xb_height - y)];
     self.contentScrollView.delegate = self;
-    self.contentScrollView.scrollEnabled = NO;
+    self.contentScrollView.scrollEnabled = YES;
+    self.contentScrollView.pagingEnabled = YES;
     self.contentScrollView.showsVerticalScrollIndicator = NO;
     self.contentScrollView.showsHorizontalScrollIndicator  = NO;
+    self.contentScrollView.contentSize = CGSizeMake(self.view.xb_width * 2, self.contentScrollView.xb_height);
     [self.view addSubview:self.contentScrollView];
     
-    CGFloat space = CGRectGetHeight(self.navigationController.navigationBar.frame) + CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-    
-    self.hotTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.contentScrollView.frame), CGRectGetHeight(self.contentScrollView.frame) - space)];
+    self.hotTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.contentScrollView.frame), CGRectGetHeight(self.contentScrollView.frame))];
     self.hotTableView.tag = 0;
     self.hotTableView.delegate = self;
     self.hotTableView.dataSource = self;
@@ -115,7 +120,7 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
     [self.hotTableView registerNib:[UINib nibWithNibName:NSStringFromClass([XBDiscoverCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:hotReuseIdentifier];
     [self.contentScrollView addSubview:self.hotTableView];
     
-    self.novelTableView = [[UITableView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.contentScrollView.frame), 0, CGRectGetWidth(self.contentScrollView.frame), CGRectGetHeight(self.contentScrollView.frame) - space)];
+    self.novelTableView = [[UITableView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.contentScrollView.frame), 0, CGRectGetWidth(self.contentScrollView.frame), CGRectGetHeight(self.contentScrollView.frame))];
     self.novelTableView.tag = 1;
     self.novelTableView.delegate = self;
     self.novelTableView.dataSource = self;
@@ -240,7 +245,7 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
 {
     self.currentPage = sender.selectedSegmentIndex;
     UITableView *view = self.contentScrollView.subviews[self.currentPage];
-    [self.contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(view.frame) * self.currentPage, -64) animated:YES];
+    [self.contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(view.frame) * self.currentPage, 0) animated:YES];
     
     if (view.contentOffset.y <= 0) {
         [view.mj_header beginRefreshing];
@@ -261,11 +266,21 @@ static NSString *novelReuseIdentifier = @"XBDiscoverCell";
 }
 
 #pragma mark -- UIScorllView delegate
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    NSInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
-//    self.segmentedControl.selectedSegmentIndex = page;
-//}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView == self.contentScrollView) {
+        NSInteger page = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
+        if (self.currentPage != page) {
+            self.currentPage = page;
+            self.segmentedControl.selectedSegmentIndex = self.currentPage;
+            
+            //如果最新分享没有数据则加载数据
+            if (self.currentPage == 1 && self.novelDatas.count <= 0) {
+                [self.novelTableView.mj_header beginRefreshing];
+            }
+        }
+    }
+}
 
 #pragma mark -- UITable data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

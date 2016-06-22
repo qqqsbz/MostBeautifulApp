@@ -12,7 +12,7 @@
 #import "XBHomeToolBar.h"
 #import "XBShareWeChatView.h"
 #import "SMProgressHUD.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 #import "XBLoginViewController.h"
 @interface XBHomeDetailViewController () <XBContentViewDelegate,XBMenuViewDelegate,XBHomeToolBarDelegate,XBShareWeChatViewDelegate>
 
@@ -35,7 +35,7 @@
 #pragma mark -- XBMenuViewDelegate
 - (void)menuView:(XBMenuView *)menuView didSelectedWithType:(XBMenuViewDidSelectedType)type atIndex:(NSInteger)index
 {
-    if (type == XBMenuViewDidSelectedTypeFavorite && ![UserDefaultsUtil userInfo]) {
+    if (type == XBMenuViewDidSelectedTypeFavorite && ![XBUserDefaultsUtil userInfo]) {
         [self presentViewController:[[XBLoginViewController alloc] init] animated:YES completion:nil];
         return;
     }

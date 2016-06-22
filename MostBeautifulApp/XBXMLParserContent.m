@@ -6,8 +6,8 @@
 //  Copyright © 2016年 coder. All rights reserved.
 //
 
-#import "XMLParserContent.h"
+#import "XBXMLParserContent.h"
 
-@implementation XMLParserContent
+@implementation XBXMLParserContent
 
 @end

@@ -29,7 +29,7 @@
 		DC2D1A031D0571C3003F9EC1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A021D0571C3003F9EC1 /* User.m */; };
 		DC2D1A061D057296003F9EC1 /* Statics.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A051D057296003F9EC1 /* Statics.m */; };
 		DC2D1A0D1D05775F003F9EC1 /* XBLeftHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A0C1D05775F003F9EC1 /* XBLeftHeaderView.m */; };
-		DC2D1A101D057C42003F9EC1 /* UserDefaultsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A0F1D057C42003F9EC1 /* UserDefaultsUtil.m */; };
+		DC2D1A101D057C42003F9EC1 /* XBUserDefaultsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A0F1D057C42003F9EC1 /* XBUserDefaultsUtil.m */; };
 		DC2D1A141D066F6A003F9EC1 /* XBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A131D066F6A003F9EC1 /* XBSettingViewController.m */; };
 		DC2D1A161D06726F003F9EC1 /* XBSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2D1A151D06726F003F9EC1 /* XBSettingCell.xib */; };
 		DC2D1A1D1D0673FE003F9EC1 /* XBSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A1C1D0673FE003F9EC1 /* XBSettingCell.m */; };
@@ -120,8 +120,8 @@
 		DC8DFB451D0D40AD00AEEAEE /* DownloadUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */; };
 		DCA2B85A1CF7DC9D00E40E91 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */; };
 		DCA92BC01CFC2137000F8A97 /* XBContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BBF1CFC2137000F8A97 /* XBContentView.m */; };
-		DCA92BC31CFC21FB000F8A97 /* XMLParserUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC21CFC21FB000F8A97 /* XMLParserUtils.m */; };
-		DCA92BC61CFC2278000F8A97 /* XMLParserContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC41CFC2278000F8A97 /* XMLParserContent.m */; };
+		DCA92BC31CFC21FB000F8A97 /* XBXMLParserUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC21CFC21FB000F8A97 /* XBXMLParserUtils.m */; };
+		DCA92BC61CFC2278000F8A97 /* XBXMLParserContent.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC41CFC2278000F8A97 /* XBXMLParserContent.m */; };
 		DCA92BC91CFC2570000F8A97 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC81CFC2570000F8A97 /* NSString+Util.m */; };
 		DCAB85241D138B3E0037B0A1 /* XBInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAB85231D138B3E0037B0A1 /* XBInteractiveTransition.m */; };
 		DCB313391D0D4E23005FD1C5 /* DiscoverComment.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */; };
@@ -197,8 +197,8 @@
 		DC2D1A051D057296003F9EC1 /* Statics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statics.m; sourceTree = "<group>"; };
 		DC2D1A0B1D05775F003F9EC1 /* XBLeftHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBLeftHeaderView.h; sourceTree = "<group>"; };
 		DC2D1A0C1D05775F003F9EC1 /* XBLeftHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBLeftHeaderView.m; sourceTree = "<group>"; };
-		DC2D1A0E1D057C42003F9EC1 /* UserDefaultsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsUtil.h; sourceTree = "<group>"; };
-		DC2D1A0F1D057C42003F9EC1 /* UserDefaultsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsUtil.m; sourceTree = "<group>"; };
+		DC2D1A0E1D057C42003F9EC1 /* XBUserDefaultsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBUserDefaultsUtil.h; sourceTree = "<group>"; };
+		DC2D1A0F1D057C42003F9EC1 /* XBUserDefaultsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBUserDefaultsUtil.m; sourceTree = "<group>"; };
 		DC2D1A121D066F6A003F9EC1 /* XBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBSettingViewController.h; sourceTree = "<group>"; };
 		DC2D1A131D066F6A003F9EC1 /* XBSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBSettingViewController.m; sourceTree = "<group>"; };
 		DC2D1A151D06726F003F9EC1 /* XBSettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XBSettingCell.xib; sourceTree = "<group>"; };
@@ -371,10 +371,10 @@
 		DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
 		DCA92BBE1CFC2137000F8A97 /* XBContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContentView.h; sourceTree = "<group>"; };
 		DCA92BBF1CFC2137000F8A97 /* XBContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBContentView.m; sourceTree = "<group>"; };
-		DCA92BC11CFC21FB000F8A97 /* XMLParserUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserUtils.h; sourceTree = "<group>"; };
-		DCA92BC21CFC21FB000F8A97 /* XMLParserUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserUtils.m; sourceTree = "<group>"; };
-		DCA92BC41CFC2278000F8A97 /* XMLParserContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserContent.m; sourceTree = "<group>"; };
-		DCA92BC51CFC2278000F8A97 /* XMLParserContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserContent.h; sourceTree = "<group>"; };
+		DCA92BC11CFC21FB000F8A97 /* XBXMLParserUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMLParserUtils.h; sourceTree = "<group>"; };
+		DCA92BC21CFC21FB000F8A97 /* XBXMLParserUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMLParserUtils.m; sourceTree = "<group>"; };
+		DCA92BC41CFC2278000F8A97 /* XBXMLParserContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBXMLParserContent.m; sourceTree = "<group>"; };
+		DCA92BC51CFC2278000F8A97 /* XBXMLParserContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBXMLParserContent.h; sourceTree = "<group>"; };
 		DCA92BC71CFC2570000F8A97 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		DCA92BC81CFC2570000F8A97 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
 		DCAB85221D138B3E0037B0A1 /* XBInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBInteractiveTransition.h; sourceTree = "<group>"; };
@@ -944,14 +944,14 @@
 		DC64C9C91CF3F84C00929724 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				DC2D1A0E1D057C42003F9EC1 /* UserDefaultsUtil.h */,
-				DC2D1A0F1D057C42003F9EC1 /* UserDefaultsUtil.m */,
+				DC2D1A0E1D057C42003F9EC1 /* XBUserDefaultsUtil.h */,
+				DC2D1A0F1D057C42003F9EC1 /* XBUserDefaultsUtil.m */,
 				DC64C9CA1CF3F86100929724 /* XBHttpClient.h */,
 				DC64C9CB1CF3F86100929724 /* XBHttpClient.m */,
-				DCA92BC11CFC21FB000F8A97 /* XMLParserUtils.h */,
-				DCA92BC21CFC21FB000F8A97 /* XMLParserUtils.m */,
-				DCA92BC51CFC2278000F8A97 /* XMLParserContent.h */,
-				DCA92BC41CFC2278000F8A97 /* XMLParserContent.m */,
+				DCA92BC11CFC21FB000F8A97 /* XBXMLParserUtils.h */,
+				DCA92BC21CFC21FB000F8A97 /* XBXMLParserUtils.m */,
+				DCA92BC51CFC2278000F8A97 /* XBXMLParserContent.h */,
+				DCA92BC41CFC2278000F8A97 /* XBXMLParserContent.m */,
 				DC09BC341CFEDE1100E73BB0 /* XBScrollView.h */,
 				DC09BC351CFEDE1100E73BB0 /* XBScrollView.m */,
 			);
@@ -1258,20 +1258,20 @@
 				DC2D1A061D057296003F9EC1 /* Statics.m in Sources */,
 				DC001FD41CFD6D9300BFB6C9 /* XBHomeToolBar.m in Sources */,
 				DC64C9B71CF2F14100929724 /* UIColor+Util.m in Sources */,
-				DCA92BC31CFC21FB000F8A97 /* XMLParserUtils.m in Sources */,
+				DCA92BC31CFC21FB000F8A97 /* XBXMLParserUtils.m in Sources */,
 				DC22024B1D10E99E007DDF02 /* XBRefreshView.m in Sources */,
 				DCAB85241D138B3E0037B0A1 /* XBInteractiveTransition.m in Sources */,
 				DC22021B1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m in Sources */,
 				DCC9C3DF1D0187E500B3F729 /* XBFavoriteViewController.m in Sources */,
 				DC2D1A141D066F6A003F9EC1 /* XBSettingViewController.m in Sources */,
-				DC2D1A101D057C42003F9EC1 /* UserDefaultsUtil.m in Sources */,
+				DC2D1A101D057C42003F9EC1 /* XBUserDefaultsUtil.m in Sources */,
 				DC2D94901D01378D001288EF /* SMProgressHUDTipView.m in Sources */,
 				DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */,
 				DC2D1A351D07AD41003F9EC1 /* XBSearchCell.m in Sources */,
 				DC2D1A441D081B28003F9EC1 /* XBLiabilityViewController.m in Sources */,
 				DC5413131CFFE69E00C5BC0F /* Application.m in Sources */,
 				DCC9C3D81D01839200B3F729 /* XBHomeCommonViewController.m in Sources */,
-				DCA92BC61CFC2278000F8A97 /* XMLParserContent.m in Sources */,
+				DCA92BC61CFC2278000F8A97 /* XBXMLParserContent.m in Sources */,
 				DCA92BC91CFC2570000F8A97 /* NSString+Util.m in Sources */,
 				DC2D1A231D06A2AA003F9EC1 /* XBRecruitNavigationBar.m in Sources */,
 				DCFEA9B81D13E55A00DB7118 /* XBDiscoverPushTransition.m in Sources */,

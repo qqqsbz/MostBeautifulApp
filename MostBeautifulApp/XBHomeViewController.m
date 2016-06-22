@@ -49,7 +49,7 @@
         fetchRequest.predicate = predicate;
         
         //按时间升序排列
-        NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"publishDate" ascending:NO];
+        NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:NO];
         
         [[DBUtil shareDBUtil] queryListWithEntityName:[App managedObjectEntityName] fetchRequest:fetchRequest sortDescriptors:@[sortDesc] complete:^(NSArray *datas) {
             

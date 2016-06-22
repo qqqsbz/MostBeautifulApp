@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger,XBParserContentType) {
     XBParserContentTypeTitle
 };
 
-@interface XMLParserContent : NSObject
+@interface XBXMLParserContent : NSObject
 @property (strong, nonatomic) NSString  *content;
 @property (assign, nonatomic) XBParserContentType  contentType;
 @end

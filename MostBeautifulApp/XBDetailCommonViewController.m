@@ -33,7 +33,7 @@
 #import "NSIntegerFormatter.h"
 #import "AppFavorite.h"
 #import "SMProgressHUD.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 #import <TTTAttributedLabel/TTTAttributedLabel.h>
 #import <MJRefresh/MJRefresh.h>
 
@@ -574,7 +574,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //        }];
 //    }
     
-    DDLogDebug(@"offsetY:%f",offsetY);
+//    DDLogDebug(@"offsetY:%f",offsetY);
     
     //封面进行滚动
     if (offsetY > 0 && offsetY <= self.coverImageView.xb_height) {
@@ -809,7 +809,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 #pragma mark -- public method
 - (User *)checkUserIsLogin
 {
-    User *user = [UserDefaultsUtil userInfo];
+    User *user = [XBUserDefaultsUtil userInfo];
     if (!user) {
         [self presentViewController:[[XBLoginViewController alloc] init] animated:YES completion:nil];
         return nil;

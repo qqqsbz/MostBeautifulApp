@@ -7,7 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 
-@interface UserDefaultsUtil : NSObject
+@interface XBUserDefaultsUtil : NSObject
 
 + (id)userInfo;
 

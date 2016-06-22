@@ -181,7 +181,7 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     self.currentIndexPath = indexPath;
     XBHomeDetailViewController *vc = [[XBHomeDetailViewController alloc] init];
     vc.homeRightType = self.homeRightType;
-    vc.view.backgroundColor = [UIColor whiteColor];
+    vc.view.backgroundColor = [UIColor colorWithHexString:@"#F6F6F6"];
     self.navigationController.delegate = vc;
     vc.app = self.datas[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];

@@ -11,7 +11,7 @@
 #import "XBLeftViewController.h"
 #import "XBLeftCell.h"
 #import "User.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 #import "XBLeftFooterView.h"
 #import "XBLeftHeaderView.h"
 #import "XBHomeViewController.h"
@@ -136,7 +136,7 @@ static NSString *reuseIdentifier = @"XBLeftCell";
         
     } else if (indexPath.row == 5) {
         
-        User *user = [UserDefaultsUtil userInfo];
+        User *user = [XBUserDefaultsUtil userInfo];
         
         [self pushToViewController:[[XBFavoriteViewController alloc] init]];
         if (!user) {
@@ -253,7 +253,7 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 
 - (void)loginSuccess:(NSNotification *)notification
 {
-    User *user = [UserDefaultsUtil userInfo];
+    User *user = [XBUserDefaultsUtil userInfo];
     self.headerView.user = user;
     
 }

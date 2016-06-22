@@ -10,7 +10,7 @@
 #import "User.h"
 #import "App.h"
 #import "Discover.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 @interface XBPublishCommentViewController () <UITextViewDelegate>
 @property (strong, nonatomic) UIButton    *backButton;
 @property (strong, nonatomic) UIButton    *publishButton;
@@ -187,7 +187,7 @@
 - (void)sendAppComment
 {
     [self showLoadinngInView:self.view];
-    User *user = [UserDefaultsUtil userInfo];
+    User *user = [XBUserDefaultsUtil userInfo];
     NSDictionary *params = @{
                              @"comment_content":self.textView.text,
                              @"signature":@"3741b24ce615a2cf2416087a223bcdb8",
@@ -214,7 +214,7 @@
 - (void)sendDiscoverComment
 {
     [self showLoadinngInView:self.view];
-    User *user = [UserDefaultsUtil userInfo];
+    User *user = [XBUserDefaultsUtil userInfo];
     NSDictionary *params = @{
                              @"app_id":[NSNumber numberWithInteger:[self.discover.modelId integerValue]],
                              @"content":self.textView.text,

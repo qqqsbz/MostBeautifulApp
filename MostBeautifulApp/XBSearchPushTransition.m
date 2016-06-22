@@ -58,10 +58,14 @@
     XBSearchDetailViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
     
+    UIColor *headBackgroundColor = toVC.headerView.backgroundColor;
+    
     XBSearchCell *cell = [fromVC.tableView cellForRowAtIndexPath:fromVC.currentIndexPath];
     [toVC.coverImageView layoutIfNeeded];
+    
     CGRect coverFrame  = toVC.coverImageView.frame;
     toVC.coverImageView.frame = [cell convertRect:cell.bounds toView:containerView];
+    
     
     UIButton *backButton = toVC.backButton;
     CGRect backFrame = [toVC.backButton convertRect:toVC.backButton.frame toView:containerView];
@@ -85,9 +89,15 @@
     
     toVC.toolBar.frame = CGRectMake(0, CGRectGetHeight(containerView.frame), CGRectGetWidth(toolBarFrame), CGRectGetHeight(toolBarFrame));
     
-    toVC.menuView.alpha = 0.f;
+//    toVC.menuView.alpha = 0.f;
+    toVC.menuView.backgroundColor   = [UIColor clearColor];
+    toVC.headerView.backgroundColor = [UIColor clearColor];
     [containerView addSubview:toVC.view];
 //    [containerView addSubview:backButton];
+    
+    for (UIView *subView in toVC.menuView.subviews) {
+        subView.alpha = 0;
+    }
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scaleAnimation.fromValue = @(0.7f);
@@ -98,6 +108,7 @@
     [toVC.avatorImageView.layer addAnimation:scaleAnimation forKey:@"scale"];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    
         backButton.frame = backFrame;
         toVC.avatorImageView.frame = avatorFrame;
         toVC.titleView.frame = titleFrame;
@@ -105,12 +116,25 @@
         toVC.scrollView.frame = scrollFrame;
         toVC.contentView.frame = contentFrame;
         toVC.toolBar.frame = toolBarFrame;
+   
     } completion:^(BOOL finished) {
+        
         toVC.coverImageView.hidden = NO;
+        
+        toVC.headerView.backgroundColor = headBackgroundColor;
+        
+        toVC.menuView.backgroundColor = headBackgroundColor;
+        
         [UIView animateWithDuration:0.25 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            toVC.menuView.alpha = 1.f;
+            
+            for (UIView *subView in toVC.menuView.subviews) {
+                subView.alpha = 1;
+            }
+            
         } completion:^(BOOL finished) {
+            
             [transitionContext completeTransition:YES];
+        
         }];
     }];
     

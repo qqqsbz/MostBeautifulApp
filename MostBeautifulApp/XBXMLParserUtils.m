@@ -6,17 +6,17 @@
 //  Copyright © 2016年 coder. All rights reserved.
 //
 
-#import "XMLParserUtils.h"
-#import "XMLParserContent.h"
-@interface XMLParserUtils() <NSXMLParserDelegate>
-@property (strong, nonatomic) NSXMLParser       *parser;
-@property (copy  , nonatomic) Complete          complete;
-@property (strong, nonatomic) NSString          *currentElementName;
-@property (strong, nonatomic) NSString          *currentValue;
-@property (strong, nonatomic) XMLParserContent  *parserContent;
-@property (strong, nonatomic) NSMutableArray    *parserContents;
+#import "XBXMLParserUtils.h"
+#import "XBXMLParserContent.h"
+@interface XBXMLParserUtils() <NSXMLParserDelegate>
+@property (strong, nonatomic) NSXMLParser         *parser;
+@property (copy  , nonatomic) Complete            complete;
+@property (strong, nonatomic) NSString            *currentElementName;
+@property (strong, nonatomic) NSString            *currentValue;
+@property (strong, nonatomic) XBXMLParserContent  *parserContent;
+@property (strong, nonatomic) NSMutableArray      *parserContents;
 @end
-@implementation XMLParserUtils
+@implementation XBXMLParserUtils
 
 + (instancetype)parserWithContent:(NSString *)content complete:(Complete)block
 {
@@ -56,14 +56,14 @@
 {
     self.currentElementName = elementName;
     if ([self.currentElementName isEqualToString:@"img"]) {
-        self.parserContent = [XMLParserContent new];
+        self.parserContent = [XBXMLParserContent new];
         self.parserContent.content = [attributeDict valueForKey:@"src"];
         self.parserContent.contentType = XBParserContentTypeImage;
         self.currentValue = self.parserContent.content;
     } else if ([self.currentElementName isEqualToString:@"a"]) {
         //防止a标签给嵌套到其他标签里面而引起的标签解析错误 如: <p> <a href="xxxx"/> </p>
         [self parser:parser didEndElement:elementName namespaceURI:namespaceURI qualifiedName:qName];
-        self.parserContent = [XMLParserContent new];
+        self.parserContent = [XBXMLParserContent new];
         self.parserContent.content = [attributeDict valueForKey:@"href"];
         self.parserContent.contentType = XBParserContentTypeLink;
         self.currentValue = self.parserContent.content;
@@ -74,11 +74,11 @@
 {
     if ([self.currentElementName isEqualToString:@"p"]) {
         self.currentValue = [self.currentValue stringByAppendingString:string];
-        self.parserContent = [XMLParserContent new];
+        self.parserContent = [XBXMLParserContent new];
         self.parserContent.content = self.currentValue;
         self.parserContent.contentType = XBParserContentTypeText;
     } else if ([self.currentElementName isEqualToString:@"h2"]) {
-        self.parserContent = [XMLParserContent new];
+        self.parserContent = [XBXMLParserContent new];
         self.parserContent.content = string;
         self.parserContent.contentType = XBParserContentTypeTitle;
         self.currentValue = string;

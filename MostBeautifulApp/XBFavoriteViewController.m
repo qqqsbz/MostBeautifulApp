@@ -10,7 +10,7 @@
 #import "DBUtil.h"
 #import "AppDelegate.h"
 #import "AppFavorite.h"
-#import "UserDefaultsUtil.h"
+#import "XBUserDefaultsUtil.h"
 @interface XBFavoriteViewController ()
 @property (strong, nonatomic) UILabel  *noDataLabel;
 @end
@@ -42,7 +42,7 @@
 - (void)reloadData
 {
     
-    if (![UserDefaultsUtil userInfo]) {
+    if (![XBUserDefaultsUtil userInfo]) {
         [self showNodata];
         return;
     }

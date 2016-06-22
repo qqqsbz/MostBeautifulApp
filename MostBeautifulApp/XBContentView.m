@@ -13,8 +13,8 @@
 #define kIconWH 52.f
 #define kYIconSpace 20.f
 #import "XBContentView.h"
-#import "XMLParserUtils.h"
-#import "XMLParserContent.h"
+#import "XBXMLParserUtils.h"
+#import "XBXMLParserContent.h"
 #import "NSString+Util.h"
 #import <TTTAttributedLabel/TTTAttributedLabel.h>
 @interface XBContentView() <TTTAttributedLabelDelegate>
@@ -26,7 +26,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         _type = type;
-        [XMLParserUtils parserWithContent:text complete:^(NSArray *datas) {
+        [XBXMLParserUtils parserWithContent:text complete:^(NSArray *datas) {
             [self buildView:datas];
         }];
     }
@@ -36,7 +36,7 @@
 - (void)setText:(NSString *)text
 {
     _text = text;
-    [XMLParserUtils parserWithContent:text complete:^(NSArray *datas) {
+    [XBXMLParserUtils parserWithContent:text complete:^(NSArray *datas) {
         [self buildView:datas];
     }];
 }
@@ -63,7 +63,7 @@
     NSString *linkText = @"点击下载";
     UIFont *linkFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.f];
     
-    for (XMLParserContent *content in datas) {
+    for (XBXMLParserContent *content in datas) {
         UIView *lastView = [self.subviews lastObject];
         switch (content.contentType) {
             case XBParserContentTypeText:
@@ -128,8 +128,61 @@
                     height = height * scale - kYImageSpace;
                     
                 } else {
-                    width = CGRectGetWidth([UIScreen mainScreen].bounds) - kSpace * 2;
-                    height = CGRectGetHeight([UIScreen mainScreen].bounds) - kSpace * 2;
+                    
+                    NSString *cs = [content.content uppercaseString];
+                    
+                    NSRange jpgRange = [cs rangeOfString:@".JPG?"];
+                    NSRange jpegRange = [cs rangeOfString:@".JPEG?"];
+                    NSRange pngRange = [cs rangeOfString:@".PNG?"];
+                    NSRange gifRange = [cs rangeOfString:@".GIF?"];
+                    if (jpgRange.location != NSNotFound) {
+                        suffix = @".JPG?";
+                    } else if (jpegRange.location != NSNotFound) {
+                        suffix = @".JPEG?";
+                    } else if (pngRange.location != NSNotFound) {
+                        suffix = @".PNG?";
+                    } else if (gifRange.location != NSNotFound) {
+                        suffix = @".GIF?";
+                    }
+                    
+                    NSString *text = (NSString *) [[[[cs componentsSeparatedByString:@"_"] objectAtIndex:1] componentsSeparatedByString:suffix] objectAtIndex:0];
+                    
+                    if (text.length > 0) {
+                        
+                        NSArray *wh = [text componentsSeparatedByString:@"X"];
+                        
+                        width = [[wh firstObject] floatValue];
+                        
+                        CGFloat ratio = CGRectGetWidth([UIScreen mainScreen].bounds) / width;
+                        
+                        width = width * ratio - kSpace * 2;
+                        
+                        height = [[wh lastObject] floatValue] * ratio - kSpace * 2;
+                        
+                    } else {
+                        
+                        NSString *text = (NSString *) [[[[cs componentsSeparatedByString:@"THUMBNAIL/"] objectAtIndex:1] componentsSeparatedByString:@"/QUALITY"] objectAtIndex:0];
+                        
+                        if (text.length > 0) {
+                            
+                            NSArray *wh = [text componentsSeparatedByString:@"X"];
+                            
+                            width = [[wh firstObject] floatValue];
+                            
+                            CGFloat ratio = CGRectGetWidth([UIScreen mainScreen].bounds) / width;
+                            
+                            width = width * ratio - kSpace * 2;
+                            
+                            height = [[wh lastObject] floatValue] * ratio - kSpace * 2;
+                            
+                        } else {
+                            
+                            width = CGRectGetWidth([UIScreen mainScreen].bounds) - kSpace * 2;
+                            
+                            height = CGRectGetHeight([UIScreen mainScreen].bounds) - kSpace * 2;
+                        }
+                        
+                    }
                 }
                 
                 CGFloat y = [lastView isKindOfClass:[UILabel class]] ? kYTextSpace : kYImageSpace;
