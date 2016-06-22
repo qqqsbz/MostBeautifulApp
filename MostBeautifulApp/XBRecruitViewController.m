@@ -77,7 +77,7 @@
 
 -(void)loadInviteUrl
 {
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:kApiInvite]];
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.urlString]];
     [_webView loadRequest:req];
 }
 

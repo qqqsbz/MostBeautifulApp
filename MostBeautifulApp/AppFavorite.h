@@ -16,8 +16,6 @@
 
 + (instancetype)favoriteAppFromApp:(App *)app;
 
-//+ (App *)appFromFavoriteApp:(AppFavorite *)appFavorite;
-
 - (BOOL)toggleFavoriteWithOutError:(NSError **)error;
 
 @end

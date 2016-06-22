@@ -14,6 +14,7 @@
 		DC09BC361CFEDE1100E73BB0 /* XBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC09BC351CFEDE1100E73BB0 /* XBScrollView.m */; };
 		DC0F64E71CF5705C00914A82 /* NSIntegerFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0F64E61CF5705C00914A82 /* NSIntegerFormatter.m */; };
 		DC130E8A1CF6E19700360830 /* XBHomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC130E891CF6E19700360830 /* XBHomeDetailViewController.m */; };
+		DC1EF1291D1A8D9E00AE2E6D /* App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC1EF1271D1A8D9E00AE2E6D /* App.xcdatamodeld */; };
 		DC22021B1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC22021A1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m */; };
 		DC2202221D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2202211D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.m */; };
 		DC2202241D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2202231D0FB887007DDF02 /* XBDiscoverPublicSearchCell.xib */; };
@@ -46,7 +47,6 @@
 		DC2D1A491D0CF8B4003F9EC1 /* XBArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A481D0CF8B4003F9EC1 /* XBArticleViewController.m */; };
 		DC2D1A501D0D0DCB003F9EC1 /* XBDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D1A4F1D0D0DCB003F9EC1 /* XBDiscoverViewController.m */; };
 		DC2D946E1D011277001288EF /* AppFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D946D1D011277001288EF /* AppFavorite.m */; };
-		DC2D94721D011460001288EF /* App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DC2D94701D011460001288EF /* App.xcdatamodeld */; };
 		DC2D94751D011A1E001288EF /* DBUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D94741D011A1E001288EF /* DBUtil.m */; };
 		DC2D948B1D01378D001288EF /* progresshud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DC2D947D1D01378D001288EF /* progresshud.bundle */; };
 		DC2D948C1D01378D001288EF /* SMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2D947F1D01378D001288EF /* SMProgressHUD.m */; };
@@ -95,6 +95,11 @@
 		DC5413101CFFDC9B00C5BC0F /* XBRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54130F1CFFDC9B00C5BC0F /* XBRefreshAutoFooter.m */; };
 		DC5413131CFFE69E00C5BC0F /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5413121CFFE69E00C5BC0F /* Application.m */; };
 		DC58BF3D1CFBDFB300AB7463 /* XBPushTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = DC58BF3C1CFBDFB300AB7463 /* XBPushTransition.m */; };
+		DC624A571D1A7351008D2A73 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = DC624A561D1A7351008D2A73 /* Config.m */; };
+		DC624A5A1D1A73C0008D2A73 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DC624A591D1A73C0008D2A73 /* Menu.m */; };
+		DC624A5D1D1A74AB008D2A73 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = DC624A5C1D1A74AB008D2A73 /* Item.m */; };
+		DC624A611D1A7ABE008D2A73 /* SideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DC624A601D1A7ABE008D2A73 /* SideMenu.m */; };
+		DC624A641D1A7B4B008D2A73 /* AboutConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DC624A631D1A7B4B008D2A73 /* AboutConfig.m */; };
 		DC64C98C1CF2E81600929724 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC64C98B1CF2E81600929724 /* main.m */; };
 		DC64C98F1CF2E81600929724 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC64C98E1CF2E81600929724 /* AppDelegate.m */; };
 		DC64C9951CF2E81600929724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC64C9931CF2E81600929724 /* Main.storyboard */; };
@@ -168,6 +173,7 @@
 		DC0F64E61CF5705C00914A82 /* NSIntegerFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSIntegerFormatter.m; sourceTree = "<group>"; };
 		DC130E881CF6E19700360830 /* XBHomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBHomeDetailViewController.h; sourceTree = "<group>"; };
 		DC130E891CF6E19700360830 /* XBHomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBHomeDetailViewController.m; sourceTree = "<group>"; };
+		DC1EF1281D1A8D9E00AE2E6D /* App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = App.xcdatamodel; sourceTree = "<group>"; };
 		DC2202191D0F9C40007DDF02 /* XBDiscoverPublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverPublishViewController.h; sourceTree = "<group>"; };
 		DC22021A1D0F9C40007DDF02 /* XBDiscoverPublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverPublishViewController.m; sourceTree = "<group>"; };
 		DC2202201D0FB4D3007DDF02 /* XBDiscoverPublishSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDiscoverPublishSearchViewController.h; sourceTree = "<group>"; };
@@ -229,7 +235,6 @@
 		DC2D1A4F1D0D0DCB003F9EC1 /* XBDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDiscoverViewController.m; sourceTree = "<group>"; };
 		DC2D946C1D011277001288EF /* AppFavorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppFavorite.h; sourceTree = "<group>"; };
 		DC2D946D1D011277001288EF /* AppFavorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFavorite.m; sourceTree = "<group>"; };
-		DC2D94711D011460001288EF /* App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = App.xcdatamodel; sourceTree = "<group>"; };
 		DC2D94731D011A1E001288EF /* DBUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUtil.h; sourceTree = "<group>"; };
 		DC2D94741D011A1E001288EF /* DBUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBUtil.m; sourceTree = "<group>"; };
 		DC2D947D1D01378D001288EF /* progresshud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = progresshud.bundle; sourceTree = "<group>"; };
@@ -324,6 +329,16 @@
 		DC5413121CFFE69E00C5BC0F /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
 		DC58BF3B1CFBDFB300AB7463 /* XBPushTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPushTransition.h; sourceTree = "<group>"; };
 		DC58BF3C1CFBDFB300AB7463 /* XBPushTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPushTransition.m; sourceTree = "<group>"; };
+		DC624A551D1A7351008D2A73 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		DC624A561D1A7351008D2A73 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
+		DC624A581D1A73C0008D2A73 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		DC624A591D1A73C0008D2A73 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		DC624A5B1D1A74AB008D2A73 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		DC624A5C1D1A74AB008D2A73 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		DC624A5F1D1A7ABE008D2A73 /* SideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenu.h; sourceTree = "<group>"; };
+		DC624A601D1A7ABE008D2A73 /* SideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenu.m; sourceTree = "<group>"; };
+		DC624A621D1A7B4B008D2A73 /* AboutConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutConfig.h; sourceTree = "<group>"; };
+		DC624A631D1A7B4B008D2A73 /* AboutConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutConfig.m; sourceTree = "<group>"; };
 		DC64C9871CF2E81600929724 /* MostBeautifulApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MostBeautifulApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC64C98B1CF2E81600929724 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DC64C98D1CF2E81600929724 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -633,9 +648,9 @@
 		DC2D946F1D0113D7001288EF /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				DC1EF1271D1A8D9E00AE2E6D /* App.xcdatamodeld */,
 				DC2D94731D011A1E001288EF /* DBUtil.h */,
 				DC2D94741D011A1E001288EF /* DBUtil.m */,
-				DC2D94701D011460001288EF /* App.xcdatamodeld */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -806,6 +821,23 @@
 			name = Recruit;
 			sourceTree = "<group>";
 		};
+		DC624A5E1D1A7A9D008D2A73 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				DC624A551D1A7351008D2A73 /* Config.h */,
+				DC624A561D1A7351008D2A73 /* Config.m */,
+				DC624A581D1A73C0008D2A73 /* Menu.h */,
+				DC624A591D1A73C0008D2A73 /* Menu.m */,
+				DC624A5B1D1A74AB008D2A73 /* Item.h */,
+				DC624A5C1D1A74AB008D2A73 /* Item.m */,
+				DC624A5F1D1A7ABE008D2A73 /* SideMenu.h */,
+				DC624A601D1A7ABE008D2A73 /* SideMenu.m */,
+				DC624A621D1A7B4B008D2A73 /* AboutConfig.h */,
+				DC624A631D1A7B4B008D2A73 /* AboutConfig.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		DC64C97E1CF2E81600929724 = {
 			isa = PBXGroup;
 			children = (
@@ -961,6 +993,7 @@
 		DC64C9CD1CF4088600929724 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DC624A5E1D1A7A9D008D2A73 /* Config */,
 				DC64C9CE1CF4089400929724 /* Model.h */,
 				DC64C9CF1CF4089400929724 /* Model.m */,
 				DC64C9D11CF409AD00929724 /* App.h */,
@@ -1214,6 +1247,7 @@
 				DC001FD11CFD3BC200BFB6C9 /* XBMenuView.m in Sources */,
 				DC2D95261D016AA1001288EF /* XBShareView.m in Sources */,
 				DC2202451D0FFD0A007DDF02 /* UIScrollView+XBExtension.m in Sources */,
+				DC624A571D1A7351008D2A73 /* Config.m in Sources */,
 				DC7CD0F11D029011005A3FBF /* XBRecruitToolBar.m in Sources */,
 				DC64C9D31CF409AD00929724 /* App.m in Sources */,
 				DCE6280F1CF43AD40001708E /* Comments.m in Sources */,
@@ -1224,6 +1258,7 @@
 				DC2509361D0E601D00C61D30 /* XBDiscoverBeautifulView.m in Sources */,
 				DC58BF3D1CFBDFB300AB7463 /* XBPushTransition.m in Sources */,
 				DC09BC361CFEDE1100E73BB0 /* XBScrollView.m in Sources */,
+				DC624A5D1D1A74AB008D2A73 /* Item.m in Sources */,
 				DC0F64E71CF5705C00914A82 /* NSIntegerFormatter.m in Sources */,
 				DC2D1A491D0CF8B4003F9EC1 /* XBArticleViewController.m in Sources */,
 				DCE627FA1CF4290D0001708E /* SameApp.m in Sources */,
@@ -1267,6 +1302,7 @@
 				DC2D1A101D057C42003F9EC1 /* XBUserDefaultsUtil.m in Sources */,
 				DC2D94901D01378D001288EF /* SMProgressHUDTipView.m in Sources */,
 				DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */,
+				DC1EF1291D1A8D9E00AE2E6D /* App.xcdatamodeld in Sources */,
 				DC2D1A351D07AD41003F9EC1 /* XBSearchCell.m in Sources */,
 				DC2D1A441D081B28003F9EC1 /* XBLiabilityViewController.m in Sources */,
 				DC5413131CFFE69E00C5BC0F /* Application.m in Sources */,
@@ -1281,9 +1317,10 @@
 				DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */,
 				DC7CD0F41D029082005A3FBF /* XBRecruitViewController.m in Sources */,
 				DCE627FD1CF429610001708E /* Author.m in Sources */,
+				DC624A641D1A7B4B008D2A73 /* AboutConfig.m in Sources */,
 				DC130E8A1CF6E19700360830 /* XBHomeDetailViewController.m in Sources */,
-				DC2D94721D011460001288EF /* App.xcdatamodeld in Sources */,
 				DC2D94911D01378D001288EF /* UIView+SMAutolayout.m in Sources */,
+				DC624A5A1D1A73C0008D2A73 /* Menu.m in Sources */,
 				DC2D94BE1D015363001288EF /* XBDetailCommonViewController.m in Sources */,
 				DC2D1A271D06BD28003F9EC1 /* XBSearchViewController.m in Sources */,
 				DC2202481D0FFD0A007DDF02 /* UICollectionView+XBRefresh.m in Sources */,
@@ -1293,6 +1330,7 @@
 				DCA2B85A1CF7DC9D00E40E91 /* UIViewController+HUD.m in Sources */,
 				DCB313391D0D4E23005FD1C5 /* DiscoverComment.m in Sources */,
 				DC54130A1CFFD05600C5BC0F /* XBCommentCell.m in Sources */,
+				DC624A611D1A7ABE008D2A73 /* SideMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,12 +1581,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		DC2D94701D011460001288EF /* App.xcdatamodeld */ = {
+		DC1EF1271D1A8D9E00AE2E6D /* App.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DC2D94711D011460001288EF /* App.xcdatamodel */,
+				DC1EF1281D1A8D9E00AE2E6D /* App.xcdatamodel */,
 			);
-			currentVersion = DC2D94711D011460001288EF /* App.xcdatamodel */;
+			currentVersion = DC1EF1281D1A8D9E00AE2E6D /* App.xcdatamodel */;
 			path = App.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

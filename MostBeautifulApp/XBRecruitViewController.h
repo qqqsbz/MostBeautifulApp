@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface XBRecruitViewController : UIViewController
-
+@property (strong, nonatomic) NSString  *urlString;
 @end

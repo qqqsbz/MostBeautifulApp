@@ -14,6 +14,9 @@
 #import "Comment.h"
 #import "Search.h"
 #import "Discover.h"
+#import "Config.h"
+#import "Menu.h"
+#import "Item.h"
 #import <Mantle/Mantle.h>
 
 @interface XBHttpClient()
@@ -21,6 +24,7 @@
 @end
 static NSString *kPrefix = @"#api#";
 static NSString *kPagePrefix = @"#pageSize#";
+static NSString *kConfig = @"/config/?";//配置
 static NSString *kToday = @"/apps/app/daily/?"; //每日最美
 static NSString *kComment = @"/apps/comment/?"; // 留言
 static NSString *kSearch  = @"/search/?";//搜索
@@ -58,6 +62,30 @@ static NSInteger kSuccessCode = 1;
         client = [[XBHttpClient alloc] initWithBaseURL:[NSURL URLWithString:@""]];
     });
     return client;
+}
+
+- (void)getConfigWithSuccess:(void (^)(Config *))success failure:(void (^)(NSError *))failure
+{
+    NSString *api = [self.api stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@&",kPrefix] withString:kConfig];
+    api = [api stringByReplacingOccurrencesOfString:kPagePrefix withString:@""];
+    [self GET:api parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject valueForKey:kSuccessPrefix] integerValue] == kSuccessCode) {
+            
+            NSDictionary *data = [responseObject objectForKey:kSuccessData];
+            NSError *error = nil;
+            
+            id config = [MTLJSONAdapter modelOfClass:[Config class] fromJSONDictionary:data error:&error];
+            
+            if (!error) {
+                success(config);
+            } else {
+                failure(error);
+            }
+            
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure(error);
+    }];
 }
 
 - (void)getTodayWithPage:(NSInteger)page PageSize:(NSInteger)pageSize success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure
@@ -490,7 +518,7 @@ static NSInteger kSuccessCode = 1;
 - (NSString *)api
 {
     if (!_api) {
-        _api = [NSString stringWithFormat:@"http://zuimeia.com/api%@&appVersion=2.2.4&openUDID=1bf9ccab8d121135bed763089b514aff901ffc28&systemVersion=9.1&page_size=%@&platform=1%@",kPrefix,kPagePrefix,@"&resolution=%7B750%2C%201334%7D"];
+        _api = [NSString stringWithFormat:@"http://zuimeia.com/api%@&appVersion=2.3.0&openUDID=d41d8cd98f00b204e9800998ecf8427e2c09ef55&systemVersion=9.1&page_size=%@&platform=1%@",kPrefix,kPagePrefix,@"&resolution=%7B750%2C%201334%7D"];
     }
     return _api;
 }

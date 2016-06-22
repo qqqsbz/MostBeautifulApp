@@ -12,8 +12,13 @@
 @class App;
 @class Discover;
 @class Info;
+@class Config;
 @interface XBHttpClient : AFHTTPSessionManager
 + (instancetype)shareInstance;
+
+//获取配置信息
+- (void)getConfigWithSuccess:(void (^)(Config *config))success
+                     failure:(void (^)(NSError *error))failure;
 
 //每日最美
 - (void)getTodayWithPage:(NSInteger)page

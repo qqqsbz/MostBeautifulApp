@@ -556,12 +556,12 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //        
 //    }
     
-    DDLogDebug(@"scrollViewDidEndDragging");
+//    DDLogDebug(@"scrollViewDidEndDragging");
 }
 
 - (void)scrollViewDidEndDecelerating
 {
-    DDLogDebug(@"scrollViewDidEndDecelerating");
+//    DDLogDebug(@"scrollViewDidEndDecelerating");
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -100,4 +100,17 @@
     }
 }
 
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    [self.titleButton setTitle:title forState:UIControlStateNormal];
+}
+
+- (void)setTitleEnable:(BOOL)titleEnable
+{
+    _titleEnable = titleEnable;
+    
+    self.titleButton.enabled = _titleEnable;
+}
+
 @end

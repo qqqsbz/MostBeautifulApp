@@ -21,6 +21,12 @@
 
 @interface XBLeftFooterView : UIView
 
+/** 标题按钮设置标题 */
+@property (strong, nonatomic) NSString  *title;
+
+/** 标题按钮是否可用 */
+@property (assign, nonatomic) BOOL      titleEnable;
+
 @property (weak, nonatomic) id<LeftFooterViewDelegate>  delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame leftImage:(UIImage *)leftImage title:(NSString *)title rightImage:(UIImage *)rightImage;

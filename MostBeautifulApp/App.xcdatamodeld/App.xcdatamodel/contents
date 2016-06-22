@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+    <entity name="AboutConfig" syncable="YES">
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itemList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" syncable="YES"/>
+        <relationship name="itemOnSideBar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" syncable="YES"/>
+    </entity>
     <entity name="App" syncable="YES">
         <attribute name="authorAvatarUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="authorBgcolor" optional="YES" attributeType="String" syncable="YES"/>
@@ -87,6 +92,11 @@
         <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="data" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="comments" inverseEntity="Comment" syncable="YES"/>
     </entity>
+    <entity name="Config" syncable="YES">
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="aboutConfig" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AboutConfig" syncable="YES"/>
+        <relationship name="sideMenu" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SideMenu" syncable="YES"/>
+    </entity>
     <entity name="Info" syncable="YES">
         <attribute name="av" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="down" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -98,6 +108,28 @@
         <attribute name="upUsers" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
         <relationship name="upUsersDetail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Author" syncable="YES"/>
     </entity>
+    <entity name="Item" syncable="YES">
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iconImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="onSideBar" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titleConstantKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Menu" syncable="YES">
+        <attribute name="canShow" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="defaultOpen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="iconUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="verboseName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Model" syncable="YES">
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="SameApp" syncable="YES">
         <attribute name="digest" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
@@ -106,6 +138,10 @@
         <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Author" syncable="YES"/>
     </entity>
     <entity name="SearchHistory" parentEntity="App" syncable="YES"/>
+    <entity name="SideMenu" syncable="YES">
+        <attribute name="modelId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="menuList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
+    </entity>
     <elements>
         <element name="App" positionX="-63" positionY="-18" width="128" height="795"/>
         <element name="AppFavorite" positionX="36" positionY="189" width="128" height="75"/>
@@ -115,5 +151,11 @@
         <element name="Info" positionX="-18" positionY="162" width="128" height="180"/>
         <element name="SameApp" positionX="-54" positionY="144" width="128" height="120"/>
         <element name="SearchHistory" positionX="-9" positionY="135" width="128" height="45"/>
+        <element name="Config" positionX="-9" positionY="135" width="128" height="90"/>
+        <element name="Menu" positionX="0" positionY="144" width="128" height="150"/>
+        <element name="Item" positionX="9" positionY="153" width="128" height="165"/>
+        <element name="SideMenu" positionX="18" positionY="162" width="128" height="75"/>
+        <element name="AboutConfig" positionX="27" positionY="171" width="128" height="90"/>
+        <element name="Model" positionX="36" positionY="180" width="128" height="60"/>
     </elements>
 </model>
