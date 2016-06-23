@@ -82,6 +82,10 @@ static NSString *reuseIdentifier = @"XBLeftCell";
                 
                 [self.tableview reloadData];
                 
+                self.footerView.title = self.config.aboutConfig.itemOnSideBar.title;
+                
+                self.footerView.titleEnable = YES;
+                
                 //默认选中第一个
                 [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
                 

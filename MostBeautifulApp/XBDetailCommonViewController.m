@@ -182,11 +182,9 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.avatorImageView = [UIImageView new];
     self.avatorImageView.layer.masksToBounds = YES;
     self.avatorImageView.layer.cornerRadius  = 12.;
-//    [self.scrollView addSubview:self.avatorImageView];
     [self.headerView addSubview:self.avatorImageView];
     
     self.titleView = [UIView new];
-//    [self.scrollView addSubview:self.titleView];
     [self.headerView addSubview:self.titleView];
     
     self.titleLabel = [UILabel new];

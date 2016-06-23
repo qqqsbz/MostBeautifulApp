@@ -53,7 +53,10 @@
 /** 滚动到指定位置 */
 - (void)slideCardScrollToItemAtIndex:(NSInteger)index;
 
-/** 顶部菜单跳转到指定位置 */
+/** 顶部菜单跳转到指定位置  
+    防止从列表进入详情 返回列表 
+    当底部菜单滚动到后面三个不自动回滚到之前的位置
+*/
 - (void)slideCardScrollToMenuAtIndex:(NSInteger)index;
 
 /** 跳转到第一个位置 */

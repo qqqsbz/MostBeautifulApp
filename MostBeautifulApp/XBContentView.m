@@ -63,6 +63,8 @@
     NSString *linkText = @"点击下载";
     UIFont *linkFont = [UIFont fontWithName:@"Helvetica-Bold" size:15.f];
     
+    XBXMLParserContent *lastContent = [datas lastObject];
+    
     for (XBXMLParserContent *content in datas) {
         UIView *lastView = [self.subviews lastObject];
         switch (content.contentType) {
@@ -159,6 +161,11 @@
                         
                         height = [[wh lastObject] floatValue] * ratio - kSpace * 2;
                         
+                        //如果最后一张是签名照片
+                        if (content == lastContent) {
+                            height += kSpace * 2;
+                        }
+                        
                     } else {
                         
                         NSString *text = (NSString *) [[[[cs componentsSeparatedByString:@"THUMBNAIL/"] objectAtIndex:1] componentsSeparatedByString:@"/QUALITY"] objectAtIndex:0];
@@ -174,6 +181,11 @@
                             width = width * ratio - kSpace * 2;
                             
                             height = [[wh lastObject] floatValue] * ratio - kSpace * 2;
+                            
+                            //如果最后一张是签名照片
+                            if (content == lastContent) {
+                                height += kSpace * 2;
+                            }
                             
                         } else {
                             

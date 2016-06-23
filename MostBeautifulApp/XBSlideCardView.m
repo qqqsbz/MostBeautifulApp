@@ -14,6 +14,7 @@
 #define kItemHeight kMenuHeight + 20.f      // 按钮的长度 默认比菜单栏的长度多20 以便遮住按钮底部的圆角
 #define kYSpace kMenuHeight - kSpace * 3    // 不选中按钮的顶部边距
 #define kMaxItemInCenter 6                  // 大于 个在滚动都最后三个的时候自动居中
+#define kScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds) //屏幕宽度
 
 #import "XBSlideCardView.h"
 #import "XBSlideItem.h"
@@ -120,7 +121,7 @@
     XBSlideItem *item = self.btns[index];
     XBSlideItem *lastItem = self.btns[self.previousIndex];
     
-    [self autoScrollTopTabBySwipDirctionToPage:index];
+    [self autoScrollTopTabBySwipDirctionToPage:index animated:YES];
     
     CGFloat duration = 0.65f;
     [UIView animateWithDuration:duration delay:0.2f usingSpringWithDamping:0.55 initialSpringVelocity:1.f/0.55f options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -144,14 +145,27 @@
 
 - (void)slideCardScrollToMenuAtIndex:(NSInteger)index
 {
-    if (index >= self.btns.count - kLastNumber && index < self.btns.count) {
-        
-        index = index - (self.btns.count - kLastNumber);
-        
-        DDLogDebug(@"index:%d",index);
-    }
+    //当菜单按钮的个数小数屏幕可显示的菜单数量时不执行任何操作
+    NSInteger count = (kScreenWidth - kMenuLeft) / kItemWidth;
+    if (self.btns.count < count) return;
     
-//    [self autoScrollTopTabBySwipDirctionToPage:index];
+    //当滚动到最后3个才进行操作
+    NSInteger origin = self.btns.count - kLastNumber;
+    if (index >= origin && index < self.btns.count) {
+        
+        NSInteger count = index - origin;
+        
+        for (NSInteger i = origin; i <= origin + count; i ++) {
+            
+            self.previousIndex = i - 1;
+            
+            [self autoScrollTopTabBySwipDirctionToPage:i animated:NO];
+        
+        }
+        
+        //还原当前选中位置
+        self.previousIndex = index;
+    }
 }
 
 - (void)slideCardScrollToFirst
@@ -160,7 +174,7 @@
     [self slideCardScrollToItemAtIndex:0];
 }
 
-- (void)autoScrollTopTabBySwipDirctionToPage:(NSInteger)page
+- (void)autoScrollTopTabBySwipDirctionToPage:(NSInteger)page animated:(BOOL)animated
 {
     CGFloat tag;
     CGFloat btnX;
@@ -193,9 +207,13 @@
             moveX = self.menuView.contentOffset.x + (self.isForwardSwip ? kItemWidth + kSpace : - ( kItemWidth + kSpace));
         }
         
-        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        if (animated) {
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                [self.menuView setContentOffset:CGPointMake(moveX, 0)];
+            } completion:nil];
+        } else {
             [self.menuView setContentOffset:CGPointMake(moveX, 0)];
-        } completion:nil];
+        }
     }
 }
 

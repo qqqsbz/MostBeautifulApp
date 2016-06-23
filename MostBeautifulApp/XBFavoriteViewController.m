@@ -74,6 +74,7 @@
                 [super.cardView slideCardReloadData];
                 [super resetBackgroundColorIsScrollToItem:YES];
                 [super.cardView slideCardScrollToFirst];
+                
             }
             
             self.noDataLabel.hidden = YES;
