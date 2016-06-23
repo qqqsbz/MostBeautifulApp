@@ -808,7 +808,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     self.commentPrototype.contentLabel.text = comment.content;
     CGFloat height = CGRectGetHeight(self.commentPrototype.contentLabel.frame);
     NSString *content = [comment.content stringByReplacingOccurrencesOfString:@"<br/>" withString:@"\n"];
-    CGSize size = [content sizeWithFont:self.commentPrototype.contentLabel.font maxSize:CGSizeMake(CGRectGetWidth(self.commentPrototype.contentLabel.frame), NSIntegerMax)];
+    CGSize size = [content sizeWithFont:self.commentPrototype.contentFont maxSize:CGSizeMake(CGRectGetWidth(self.commentPrototype.contentLabel.frame), NSIntegerMax)];
     result += size.height > height ? size.height + height : 0;
     return result;
 }

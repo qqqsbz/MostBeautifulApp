@@ -123,6 +123,8 @@
 		DC7CD0F41D029082005A3FBF /* XBRecruitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7CD0F31D029082005A3FBF /* XBRecruitViewController.m */; };
 		DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB411D0D3D5300AEEAEE /* Discover.m */; };
 		DC8DFB451D0D40AD00AEEAEE /* DownloadUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */; };
+		DC9768B71D1BC30300AA909F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9768B61D1BC30300AA909F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		DC9768BA1D1BDABB00AA909F /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9768B91D1BDABB00AA909F /* Range.m */; };
 		DCA2B85A1CF7DC9D00E40E91 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */; };
 		DCA92BC01CFC2137000F8A97 /* XBContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BBF1CFC2137000F8A97 /* XBContentView.m */; };
 		DCA92BC31CFC21FB000F8A97 /* XBXMLParserUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC21CFC21FB000F8A97 /* XBXMLParserUtils.m */; };
@@ -382,6 +384,10 @@
 		DC8DFB411D0D3D5300AEEAEE /* Discover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Discover.m; sourceTree = "<group>"; };
 		DC8DFB431D0D40AD00AEEAEE /* DownloadUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadUrl.h; sourceTree = "<group>"; };
 		DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadUrl.m; sourceTree = "<group>"; };
+		DC9768B51D1BC30300AA909F /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		DC9768B61D1BC30300AA909F /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		DC9768B81D1BDABB00AA909F /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
+		DC9768B91D1BDABB00AA909F /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
 		DCA2B8581CF7DC9D00E40E91 /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
 		DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
 		DCA92BBE1CFC2137000F8A97 /* XBContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContentView.h; sourceTree = "<group>"; };
@@ -976,6 +982,8 @@
 		DC64C9C91CF3F84C00929724 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DC9768B51D1BC30300AA909F /* RegexKitLite.h */,
+				DC9768B61D1BC30300AA909F /* RegexKitLite.m */,
 				DC2D1A0E1D057C42003F9EC1 /* XBUserDefaultsUtil.h */,
 				DC2D1A0F1D057C42003F9EC1 /* XBUserDefaultsUtil.m */,
 				DC64C9CA1CF3F86100929724 /* XBHttpClient.h */,
@@ -1022,6 +1030,8 @@
 				DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */,
 				DCB313371D0D4E23005FD1C5 /* DiscoverComment.h */,
 				DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */,
+				DC9768B81D1BDABB00AA909F /* Range.h */,
+				DC9768B91D1BDABB00AA909F /* Range.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1290,6 +1300,7 @@
 				DC2D1A201D067B8E003F9EC1 /* XBSettingFooterView.m in Sources */,
 				DCC9C3D01D0170EC00B3F729 /* XBShareHeaderView.m in Sources */,
 				DCDC8A901D1103F100836F04 /* XBRefreshFooter.m in Sources */,
+				DC9768B71D1BC30300AA909F /* RegexKitLite.m in Sources */,
 				DC2D1A061D057296003F9EC1 /* Statics.m in Sources */,
 				DC001FD41CFD6D9300BFB6C9 /* XBHomeToolBar.m in Sources */,
 				DC64C9B71CF2F14100929724 /* UIColor+Util.m in Sources */,
@@ -1301,6 +1312,7 @@
 				DC2D1A141D066F6A003F9EC1 /* XBSettingViewController.m in Sources */,
 				DC2D1A101D057C42003F9EC1 /* XBUserDefaultsUtil.m in Sources */,
 				DC2D94901D01378D001288EF /* SMProgressHUDTipView.m in Sources */,
+				DC9768BA1D1BDABB00AA909F /* Range.m in Sources */,
 				DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */,
 				DC1EF1291D1A8D9E00AE2E6D /* App.xcdatamodeld in Sources */,
 				DC2D1A351D07AD41003F9EC1 /* XBSearchCell.m in Sources */,
@@ -1496,6 +1508,7 @@
 					"\"SystemConfiguration\"",
 					"-framework",
 					"\"UIKit\"",
+					"-licucore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vbuy.penyou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1551,6 +1564,7 @@
 					"\"SystemConfiguration\"",
 					"-framework",
 					"\"UIKit\"",
+					"-licucore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vbuy.penyou;
 				PRODUCT_NAME = "$(TARGET_NAME)";

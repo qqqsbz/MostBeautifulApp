@@ -18,4 +18,6 @@
 @property (strong, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
 
 @property (strong, nonatomic) Comment  *comment;
+@property (strong, nonatomic) UIFont   *contentFont;
+
 @end

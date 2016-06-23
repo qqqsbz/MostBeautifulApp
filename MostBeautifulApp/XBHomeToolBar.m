@@ -74,6 +74,7 @@
     self.voteLabel.textColor = [UIColor whiteColor];
     self.voteLabel.font = numFont;
     self.voteLabel.text = @"19";
+    self.voteLabel.textAlignment = NSTextAlignmentCenter;
     
     self.voteSeparatorView = [UIView new];
     self.voteSeparatorView.backgroundColor = [UIColor whiteColor];
@@ -220,7 +221,7 @@
     
     [self.voteLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.voteView);
-        make.right.equalTo(self.voteSeparatorView.left).offset(-20.f);
+        make.right.equalTo(self.voteSeparatorView.left).offset(-15.f);
     }];
     
     [self.leftDragImageView makeConstraints:^(MASConstraintMaker *make) {
