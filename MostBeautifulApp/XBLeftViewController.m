@@ -202,29 +202,34 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     cell.dotImageView.hidden = NO;
 
     if (self.config) {
-        if (indexPath.row == 0) {
+        
+        if (indexPath.row < self.config.sideMenu.menuList.count) {
+            Menu *menu = self.config.sideMenu.menuList[indexPath.row];
+            if ([menu.name isEqualToString:@"niceapp"]) {
+                
+                [self pushToViewController:[[XBHomeViewController alloc] init]];
+                
+            } else if ([menu.name isEqualToString:@"free_app"]) {
+                
+                [self pushToViewController:[[XBLiabilityViewController alloc] init]];
+                
+            } else if ([menu.name isEqualToString:@"community"]) {
+                
+                AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                tempAppDelegate.mainNavigationController.navigationBarHidden = NO;
+                [self pushToViewController:[[XBDiscoverViewController alloc] init]];
+                
+            } else if ([menu.name isEqualToString:@"article"]) {
+                
+                [self pushToViewController:[[XBArticleViewController alloc] init]];
+                
+            } else if ([menu.name isEqualToString:@"pingfen"]) {
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/zui-mei-ying-yong/id739652274?mt=8"]];
+                
+            }
             
-            [self pushToViewController:[[XBHomeViewController alloc] init]];
-            
-        } else if (indexPath.row == 1) {
-            
-            [self pushToViewController:[[XBLiabilityViewController alloc] init]];
-            
-        } else if (indexPath.row == 2) {
-            
-            AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            tempAppDelegate.mainNavigationController.navigationBarHidden = NO;
-            [self pushToViewController:[[XBDiscoverViewController alloc] init]];
-            
-        } else if (indexPath.row == 3) {
-            
-            [self pushToViewController:[[XBArticleViewController alloc] init]];
-            
-        } else if (indexPath.row == 4) {
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/cn/app/zui-mei-ying-yong/id739652274?mt=8"]];
-            
-        } else if (indexPath.row == 5) {
+        } else {
             
             User *user = [XBUserDefaultsUtil userInfo];
             
@@ -232,8 +237,8 @@ static NSString *reuseIdentifier = @"XBLeftCell";
             if (!user) {
                 [self presentToLogViewController];
             }
-            
         }
+
     } else {
         
         User *user = [XBUserDefaultsUtil userInfo];

@@ -489,6 +489,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         return;
     }
     
+    [self showLoadinngInView:self.view];
+    
     NSDictionary *params = @{
                              @"signature":@"1d2901dfec1ef2e57485c5dffd368913",
                              @"timestamp":@"1466153683",
@@ -497,12 +499,19 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [[XBHttpClient shareInstance] upWithAppId:[self.app.modelId integerValue] params:params success:^(Info *info) {
         
         [[SMProgressHUD shareInstancetype] showTip:@"表态成功 ^_^"];
+        
         self.app.info = info;
         
         [self checkIsBeautifulOrFeel];
         
+        [self hideLoading];
+        
     } failure:^(NSError *error) {
+    
+        [self hideLoading];
+        
         [[SMProgressHUD shareInstancetype] showTip:@"表态失败 T_T"];
+    
     }];
 }
 
@@ -516,6 +525,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         return;
     }
     
+    [self showLoadinngInView:self.view];
+    
     NSDictionary *params = @{
                              @"signature":@"1d2901dfec1ef2e57485c5dffd368913",
                              @"timestamp":@"1466153683",
@@ -524,12 +535,19 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     [[XBHttpClient shareInstance] downWithAppId:[self.app.modelId integerValue] params:params success:^(Info *info) {
         
         [[SMProgressHUD shareInstancetype] showTip:@"表态成功 ^_^"];
+        
         self.app.info = info;
         
         [self checkIsBeautifulOrFeel];
 
+        [self hideLoading];
+        
     } failure:^(NSError *error) {
+        
         [[SMProgressHUD shareInstancetype] showTip:@"表态失败 T_T"];
+    
+        [self hideLoading];
+        
     }];
 }
 
@@ -539,7 +557,9 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     
     XBPublishCommentViewController *pcVC = [[XBPublishCommentViewController alloc] init];
     pcVC.app = self.app;
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pcVC];
+    
     [self presentViewController:navigationController animated:YES completion:^{
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     }];

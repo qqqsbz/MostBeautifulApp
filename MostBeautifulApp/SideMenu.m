@@ -20,7 +20,13 @@
         }];
         menuList = temp;
     }
-    _menuList = menuList;
+    
+    //对结果进行倒序排序
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"_order"ascending:NO];
+    
+    NSArray *tempArray = [menuList sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    _menuList = tempArray;
 }
 
 + (NSString *)managedObjectEntityName

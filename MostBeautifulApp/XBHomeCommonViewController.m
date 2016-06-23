@@ -56,6 +56,11 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
     self.navigationController.navigationBarHidden = YES;
     AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [tempAppDelegate.leftSlideVC setPanEnabled:YES];
+    
+    if (self.datas.count > 0) {
+        [self.cardView slideCardScrollToMenuAtIndex:self.currentIndexPath.row];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -77,7 +82,7 @@ static NSString *homeReuseIdentifier = @"XBHomeCell";
 
 - (void)headerBeginRefreshing
 {
-    if (self.cardView.xb_header.state != XBRefreshStateRefreshing) {
+    if (self.cardView.xb_footer.state != XBRefreshStateRefreshing) {
         [self.cardView.xb_header beginRefreshing];
     }
 }

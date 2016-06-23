@@ -53,6 +53,9 @@
 /** 滚动到指定位置 */
 - (void)slideCardScrollToItemAtIndex:(NSInteger)index;
 
+/** 顶部菜单跳转到指定位置 */
+- (void)slideCardScrollToMenuAtIndex:(NSInteger)index;
+
 /** 跳转到第一个位置 */
 - (void)slideCardScrollToFirst;
 

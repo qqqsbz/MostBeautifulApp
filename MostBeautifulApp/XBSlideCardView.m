@@ -141,6 +141,19 @@
     [self visibleSlideItems];
 }
 
+
+- (void)slideCardScrollToMenuAtIndex:(NSInteger)index
+{
+    if (index >= self.btns.count - kLastNumber && index < self.btns.count) {
+        
+        index = index - (self.btns.count - kLastNumber);
+        
+        DDLogDebug(@"index:%d",index);
+    }
+    
+//    [self autoScrollTopTabBySwipDirctionToPage:index];
+}
+
 - (void)slideCardScrollToFirst
 {
     self.isFirstLoad = YES;

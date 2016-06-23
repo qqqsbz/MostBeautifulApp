@@ -96,8 +96,17 @@
 - (void)loadDataFromServer
 {
     self.homeRightButton.hidden = self.datas.count <= 0;
+    
     [[XBHttpClient shareInstance] getTodayWithPage:1 PageSize:self.pageSize success:^(NSArray *datas) {
-        self.datas = datas;
+        
+        if (self.datas.count >= self.pageSize) {
+            
+            self.datas = [self removeDuplicate:[datas arrayByAddingObjectsFromArray:self.datas]];
+            
+        } else {
+            self.datas = datas;
+        }
+        
         [self.cardView slideCardReloadData];
         [super resetBackgroundColorIsScrollToItem:YES];
         self.homeRightButton.hidden = NO;
@@ -118,7 +127,7 @@
     self.page += 1;
     [[XBHttpClient shareInstance] getTodayWithPage:self.page PageSize:self.pageSize success:^(NSArray *datas) {
         if (datas.count > 0) {
-            self.datas = [self.datas arrayByAddingObjectsFromArray:datas];
+            self.datas = [self removeDuplicate:[self.datas arrayByAddingObjectsFromArray:datas]];
             [self.cardView slideCardReloadData];
             [super resetBackgroundColorIsScrollToItem:YES];
             self.homeRightButton.hidden = NO;
@@ -133,6 +142,24 @@
 - (void)menuAction
 {
     [super menuAction];
+}
+
+- (NSArray *)removeDuplicate:(NSArray *)datas
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    for (App *app in datas) {
+        [dic setObject:app forKey:app.modelId];
+    }
+    
+    //对结果进行倒序排序
+    NSArray *arr = [dic allValues];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"_createTime"ascending:NO];
+    
+    arr = [arr sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    return arr;
 }
 
 - (void)didReceiveMemoryWarning {
