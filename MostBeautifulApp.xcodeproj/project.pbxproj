@@ -124,7 +124,7 @@
 		DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB411D0D3D5300AEEAEE /* Discover.m */; };
 		DC8DFB451D0D40AD00AEEAEE /* DownloadUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */; };
 		DC9768B71D1BC30300AA909F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9768B61D1BC30300AA909F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		DC9768BA1D1BDABB00AA909F /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9768B91D1BDABB00AA909F /* Range.m */; };
+		DC9768BD1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9768BC1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.m */; };
 		DCA2B85A1CF7DC9D00E40E91 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */; };
 		DCA92BC01CFC2137000F8A97 /* XBContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BBF1CFC2137000F8A97 /* XBContentView.m */; };
 		DCA92BC31CFC21FB000F8A97 /* XBXMLParserUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA92BC21CFC21FB000F8A97 /* XBXMLParserUtils.m */; };
@@ -386,8 +386,8 @@
 		DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadUrl.m; sourceTree = "<group>"; };
 		DC9768B51D1BC30300AA909F /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		DC9768B61D1BC30300AA909F /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
-		DC9768B81D1BDABB00AA909F /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
-		DC9768B91D1BDABB00AA909F /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
+		DC9768BB1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TTTAttributedLabel+AnalysisHTMLTag.h"; sourceTree = "<group>"; };
+		DC9768BC1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TTTAttributedLabel+AnalysisHTMLTag.m"; sourceTree = "<group>"; };
 		DCA2B8581CF7DC9D00E40E91 /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
 		DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
 		DCA92BBE1CFC2137000F8A97 /* XBContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBContentView.h; sourceTree = "<group>"; };
@@ -975,6 +975,8 @@
 				DCA2B8591CF7DC9D00E40E91 /* UIViewController+HUD.m */,
 				DC54130B1CFFD17600C5BC0F /* UIImage+Util.h */,
 				DC54130C1CFFD17600C5BC0F /* UIImage+Util.m */,
+				DC9768BB1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.h */,
+				DC9768BC1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1030,8 +1032,6 @@
 				DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */,
 				DCB313371D0D4E23005FD1C5 /* DiscoverComment.h */,
 				DCB313381D0D4E23005FD1C5 /* DiscoverComment.m */,
-				DC9768B81D1BDABB00AA909F /* Range.h */,
-				DC9768B91D1BDABB00AA909F /* Range.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1279,6 +1279,7 @@
 				DC64C9C61CF3EB6400929724 /* XBLeftFooterView.m in Sources */,
 				DC2D1A2A1D06BDC7003F9EC1 /* XBSearchNavigationBar.m in Sources */,
 				DC64C98F1CF2E81600929724 /* AppDelegate.m in Sources */,
+				DC9768BD1D1CC71C00AA909F /* TTTAttributedLabel+AnalysisHTMLTag.m in Sources */,
 				DC2D94751D011A1E001288EF /* DBUtil.m in Sources */,
 				DC2D1A301D06D0EF003F9EC1 /* Search.m in Sources */,
 				DC2D1A0D1D05775F003F9EC1 /* XBLeftHeaderView.m in Sources */,
@@ -1312,7 +1313,6 @@
 				DC2D1A141D066F6A003F9EC1 /* XBSettingViewController.m in Sources */,
 				DC2D1A101D057C42003F9EC1 /* XBUserDefaultsUtil.m in Sources */,
 				DC2D94901D01378D001288EF /* SMProgressHUDTipView.m in Sources */,
-				DC9768BA1D1BDABB00AA909F /* Range.m in Sources */,
 				DCC5B7CB1D0D334F009EE8AF /* XBDiscoverCell.m in Sources */,
 				DC1EF1291D1A8D9E00AE2E6D /* App.xcdatamodeld in Sources */,
 				DC2D1A351D07AD41003F9EC1 /* XBSearchCell.m in Sources */,

@@ -5,14 +5,12 @@
 //  Created by coder on 16/6/2.
 //  Copyright © 2016年 coder. All rights reserved.
 //
-#define kLineSpacing 3.f
 
 #import "XBCommentCell.h"
 #import "UIImage+Util.h"
 #import "Comment.h"
-#import "RegexKitLite.h"
-#import "Range.h"
 #import "TTTAttributedLabel.h"
+#import "TTTAttributedLabel+AnalysisHTMLTag.h"
 @implementation XBCommentCell
 
 - (void)awakeFromNib {
@@ -57,56 +55,17 @@
     
     self.contentLabel.attributedText = attributedString;
 
-    [self analysisHtmlLabelWithPrefixLabel:@"<strong>" suffixLabel:@"</strong>"];
-}
-
-//** 解析html标签 */
-- (void)analysisHtmlLabelWithPrefixLabel:(NSString *)prefixLabel suffixLabel:(NSString *)suffixLabel
-{
-    NSInteger count = [self.comment.content componentsMatchedByRegex:prefixLabel].count;
-    __block NSInteger index = 0;
-    NSMutableArray *ranges = [NSMutableArray arrayWithCapacity:count];
+    [self.contentLabel analysisHTMLTagWithPrefixTag:@"<strong>" suffixTag:@"</strong>" analysisingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
+        
+        [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica-Bold" size:self.contentLabel.font.pointSize - 1.2] range:range];
+        
+    } complete:^(NSMutableAttributedString *attributedString) {
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:kLineSpacing - 0.5];//调整行间距
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, ((NSString *)self.contentLabel.text).length)];
     
-    //解析html标签
-    [self.comment.content enumerateStringsMatchedByRegex:[NSString stringWithFormat:@"%@.*?%@",prefixLabel,suffixLabel] usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-        
-        [ranges addObject:[Range rangeWithLocation:(*capturedRanges).location length:(*capturedRanges).length]];
-        
-        index++;
-        
-        if (count == index) {
-            
-            self.contentLabel.text = [self.contentLabel.text stringByReplacingOccurrencesOfString:prefixLabel withString:@""];
-            self.contentLabel.text = [self.contentLabel.text stringByReplacingOccurrencesOfString:suffixLabel withString:@""];
-            
-            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.contentLabel.attributedText];
-            
-            for (NSInteger i = 0 ; i < count; i++) {
-                
-                Range *mrange = ranges[i];
-                
-                NSRange range;
-                
-                NSInteger labelLength = prefixLabel.length + suffixLabel.length;
-                
-                if (i == 0) {
-                    range = NSMakeRange(mrange.location, mrange.length - labelLength);
-                } else {
-                    range = NSMakeRange(mrange.location - labelLength, mrange.length - labelLength);
-                }
-                
-                [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica-Bold" size:self.contentLabel.font.pointSize - 0.7f] range:range];
-            }
-            
-            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-            [paragraphStyle setLineSpacing:kLineSpacing - 0.5f];//调整行间距
-            [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, ((NSString *)self.contentLabel.text).length)];
-            
-            self.contentLabel.attributedText = attributedString;
-            self.contentLabel.font = self.contentFont;
-            
-        }
-    }];
+    } ];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
