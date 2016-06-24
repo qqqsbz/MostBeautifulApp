@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface NSString (Util)
+
 - (CGSize)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
+
+//** 将含有中文的网址进行转码  */
+- (NSString *)urlEncodedString;
+
 @end

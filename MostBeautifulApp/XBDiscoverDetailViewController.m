@@ -57,8 +57,8 @@
 @property (assign, nonatomic) NSInteger     commentPageSize;
 /** 评论数据*/
 @property (strong, nonatomic) NSArray       *datas;
-/** 菜单图标 */
-@property (strong, nonatomic) NSArray  *menuImages;
+/** 菜单 */
+@property (strong, nonatomic) NSArray<MenuModel *>  *menuModels;
 @end
 
 static NSString *reuseIdentifier = @"XBCommentCell";
@@ -309,15 +309,20 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //设置菜单栏数据
 - (void)fillMenu
 {
-    self.menuImages = @[
-                        [UIImage imageNamed:@"detail_icon_share_normal"],
-                        [UIImage imageNamed:@"detail_icon_download_normal"]
-                       ];
+//    self.menuImages = @[
+//                        [UIImage imageNamed:@"detail_icon_share_normal"],
+//                        [UIImage imageNamed:@"detail_icon_download_normal"]
+//                       ];
+
+    self.menuModels = @[
+                       [MenuModel menuModelWithTitle:@"分享" image:[UIImage imageNamed:@"detail_icon_share_normal"] type:XBMenuViewDidSelectedTypeShare]
+                      ];
     
-    NSDictionary *data = @{@"images":self.menuImages,
-                           @"titles":@[@"分享",@"下载"]
-                           };
-    self.menuView.data = data;
+    if (self.discover.downloadUrls.count > 0) {
+        self.menuModels = [self.menuModels arrayByAddingObject:[MenuModel menuModelWithTitle:@"下载" image:[UIImage imageNamed:@"detail_icon_download_normal"] type:XBMenuViewDidSelectedTypeDownload]];
+    }
+    
+    self.menuView.menuModels = self.menuModels;
     
     [self buildNavigationBarMenu];
 }
@@ -325,7 +330,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 //创建导航菜单
 - (void)buildNavigationBarMenu
 {
-    self.naviBarMenuView = [[XBMenuView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.menuView.frame)) images:self.menuImages type:XBMenuViewTypeNavBar];
+    self.naviBarMenuView = [[XBMenuView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.menuView.frame)) menuModels:self.menuModels type:XBMenuViewTypeNavBar];
     self.naviBarMenuView.delegate = self;
     self.naviBarMenuView.hidden = YES;
     self.naviBarMenuView.userInteractionEnabled = YES;

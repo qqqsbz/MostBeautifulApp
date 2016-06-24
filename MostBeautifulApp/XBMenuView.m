@@ -11,49 +11,46 @@
 #define kNaviBarSpace 30.f
 #define kAnimationSpace 10
 #import "XBMenuView.h"
+
+@implementation MenuModel
+
++ (instancetype)menuModelWithTitle:(NSString *)title image:(UIImage *)image type:(XBMenuViewDidSelectedType)type
+{
+    return [[self alloc] initWithTitle:title image:image type:type];
+}
+
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image type:(XBMenuViewDidSelectedType)type
+{
+    if (self = [super init]) {
+        _title = title;
+        _image = image;
+        _type  = type;
+    }
+    return self;
+}
+
+@end
+
 @interface XBMenuView()
-@property (strong, nonatomic) NSArray  *images;
-@property (strong, nonatomic) NSArray  *titles;
 @property (assign, nonatomic) XBMenuViewType  type;
 @property (strong, nonatomic) NSMutableArray<UILabel *>     *titleLabels;
 @property (strong, nonatomic) NSMutableArray<UIImageView *> *imageViews;
 @end
 @implementation XBMenuView
 
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray<UIImage *> *)images type:(XBMenuViewType)type
-{
-    if (self == [super initWithFrame:frame]) {
-        _images = images;
-        _type = type;
-        [self initialization];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray<UIImage *> *)images titles:(NSArray<NSString *> *)titles type:(XBMenuViewType)type
+- (instancetype)initWithFrame:(CGRect)frame menuModels:(NSArray<MenuModel *> *)menuModels type:(XBMenuViewType)type
 {
     if (self = [super initWithFrame:frame]) {
-        _images = images;
-        _titles = titles;
+        _menuModels = menuModels;
         _type = type;
-        if (_images.count != _titles.count) {
-            NSParameterAssert(@"image count no equal title count");
-        }
         [self initialization];
     }
     return self;
 }
 
-- (void)setData:(NSDictionary *)data
+- (void)setMenuModels:(NSArray<MenuModel *> *)menuModels
 {
-    _data = data;
-    
-    self.images = [data objectForKey:@"images"];
-    self.titles = [data objectForKey:@"titles"];
-    
-    if (_images.count != _titles.count) {
-        NSParameterAssert(@"image count no equal title count");
-    }
+    _menuModels = menuModels;
     
     [self initialization];
 }
@@ -63,15 +60,19 @@
     UIFont *textFont   = [UIFont fontWithName:@"Helvetica-Bold" size:13.f];
     UIColor *textColor = [UIColor grayColor];
     
-    NSInteger count = self.images.count;
+    NSInteger count = self.menuModels.count;
+    MenuModel *menuModel;
     
     self.titleLabels = [NSMutableArray arrayWithCapacity:count];
     self.imageViews  = [NSMutableArray arrayWithCapacity:count];
     
     for (NSInteger i = 0; i < count; i ++) {
+        
+        menuModel = self.menuModels[i];
+        
         UIImageView *imageView = [UIImageView new];
         imageView.userInteractionEnabled = YES;
-        imageView.image = self.images[i];
+        imageView.image = menuModel.image;
         imageView.tag = i;
         
         [self addSubview:imageView];
@@ -79,7 +80,7 @@
         
         if (self.type == XBMenuViewTypeView) {
             UILabel *label = [UILabel new];
-            label.text = self.titles[i];
+            label.text = menuModel.title;
             label.textColor = textColor;
             label.font = textFont;
             label.tag = i;
@@ -106,10 +107,10 @@
 - (void)addViewConstraint
 {
     
-    NSInteger count = self.images.count;
+    NSInteger count = self.menuModels.count;
     if (count == 3) {
         
-        NSInteger mid = floor(self.images.count / 2.f);
+        NSInteger mid = floor(self.menuModels.count / 2.f);
         
         UIImageView *midImageView = self.imageViews[mid];
         UILabel *midLabel = self.titleLabels[mid];
@@ -373,7 +374,7 @@
 - (void)tapAction:(UITapGestureRecognizer *)tapGesture
 {
     UIView *view = [tapGesture view];
-    XBMenuViewDidSelectedType type = view.tag;
+    XBMenuViewDidSelectedType type = [self.menuModels objectAtIndex:view.tag].type;
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectedWithType:atIndex:)]) {
         [self.delegate menuView:self didSelectedWithType:type atIndex:view.tag];
     }
@@ -381,14 +382,14 @@
 
 - (void)replaceImage:(UIImage *)image atIndex:(NSInteger)index
 {
-    if (index < 0 || index > self.images.count) return;
+    if (index < 0 || index > self.menuModels.count) return;
     UIImageView *imageView = self.imageViews[index];
     imageView.image = image;
 }
 
 - (void)replaceTitle:(NSString *)title atIndex:(NSInteger)index
 {
-    if (index < 0 || index > self.titles.count) return;
+    if (index < 0 || index > self.menuModels.count) return;
     UILabel *label = self.titleLabels[index];
     label.text = title;
 }

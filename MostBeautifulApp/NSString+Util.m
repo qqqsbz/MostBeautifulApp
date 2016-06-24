@@ -8,11 +8,23 @@
 
 #import "NSString+Util.h"
 @implementation NSString (Util)
+
 - (CGSize)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize
 {
     NSDictionary *dic = @{NSFontAttributeName:font};
     return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
 }
 
+
+- (NSString *)urlEncodedString
+{
+    NSString *encodedString = (NSString *)CFBridgingRelease(
+                               CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                               (CFStringRef)self,
+                               (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
+                               NULL,
+                               kCFStringEncodingUTF8));
+    return encodedString;
+}
 
 @end

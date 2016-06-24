@@ -59,10 +59,8 @@
 @property (assign, nonatomic) NSInteger          commentPageSize;
 /** 评论数据 */
 @property (strong, nonatomic) NSArray            *datas;
-/** 按钮图标 */
-@property (strong, nonatomic) NSMutableArray     *menuImages;
-/** 按钮标题 */
-@property (strong, nonatomic) NSMutableArray     *menuTitles;
+/** 按钮 */
+@property (strong, nonatomic) NSMutableArray     *menuModels;
 /** 封面长度 */
 @property (assign, nonatomic) CGFloat            coverHeight;
 /** 是否"美一下" */
@@ -258,26 +256,21 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         self.appFavorite = (AppFavorite *)self.app;
     }
     
-    self.menuTitles = [NSMutableArray array];
-    self.menuImages = [NSMutableArray array];
+    self.menuModels = [NSMutableArray array];
     
     if (self.homeRightType != XBHomeRightTypeArticle) {
-        [self.menuTitles addObject:self.appFavorite.isFavorite ? @"已收藏" : @"收藏"];
-        [self.menuImages addObject:[UIImage imageNamed:self.appFavorite.isFavorite ? @"detail_icon_fav_roll_normal" : @"detail_icon_fav_normal"]];
+        NSString *title = self.appFavorite.isFavorite ? @"已收藏" : @"收藏";
+        UIImage *image  = [UIImage imageNamed:self.appFavorite.isFavorite ? @"detail_icon_fav_roll_normal" : @"detail_icon_fav_normal"];
+        [self.menuModels addObject:[MenuModel menuModelWithTitle:title image:image type:XBMenuViewDidSelectedTypeFavorite]];
     }
     
-    [self.menuTitles addObject:@"分享"];
-    [self.menuImages addObject:[UIImage imageNamed:@"detail_icon_share_normal"]];
+    [self.menuModels addObject:[MenuModel menuModelWithTitle:@"分享" image:[UIImage imageNamed:@"detail_icon_share_normal"] type:XBMenuViewDidSelectedTypeShare]];
     
     if (self.homeRightType != XBHomeRightTypeArticle && self.app.downloadUrl.length > 0) {
-        [self.menuImages addObject:[UIImage imageNamed:@"detail_icon_download_normal"]];
-        [self.menuTitles addObject:@"下载"];
+        [self.menuModels addObject:[MenuModel menuModelWithTitle:@"下载" image:[UIImage imageNamed:@"detail_icon_download_normal"] type:XBMenuViewDidSelectedTypeDownload]];
     }
     
-    NSDictionary *data = @{@"images":self.menuImages,
-                           @"titles":self.menuTitles
-                           };
-    self.menuView.data = data;
+    self.menuView.menuModels = self.menuModels;
     
     //导航栏创建菜单
     [self buildNavigationBarMenu];
@@ -290,7 +283,7 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     CGFloat naviBarMenuY = 17;
     CGFloat naviBarMenuX = CGRectGetWidth(self.backButton.frame) * 1.8f;
     
-    self.naviBarMenuView = [[XBMenuView alloc] initWithFrame:CGRectMake(naviBarMenuX, naviBarMenuY , CGRectGetWidth(self.view.frame) - naviBarMenuX * 2, menuHeight) images:self.menuImages type:XBMenuViewTypeNavBar];
+    self.naviBarMenuView = [[XBMenuView alloc] initWithFrame:CGRectMake(naviBarMenuX, naviBarMenuY , CGRectGetWidth(self.view.frame) - naviBarMenuX * 2, menuHeight) menuModels:self.menuModels type:XBMenuViewTypeNavBar];
     self.naviBarMenuView.delegate = self;
     self.naviBarMenuView.hidden = YES;
     self.naviBarMenuView.userInteractionEnabled = YES;

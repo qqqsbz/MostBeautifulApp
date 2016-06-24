@@ -19,6 +19,22 @@ typedef NS_ENUM(NSInteger,XBMenuViewDidSelectedType) {
     XBMenuViewDidSelectedTypeDownload
 };
 
+
+@interface MenuModel : NSObject
+
+@property (strong, nonatomic) NSString  *title;
+
+@property (strong, nonatomic) UIImage   *image;
+
+@property (assign, nonatomic) XBMenuViewDidSelectedType  type;
+
++ (instancetype)menuModelWithTitle:(NSString *)title image:(UIImage *)image type:(XBMenuViewDidSelectedType)type;
+
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image type:(XBMenuViewDidSelectedType)type;
+
+@end
+
+
 @class XBMenuView;
 @protocol XBMenuViewDelegate <NSObject>
 
@@ -31,13 +47,11 @@ typedef void(^complete)(BOOL finished);
 
 @interface XBMenuView : UIView
 
-@property (strong, nonatomic) NSDictionary  *data;
+@property (strong, nonatomic) NSArray<MenuModel *>  *menuModels;
 
 @property (weak, nonatomic) id<XBMenuViewDelegate> delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray<UIImage *> *)images type:(XBMenuViewType)type;
-
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray<UIImage *> *)images titles:(NSArray<NSString *> *)titles type:(XBMenuViewType)type;
+- (instancetype)initWithFrame:(CGRect)frame menuModels:(NSArray<MenuModel *> *)menuModels type:(XBMenuViewType)type;
 
 /** 根据下标替换图片 */
 - (void)replaceImage:(UIImage *)image atIndex:(NSInteger)index;

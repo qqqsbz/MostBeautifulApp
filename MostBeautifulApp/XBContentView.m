@@ -12,6 +12,7 @@
 #define kYSeparatorSpace 40.f
 #define kIconWH 52.f
 #define kYIconSpace 20.f
+
 #import "XBContentView.h"
 #import "XBXMLParserUtils.h"
 #import "XBXMLParserContent.h"
@@ -100,7 +101,7 @@
                 linkLabel.text = linkText;
                 [self addSubview:linkLabel];
                 
-                NSString *linkUrlString = [content.content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                NSString *linkUrlString = [[content.content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] urlEncodedString];
                 NSMutableDictionary *linkAttributes = [NSMutableDictionary dictionary];
                 [linkAttributes setValue:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
                 [linkAttributes setValue:(__bridge id)[UIColor colorWithHexString:@"#69BAF2"].CGColor forKey:(NSString *)kCTForegroundColorAttributeName];
