@@ -13,3 +13,5 @@ extern NSString *const kChangeBackgroundColorNotification;
 extern NSString *const kLoginOutSuccessNotification;
 
 extern NSString *const kApiInvite;//招聘编辑
+
+extern NSString *const kURLRegex;//网址正则

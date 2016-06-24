@@ -89,4 +89,24 @@
     }];
 }
 
+//** 解析超链接 */
+- (void)analysisHTMLLinkWithText:(NSString *)text
+{
+    NSMutableDictionary *linkAttributes = [NSMutableDictionary dictionary];
+    [linkAttributes setValue:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
+    [linkAttributes setValue:(__bridge id)[UIColor colorWithHexString:@"#69BAF2"].CGColor forKey:(NSString *)kCTForegroundColorAttributeName];
+    
+    NSArray *urls = [self.text componentsMatchedByRegex:kURLRegex];
+    for (NSString *url in urls) {
+        NSRange range = [self.text rangeOfString:url];
+        NSString *linkString = text;
+        NSMutableString *content = [NSMutableString stringWithString:self.text];
+        [content replaceCharactersInRange:range withString:linkString];
+        self.text = content;
+        range = NSMakeRange(range.location, linkString.length);
+        self.linkAttributes = linkAttributes;
+        [self addLinkToURL:[NSURL URLWithString:url] withRange:range];
+    }
+}
+
 @end

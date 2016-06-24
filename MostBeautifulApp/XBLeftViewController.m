@@ -22,7 +22,7 @@
 #import "XBLeftHeaderView.h"
 #import "XBHomeViewController.h"
 #import "XBFavoriteViewController.h"
-#import "XBRecruitViewController.h"
+#import "XBWebViewController.h"
 #import "XBLoginViewController.h"
 #import "XBSettingViewController.h"
 #import "XBSearchViewController.h"
@@ -314,9 +314,10 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 
 - (void)didSelectedTitleButton:(UIButton *)sender
 {
-    XBRecruitViewController *recruitVC = [[XBRecruitViewController alloc] init];
+    XBWebViewController *recruitVC = [[XBWebViewController alloc] init];
     NSString *urlString = self.config.aboutConfig.itemOnSideBar.detail;
-    recruitVC.urlString = urlString.length > 0 ? urlString : kApiInvite;
+    urlString = urlString.length > 0 ? urlString : kApiInvite;
+    recruitVC.url = [NSURL URLWithString:urlString];
     [self presentViewController:recruitVC animated:YES completion:^{
         
     }];

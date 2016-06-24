@@ -100,12 +100,13 @@
                 linkLabel.text = linkText;
                 [self addSubview:linkLabel];
                 
+                NSString *linkUrlString = [content.content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 NSMutableDictionary *linkAttributes = [NSMutableDictionary dictionary];
                 [linkAttributes setValue:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
                 [linkAttributes setValue:(__bridge id)[UIColor colorWithHexString:@"#69BAF2"].CGColor forKey:(NSString *)kCTForegroundColorAttributeName];
                 [linkAttributes setValue:linkFont forKey:(NSString *)kCTFontAttributeName];
                 linkLabel.linkAttributes = linkAttributes;
-                [linkLabel addLinkToURL:[NSURL URLWithString:content.content] withRange:NSMakeRange(0, linkText.length)];
+                [linkLabel addLinkToURL:[NSURL URLWithString:linkUrlString] withRange:NSMakeRange(0, linkText.length)];
             }
                 
                 break;

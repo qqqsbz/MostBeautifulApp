@@ -11,6 +11,8 @@
 #import "Comment.h"
 #import "TTTAttributedLabel.h"
 #import "TTTAttributedLabel+AnalysisHTMLTag.h"
+@interface XBCommentCell() <TTTAttributedLabelDelegate>
+@end
 @implementation XBCommentCell
 
 - (void)awakeFromNib {
@@ -29,7 +31,9 @@
     
     self.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.f];
     self.signLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12.f];
+    
     self.contentLabel.font = self.contentFont;
+    self.contentLabel.delegate = self;
     
     self.contentLabel.numberOfLines = 0.;
     self.contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -54,6 +58,8 @@
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, content.length)];
     
     self.contentLabel.attributedText = attributedString;
+    
+    [self.contentLabel analysisHTMLLinkWithText:@"点击查看"];
 
     [self.contentLabel analysisHTMLTagWithPrefixTag:@"<strong>" suffixTag:@"</strong>" analysisingBlock:^(NSMutableAttributedString *attributedString, NSRange range) {
         
@@ -66,6 +72,15 @@
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, ((NSString *)self.contentLabel.text).length)];
     
     } ];
+}
+
+#pragma mark -- TTTAttributedLabelDelegate
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url
+{
+    if ([self.delegate respondsToSelector:@selector(commentCellDidSelectLinkWithURL:)]) {
+        [self.delegate commentCellDidSelectLinkWithURL:url];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

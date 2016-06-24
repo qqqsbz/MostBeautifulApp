@@ -120,7 +120,7 @@
 		DC64C9D31CF409AD00929724 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = DC64C9D21CF409AD00929724 /* App.m */; };
 		DC7C9E6F1CF5A214001AF6A1 /* XBSlideItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7C9E6E1CF5A214001AF6A1 /* XBSlideItem.m */; };
 		DC7CD0F11D029011005A3FBF /* XBRecruitToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7CD0F01D029011005A3FBF /* XBRecruitToolBar.m */; };
-		DC7CD0F41D029082005A3FBF /* XBRecruitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7CD0F31D029082005A3FBF /* XBRecruitViewController.m */; };
+		DC7CD0F41D029082005A3FBF /* XBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC7CD0F31D029082005A3FBF /* XBWebViewController.m */; };
 		DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB411D0D3D5300AEEAEE /* Discover.m */; };
 		DC8DFB451D0D40AD00AEEAEE /* DownloadUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8DFB441D0D40AD00AEEAEE /* DownloadUrl.m */; };
 		DC9768B71D1BC30300AA909F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9768B61D1BC30300AA909F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -378,8 +378,8 @@
 		DC7C9E6E1CF5A214001AF6A1 /* XBSlideItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBSlideItem.m; sourceTree = "<group>"; };
 		DC7CD0EF1D029011005A3FBF /* XBRecruitToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRecruitToolBar.h; sourceTree = "<group>"; };
 		DC7CD0F01D029011005A3FBF /* XBRecruitToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRecruitToolBar.m; sourceTree = "<group>"; };
-		DC7CD0F21D029082005A3FBF /* XBRecruitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBRecruitViewController.h; sourceTree = "<group>"; };
-		DC7CD0F31D029082005A3FBF /* XBRecruitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBRecruitViewController.m; sourceTree = "<group>"; };
+		DC7CD0F21D029082005A3FBF /* XBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBWebViewController.h; sourceTree = "<group>"; };
+		DC7CD0F31D029082005A3FBF /* XBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBWebViewController.m; sourceTree = "<group>"; };
 		DC8DFB401D0D3D5300AEEAEE /* Discover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discover.h; sourceTree = "<group>"; };
 		DC8DFB411D0D3D5300AEEAEE /* Discover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Discover.m; sourceTree = "<group>"; };
 		DC8DFB431D0D40AD00AEEAEE /* DownloadUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadUrl.h; sourceTree = "<group>"; };
@@ -685,6 +685,8 @@
 		DC2D94BB1D01524E001288EF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC7CD0F21D029082005A3FBF /* XBWebViewController.h */,
+				DC7CD0F31D029082005A3FBF /* XBWebViewController.m */,
 				DC22024C1D10EE50007DDF02 /* XBRefresh */,
 				DC2D1A4B1D0CFB61003F9EC1 /* Detail */,
 				DC2D1A4A1D0CFB51003F9EC1 /* Home */,
@@ -819,8 +821,6 @@
 			children = (
 				DC7CD0EF1D029011005A3FBF /* XBRecruitToolBar.h */,
 				DC7CD0F01D029011005A3FBF /* XBRecruitToolBar.m */,
-				DC7CD0F21D029082005A3FBF /* XBRecruitViewController.h */,
-				DC7CD0F31D029082005A3FBF /* XBRecruitViewController.m */,
 				DC2D1A211D06A2AA003F9EC1 /* XBRecruitNavigationBar.h */,
 				DC2D1A221D06A2AA003F9EC1 /* XBRecruitNavigationBar.m */,
 			);
@@ -1327,7 +1327,7 @@
 				DCE628031CF42BE10001708E /* Info.m in Sources */,
 				DC64C9BC1CF2F39D00929724 /* Constants.m in Sources */,
 				DC8DFB421D0D3D5300AEEAEE /* Discover.m in Sources */,
-				DC7CD0F41D029082005A3FBF /* XBRecruitViewController.m in Sources */,
+				DC7CD0F41D029082005A3FBF /* XBWebViewController.m in Sources */,
 				DCE627FD1CF429610001708E /* Author.m in Sources */,
 				DC624A641D1A7B4B008D2A73 /* AboutConfig.m in Sources */,
 				DC130E8A1CF6E19700360830 /* XBHomeDetailViewController.m in Sources */,

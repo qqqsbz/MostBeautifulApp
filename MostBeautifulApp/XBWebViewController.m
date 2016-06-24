@@ -6,12 +6,12 @@
 //  Copyright © 2016年 coder. All rights reserved.
 //
 #define kToolBarH   50.f
-#import "XBRecruitViewController.h"
+#import "XBWebViewController.h"
 #import "XBRecruitNavigationBar.h"
 #import "XBRecruitToolBar.h"
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
 #import <NJKWebViewProgress/NJKWebViewProgressView.h>
-@interface XBRecruitViewController () <UIWebViewDelegate,NJKWebViewProgressDelegate,UIWebViewDelegate,XBRecruitToolBarDelegate>
+@interface XBWebViewController () <UIWebViewDelegate,NJKWebViewProgressDelegate,UIWebViewDelegate,XBRecruitToolBarDelegate>
 @property (strong, nonatomic) UIWebView  *webView;
 @property (strong, nonatomic) XBRecruitNavigationBar  *navigationBar;
 @property (strong, nonatomic) XBRecruitToolBar        *toolBar;
@@ -19,12 +19,13 @@
 @property (strong, nonatomic) NJKWebViewProgress *progressProxy;
 @end
 
-@implementation XBRecruitViewController
+@implementation XBWebViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
     [self buildView];
 
 }
@@ -38,15 +39,18 @@
     }];
     [self.view addSubview:self.navigationBar];
     
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.navigationBar.frame) - kToolBarH)];
+    CGFloat webViewHeight = CGRectGetHeight(self.view.frame) - CGRectGetHeight(self.navigationBar.frame);
+    webViewHeight -= self.hideToolBar ? 0 : kToolBarH;
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationBar.frame), CGRectGetWidth(self.view.frame), webViewHeight)];
     self.webView.delegate = self;
     self.webView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.webView];
     
-    self.toolBar = [[XBRecruitToolBar alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.webView.frame), CGRectGetWidth(self.view.frame), kToolBarH)];
-    self.toolBar.delegate = self;
-    [self.view addSubview:self.toolBar];
-    
+    if (!self.hideToolBar) {
+        self.toolBar = [[XBRecruitToolBar alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.webView.frame), CGRectGetWidth(self.view.frame), kToolBarH)];
+        self.toolBar.delegate = self;
+        [self.view addSubview:self.toolBar];
+    }
     
     _progressProxy = [[NJKWebViewProgress alloc] init];
     _webView.delegate = _progressProxy;
@@ -77,7 +81,7 @@
 
 -(void)loadInviteUrl
 {
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.urlString]];
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:self.url];
     [_webView loadRequest:req];
 }
 

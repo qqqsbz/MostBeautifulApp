@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XBRecruitViewController : UIViewController
-@property (strong, nonatomic) NSString  *urlString;
+@interface XBWebViewController : UIViewController
+@property (strong, nonatomic) NSURL *url;
+@property (assign, nonatomic) BOOL  hideToolBar;
 @end

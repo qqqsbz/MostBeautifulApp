@@ -13,10 +13,12 @@
 #import "App.h"
 #import "Author.h"
 #import "Comment.h"
+#import "DownloadUrl.h"
 #import "XBMenuView.h"
 #import "XBContentView.h"
 #import "XBHomeToolBar.h"
 #import "XBCommentCell.h"
+#import "XBShareView.h"
 #import "NSString+Util.h"
 #import "XBUserDefaultsUtil.h"
 #import "XBRefreshAutoFooter.h"
@@ -25,10 +27,11 @@
 #import "XBInteractiveTransition.h"
 #import "XBDiscoverPushTransition.h"
 #import "XBLoginViewController.h"
+#import "XBWebViewController.h"
 #import "XBPublishCommentViewController.h"
 #import <TTTAttributedLabel/TTTAttributedLabel.h>
 #import <MJRefresh/UIView+MJExtension.h>
-@interface XBDiscoverDetailViewController () <XBMenuViewDelegate,XBContentViewDelegate,XBHomeToolBarDelegate,XBDiscoverBeautifulViewDataSource,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface XBDiscoverDetailViewController () <XBMenuViewDelegate,XBContentViewDelegate,XBHomeToolBarDelegate,XBDiscoverBeautifulViewDataSource,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,XBCommentCellDelegate>
 @property (strong, nonatomic) UIScrollView          *scrollView;
 @property (strong, nonatomic) XBHomeToolBar         *toolBar;
 @property (strong, nonatomic) XBMenuView            *menuView;
@@ -41,6 +44,7 @@
 @property (strong, nonatomic) XBCommentCell         *commentPrototype;
 @property (strong, nonatomic) XBRefreshAutoFooter   *commentTableViewFooter;
 @property (strong, nonatomic) XBDiscoverHeaderView  *headerView;
+@property (strong, nonatomic) XBShareView           *shareView;
 @property (strong, nonatomic) XBDiscoverBeautifulView  *beautifulView;
 /** 手势 */
 @property (strong, nonatomic) XBInteractiveTransition  *interactiveTransition;
@@ -493,13 +497,23 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 #pragma mark -- XBMenuView delegate
 - (void)menuView:(XBMenuView *)menuView didSelectedWithType:(XBMenuViewDidSelectedType)type atIndex:(NSInteger)index
 {
-    
+    if (type == XBMenuViewDidSelectedTypeShare) {
+        
+        [self.shareView showWidthTargetViewController:self shareDataBlock:^ShareData *{
+            return [ShareData shareWithImage:self.headerView.avatorImageView.image content:self.headerView.titleLabel.text url:@"http://www.baidu.com"];
+        }];
+        
+    } else if (type == XBMenuViewDidSelectedTypeDownload) {
+        DownloadUrl *downloadUrl = [self.discover.downloadUrls lastObject];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:downloadUrl.url]];
+    }
+
 }
 
 #pragma mark -- XBContentViewDelegate
 - (void)contentAttributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark -- XBHomeToolBarDelegate
@@ -627,7 +641,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XBCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.comment = self.datas[indexPath.row];
+    cell.delegate = self;
+    cell.comment  = self.datas[indexPath.row];
     return cell;
 }
 
@@ -722,6 +737,31 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         
     }
     
+}
+
+#pragma mark -- XBCommentCellDelegate
+- (void)commentCellDidSelectLinkWithURL:(NSURL *)url
+{
+    
+//    XBWebViewController *webViewController = [[XBWebViewController alloc] init];
+//    webViewController.url = url;
+//    webViewController.hideToolBar = YES;
+//    [self presentViewController:webViewController animated:YES completion:^{
+//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+//    }];
+    
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+#pragma mark -- lazy loading
+- (XBShareView *)shareView
+{
+    if (!_shareView) {
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        _shareView = [[XBShareView alloc] initWithFrame:keyWindow.bounds];
+        [keyWindow addSubview:_shareView];
+    }
+    return _shareView;
 }
 
 - (void)didReceiveMemoryWarning {

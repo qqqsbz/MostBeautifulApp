@@ -34,10 +34,11 @@
 #import "AppFavorite.h"
 #import "SMProgressHUD.h"
 #import "XBUserDefaultsUtil.h"
+#import "XBWebViewController.h"
 #import <TTTAttributedLabel/TTTAttributedLabel.h>
 #import <MJRefresh/MJRefresh.h>
 
-@interface XBDetailCommonViewController ()<XBContentViewDelegate,XBMenuViewDelegate,XBHomeToolBarDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,XBShareWeChatViewDelegate>
+@interface XBDetailCommonViewController ()<XBContentViewDelegate,XBMenuViewDelegate,XBHomeToolBarDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,XBShareWeChatViewDelegate,XBCommentCellDelegate>
 
 /** 评论view */
 @property (strong, nonatomic) UIView                *commnetView;
@@ -797,7 +798,8 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XBCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.comment = self.datas[indexPath.row];
+    cell.delegate = self;
+    cell.comment  = self.datas[indexPath.row];
     return cell;
 }
 
@@ -811,6 +813,15 @@ static NSString *reuseIdentifier = @"XBCommentCell";
     CGSize size = [content sizeWithFont:self.commentPrototype.contentFont maxSize:CGSizeMake(CGRectGetWidth(self.commentPrototype.contentLabel.frame), NSIntegerMax)];
     result += size.height > height ? size.height + height : 0;
     return result;
+}
+
+#pragma mark -- XBCommentCellDelegate
+- (void)commentCellDidSelectLinkWithURL:(NSURL *)url
+{
+    XBWebViewController *webViewController = [[XBWebViewController alloc] init];
+    webViewController.url = url;
+    webViewController.hideToolBar = YES;
+    [self presentViewController:webViewController animated:YES completion:nil];
 }
 
 #pragma mark -- lazy loading

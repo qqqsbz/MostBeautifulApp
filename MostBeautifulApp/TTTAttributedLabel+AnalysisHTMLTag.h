@@ -29,4 +29,6 @@ typedef void(^Complete)(NSMutableAttributedString *attributedString);
 
 - (void)analysisHTMLTagWithPrefixTag:(NSString *)prefixTag suffixTag:(NSString *)suffixTag analysisingBlock:(AnalysisHTMLBlock)analysisingBlock complete:(Complete)complete;
 
+- (void)analysisHTMLLinkWithText:(NSString *)text;
+
 @end

@@ -79,7 +79,7 @@
 - (void)setTitle:(NSString *)title
 {
     _title = title;
-    self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.text = _title;
     
     [self.completeButton updateConstraints:^(MASConstraintMaker *make) {

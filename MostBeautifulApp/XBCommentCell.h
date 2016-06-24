@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
+@protocol XBCommentCellDelegate <NSObject>
+
+@optional
+- (void)commentCellDidSelectLinkWithURL:(NSURL *)url;
+
+@end
+
 @class Comment;
 @class TTTAttributedLabel;
 @interface XBCommentCell : UITableViewCell
@@ -19,5 +27,5 @@
 
 @property (strong, nonatomic) Comment  *comment;
 @property (strong, nonatomic) UIFont   *contentFont;
-
+@property (weak, nonatomic) id<XBCommentCellDelegate> delegate;
 @end

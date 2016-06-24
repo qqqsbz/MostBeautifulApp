@@ -126,6 +126,7 @@
         [rec setTranslation:CGPointMake(0, 0) inView:self.view];
         
         if (self.closed) {
+            
             CGFloat leftScale = self.mainVC.view.xb_x * 2.f / kScreenWidth;
             
             leftScale = leftScale > 1.f ? 1 : leftScale;
