@@ -403,7 +403,7 @@
         if ([subview isKindOfClass:[UIImageView class]]) {
             CGRect panFrame = CGRectMake(point.x, point.y, CGRectGetWidth(subview.frame) / 2.f, CGRectGetHeight(subview.frame) / 2.f);
             if (CGRectIntersectsRect(panFrame, subview.frame)) {
-                XBMenuViewDidSelectedType type = subview.tag;
+                XBMenuViewDidSelectedType type = [self.menuModels objectAtIndex:subview.tag].type;
                 if ([self.delegate respondsToSelector:@selector(menuView:didSelectedWithType:atIndex:)]) {
                     [self.delegate menuView:self didSelectedWithType:type atIndex:subview.tag];
                 }
