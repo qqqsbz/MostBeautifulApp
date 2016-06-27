@@ -23,9 +23,10 @@ static NSString *const kBeautifulUserInfo = @"BEAUTIFUL_USER_INFO";
 
 + (void)updateUserInfo:(id)user
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:user];
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:kBeautifulUserInfo];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [defaults setObject:data forKey:kBeautifulUserInfo];
+    [defaults synchronize];
 }
 
 + (void)clearUserInfo

@@ -8,7 +8,8 @@
 
 #define kIconWH 52.f
 #define kAnimationSpace 25.f
-#define  kScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define  kScreenWidth   [UIScreen mainScreen].bounds.size.width
+#define  kScreenHeight  [UIScreen mainScreen].bounds.size.height
 
 #import "XBDetailCommonViewController.h"
 #import "App.h"
@@ -73,6 +74,7 @@
 
 /** 上一次的offsetY */
 @property (assign, nonatomic) CGFloat  previousOffsetY;
+
 
 @end
 
@@ -580,13 +582,6 @@ static NSString *reuseIdentifier = @"XBCommentCell";
 {
     //计算封面图片进行缩放
     CGFloat offsetY = self.scrollView.contentOffset.y;
-//    if (offsetY < 0) {
-//        [self.coverImageView updateConstraints:^(MASConstraintMaker *make) {
-//            make.height.mas_equalTo(self.coverImageView.xb_height + fabsf(offsetY));
-//        }];
-//    }
-    
-//    DDLogDebug(@"offsetY:%f",offsetY);
     
     //封面进行滚动
     if (offsetY > 0 && offsetY <= self.coverImageView.xb_height) {
@@ -595,17 +590,23 @@ static NSString *reuseIdentifier = @"XBCommentCell";
         
         self.tempImageView.hidden = NO;
         
-//        if (self.previousOffsetY < offsetY) { //向上
-////            self.tempImageView.xb_y -=  0.45f;
-//            self.tempImageView.xb_y -=  offsetY * 0.015f;
-//            
-//            DDLogDebug(@"xb_y:%f",self.tempImageView.xb_y);
-//            
-//        } else {
-////             self.tempImageView.xb_y +=  self.tempImageView.xb_y == 20 ? 0 : 0.45f;
-//            self.tempImageView.xb_y +=  offsetY * 0.015f;
-//        }
+        offsetY = offsetY / 2.5f;
         
+        if (self.previousOffsetY < offsetY) { //向上
+            
+            self.tempImageView.xb_y -= offsetY - self.previousOffsetY;
+            
+        } else {
+            
+            self.previousOffsetY = self.previousOffsetY - offsetY >= 10.f ? offsetY + 0.18f : self.previousOffsetY;
+            
+            if (self.tempImageView.xb_y < 20) {
+                self.tempImageView.xb_y += self.previousOffsetY - offsetY;
+            } else {
+                self.tempImageView.xb_y = 20;
+            }
+
+        }
         
     } else {
         
