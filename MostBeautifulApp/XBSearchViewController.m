@@ -33,22 +33,32 @@ static NSString *reuseIdentifier = @"XBSearchCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
     self.searchNavigationBar.isBecomeFirstResponder = NO;
+    
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
+
+/**
+ 创建view
+ */
 - (void)buildView
 {
     self.searchNavigationBar = [[XBSearchNavigationBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 68.f) searchBlock:^(NSString *text) {
         
         self.keyWord = text;
+        
+        //清除空格
         self.keyWord = [self.keyWord stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
         if (self.keyWord.length <= 0) return ;
         
         [self showLoadinngInView:self.view];
@@ -62,31 +72,51 @@ static NSString *reuseIdentifier = @"XBSearchCell";
                                };
         
         [[XBHttpClient shareInstance] searchWithParamter:param success:^(NSArray *datas) {
+            
             [self hideLoading];
+            
             self.datas = datas;
+        
             [self.tableView reloadData];
+        
         } failure:^(NSError *error) {
+            
             [self hideLoading];
+        
             [self showFail:@"搜索失败!"];
+        
         }];
         
     } cancleBlock:^{
+        
         [self dismissViewControllerAnimated:YES completion:^{
+        
             [self.searchNavigationBar removeFromSuperview];
+    
         }];
     }];
+    
     self.searchNavigationBar.isBecomeFirstResponder = YES;
+    
     self.searchNavigationBar.backgroundColor = [UIColor whiteColor];
+    
     [self.view addSubview:self.searchNavigationBar];
+    
     //隐藏导航栏 以免会挡道searchNavigationBar
     self.navigationController.navigationBarHidden = YES;
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchNavigationBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMaxY(self.searchNavigationBar.frame))];
+    
     self.tableView.delegate = self;
+    
     self.tableView.dataSource = self;
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([XBSearchCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:reuseIdentifier];
+   
     [self.view addSubview:self.tableView];
 }
 
@@ -99,17 +129,24 @@ static NSString *reuseIdentifier = @"XBSearchCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XBSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
     cell.search = self.datas[indexPath.row];
+    
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(tableView.frame), 0)];
+    
     label.text = [NSString stringWithFormat:@"没有搜索到 “%@” ",self.keyWord];
+    
     label.textColor = [UIColor colorWithHexString:@"#A6AEB1"];
+    
     label.textAlignment = NSTextAlignmentCenter;
+    
     label.font = [UIFont systemFontOfSize:15.f];
+    
     return label;
 }
 
@@ -127,8 +164,11 @@ static NSString *reuseIdentifier = @"XBSearchCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self showLoadinng];
+    
     self.currentIndexPath = indexPath;
+    
     Search *seach = self.datas[indexPath.row];
+    
     NSInteger appId = [seach.modelId integerValue];
     
     //查询数据库是否有该app
@@ -144,12 +184,18 @@ static NSString *reuseIdentifier = @"XBSearchCell";
        
         //存在 则直接获取该对象
         if (result) {
+            
             [self hideLoading];
+            
             NSError *error;
+            
             App *app = [MTLManagedObjectAdapter modelOfClass:[App class] fromManagedObject:result error:&error];
+            
             if (!error) {
+                
                 [self pushToSearchDetailViewController:app];
             }
+            
         } else {
             
             //访问服务器获取对象
@@ -158,26 +204,42 @@ static NSString *reuseIdentifier = @"XBSearchCell";
                 
                 //将对象保存到coredata中
                 BOOL result = [[DBUtil shareDBUtil] add:app];
+                
                 if (result) {
+                    
                     DDLogDebug(@"保存成功");
                 }
                 
                 [self pushToSearchDetailViewController:app];
+                
             } failure:^(NSError *error) {
+                
                 [self hideLoading];
+                
                 [self showFail:@"加载失败!"];
+                
             }];
             
         }
     }];
 }
 
+
+/**
+ 跳转到详情页
+
+ @param app 要查看详细信息的app数据
+ */
 - (void)pushToSearchDetailViewController:(App *)app
 {
     XBSearchDetailViewController *detailVC = [[XBSearchDetailViewController alloc] init];
+    
     detailVC.view.backgroundColor = [UIColor whiteColor];
+    
     self.navigationController.delegate = detailVC;
+    
     detailVC.app = app;
+    
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

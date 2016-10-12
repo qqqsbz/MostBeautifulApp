@@ -39,6 +39,7 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 @implementation XBLeftViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self buildTableView];
@@ -53,11 +54,16 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     
     //设置默认颜色
     UIColor *color = [UIColor colorWithHexString:@"#40A0D0"];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kChangeBackgroundColorNotification object:color];
     
     [self loadData];
 }
 
+
+/**
+ 从本地数据库加载数据
+ */
 - (void)loadData
 {
     
@@ -101,6 +107,10 @@ static NSString *reuseIdentifier = @"XBLeftCell";
    
 }
 
+
+/**
+ 从服务器加载数据
+ */
 - (void)loadDataFromServer
 {
     //没有数据则访问服务器获取数据
@@ -138,6 +148,10 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     }];
 }
 
+
+/**
+ 创建菜单
+ */
 - (void)buildTableView
 {
     UITableView *tableview = [[UITableView alloc] init];
@@ -173,42 +187,65 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     cell.backgroundColor = [UIColor clearColor];
     
     if (self.config) {
+        
         if (indexPath.row < self.config.sideMenu.menuList.count) {
+           
             Menu *menu = self.config.sideMenu.menuList[indexPath.row];
+            
             cell.titleLabel.text = menu.verboseName;
+            
             if ([menu.name isEqualToString:@"niceapp"]) {
+            
                 cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_apps_normal"];
+            
             } else if ([menu.name isEqualToString:@"free_app"]) {
+            
                 cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_box_normal"];
+            
             } else if ([menu.name isEqualToString:@"community"]) {
+            
                 cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_discover_normal"];
+            
             } else if ([menu.name isEqualToString:@"article"]) {
+            
                 cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_article_normal"];
+            
             } else if ([menu.name isEqualToString:@"pingfen"]) {
+                
                 cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_beauty_normal"];
             }
+        
         } else {
+            
             cell.titleLabel.text = @"我的收藏";
+        
             cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_fav_normal"];
         }
+        
     } else {
+        
         cell.titleLabel.text = @"我的收藏";
+        
         cell.iconImageView.image = [UIImage imageNamed:@"sidebar_icon_fav_normal"];
     }
     
     cell.dotImageView.hidden = self.currentIndexPath.row != indexPath.row;
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XBLeftCell *cell = (XBLeftCell *)[tableView cellForRowAtIndexPath:indexPath];
+   
     cell.dotImageView.hidden = NO;
 
     if (self.config) {
         
         if (indexPath.row < self.config.sideMenu.menuList.count) {
+            
             Menu *menu = self.config.sideMenu.menuList[indexPath.row];
+            
             if ([menu.name isEqualToString:@"niceapp"]) {
                 
                 [self pushToViewController:[[XBHomeViewController alloc] init]];
@@ -220,7 +257,9 @@ static NSString *reuseIdentifier = @"XBLeftCell";
             } else if ([menu.name isEqualToString:@"community"]) {
                 
                 AppDelegate *tempAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                
                 tempAppDelegate.mainNavigationController.navigationBarHidden = NO;
+               
                 [self pushToViewController:[[XBDiscoverViewController alloc] init]];
                 
             } else if ([menu.name isEqualToString:@"article"]) {
@@ -238,7 +277,9 @@ static NSString *reuseIdentifier = @"XBLeftCell";
             User *user = [XBUserDefaultsUtil userInfo];
             
             [self pushToViewController:[[XBFavoriteViewController alloc] init]];
+            
             if (!user) {
+            
                 [self presentToLogViewController];
             }
         }
@@ -248,7 +289,9 @@ static NSString *reuseIdentifier = @"XBLeftCell";
         User *user = [XBUserDefaultsUtil userInfo];
         
         [self pushToViewController:[[XBFavoriteViewController alloc] init]];
+        
         if (!user) {
+        
             [self presentToLogViewController];
         }
         
@@ -258,6 +301,7 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XBLeftCell *cell = (XBLeftCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
     cell.dotImageView.hidden = YES;
     
 }
@@ -277,13 +321,26 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     return self.headerView;
 }
 
+
+/**
+ 根据通知修改背景颜色
+
+ @param notification 通知
+ */
 - (void)changeBackGroundColor:(NSNotification *)notification
 {
     UIColor *color = notification.object;
+    
     self.view.backgroundColor = color;
 }
 
 #pragma mark -- lazy load
+
+/**
+ 懒加载创建顶部用户信息界面
+
+ @return 顶部用户信息界面
+ */
 - (XBLeftHeaderView *)headerView
 {
     if (!_headerView) {
@@ -295,38 +352,73 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     return _headerView;
 }
 
+
+/**
+ 创建底部菜单栏
+ */
 - (void)buildFooterView
 {
     CGRect frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kFooterViewHeight, CGRectGetWidth(self.tableview.frame) - kMainPageDistance, kFooterViewHeight);
+    
     _footerView = [[XBLeftFooterView alloc] initWithFrame:frame leftImage:[UIImage imageNamed:@"sidebar_bottomicon_search_normal"] title:@"招聘编辑" rightImage:[UIImage imageNamed:@"sidebar_bottomicon_setting_normal"]];
+    
     _footerView.delegate = self;
+    
     _footerView.titleEnable = NO;
+    
     [self.view addSubview:_footerView];
 }
 
 #pragma mark -- LeftViewDelegate
+
+/**
+ 点击搜索按钮 跳转到搜索控制器
+
+ @param sender 搜索按钮
+ */
 - (void)didSelectedLeftButton:(UIButton *)sender
 {
     XBSearchViewController *searchVC = [[XBSearchViewController alloc] init];
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:searchVC];
+    
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
+
+
+/**
+ 点击中间标题 跳转到网页浏览页
+
+ @param sender 标题按钮
+ */
 - (void)didSelectedTitleButton:(UIButton *)sender
 {
     XBWebViewController *recruitVC = [[XBWebViewController alloc] init];
+    
     NSString *urlString = self.config.aboutConfig.itemOnSideBar.detail;
+    
     urlString = urlString.length > 0 ? urlString : kApiInvite;
+    
     recruitVC.url = [NSURL URLWithString:urlString];
+    
     [self presentViewController:recruitVC animated:YES completion:^{
         
     }];
 }
 
+
+/**
+ 跳转到设置界面
+
+ @param sender 设置按钮
+ */
 - (void)didSelectedRightButton:(UIButton *)sender
 {
     XBSettingViewController *settingVC = [[XBSettingViewController alloc] init];
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingVC];
+   
     [self presentViewController:navigationController animated:YES completion:^{
         
     }];
@@ -334,6 +426,12 @@ static NSString *reuseIdentifier = @"XBLeftCell";
 
 
 #pragma mark -- public method
+
+/**
+ 跳转到指定控制器
+
+ @param vc 控制器
+ */
 - (void)pushToViewController:(UIViewController *)vc
 {
     BOOL isAlread = NO;
@@ -358,24 +456,45 @@ static NSString *reuseIdentifier = @"XBLeftCell";
     }
 }
 
+
+/**
+ 跳转到登录控制器
+ */
 - (void)presentToLogViewController
 {
     XBLoginViewController *loginViewController = [[XBLoginViewController alloc] init];
     [self presentViewController:loginViewController animated:YES completion:nil];
 }
 
+
+/**
+ 获取当前日期 格式为年月日 如:20161012
+
+ @return 日期字符串
+ */
 - (NSString *)toDayString
 {
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];//设置成中国阳历
+    
     NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;//这句我也不明白具体时用来做什么。。。
+    
+    NSInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekdayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    
     comps = [calendar components:unitFlags fromDate:[NSDate date]];
+    
     return [NSString stringWithFormat:@"%@%@%@",[NSIntegerFormatter formatToNSString:comps.year],[NSIntegerFormatter formatToNSString:comps.month],[NSIntegerFormatter formatToNSString:comps.day]];
 }
 
+
+/**
+ 登录成功接收到通知
+
+ @param notification 通知
+ */
 - (void)loginSuccess:(NSNotification *)notification
 {
     User *user = [XBUserDefaultsUtil userInfo];
+    
     self.headerView.user = user;
     
 }
